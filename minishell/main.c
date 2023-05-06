@@ -2,6 +2,8 @@
 
 int	main()
 {
-	readline(PROMPT);
+	char	*str;
+
+	str = readline(PROMPT);
 	return (0);
 }
