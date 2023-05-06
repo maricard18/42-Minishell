@@ -24,9 +24,9 @@
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <unistd.h>
 
 <<<<<<< HEAD
-=======
 # define PROMPT " [MINI\033[31;1mSHELL] \033[0m"
 
 // Structs

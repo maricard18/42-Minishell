@@ -1,10 +1,9 @@
 #include "minishell.h"
 
-t_minishell_state g_data;
+t_minishell_state g_minishell;
 
 int	env_size(char **env)
 {
-<<<<<<< HEAD
 	int	i;
 
 	i = 0;
@@ -41,7 +40,7 @@ void	minishell_init(t_minishell_state *shell, char **env)
 	shell->environment_variables = env_dup(env);
 	if (!shell->environment_variables)
 		exit(EXIT_FAILURE);
-	shell->pwd = getcwd(NULL, 0);
+	shell->pwd = getcwd(NULL, 0);//retorna o diretório de trabalho atual em forma de uma string de caracteres.
 	shell->fd_in = 0;
 	shell->fd_out = 1;
 	shell->any_redirection = 1;
@@ -54,8 +53,10 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	prompt();
-	minishell_init(&g_data, envp);
+	minishell_init(&g_minishell, envp);
 
+}
+/*
 =======
 	char	*str;
 
@@ -63,3 +64,4 @@ int	main(int argc, char **argv, char **envp)
 >>>>>>> ef150b119c54bc7542ca266bac7262852c5c3f96
 	return (0);
 }
+*/
