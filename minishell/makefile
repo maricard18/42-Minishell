@@ -1,24 +1,23 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
+#    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: maricard <maricard@student.42.fr>          +#+  +:+       +#+         #
+#    By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 10:28:04 by maricard          #+#    #+#              #
-#    Updated: 2023/04/21 20:42:45 by maricard         ###   ########.fr        #
+#    Updated: 2023/05/06 10:34:18 by maricard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -lreadline
 RM = rm -rf
 
-LIBFT = ./libft/libft.a
 NAME = minishell
 INCLUDES = includes
 
-SRC = ./utils/prompt.c
+SRC = 
 
 SRC-OBJ = $(SRC:.c=.o)
 
