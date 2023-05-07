@@ -3,17 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-<<<<<<< HEAD
-/*   By: filipa <filipa@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/21 20:34:12 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/06 18:06:26 by filipa           ###   ########.fr       */
-=======
 /*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 20:34:12 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/06 14:08:52 by maricard         ###   ########.fr       */
->>>>>>> ef150b119c54bc7542ca266bac7262852c5c3f96
+/*   Updated: 2023/05/07 01:09:57 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +18,16 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <unistd.h>
+# include <signal.h>
 
-<<<<<<< HEAD
-# define PROMPT " [MINI\033[31;1mSHELL] \033[0m"
+// # define PROMPT "\x1b[32m[\x1b[33mMinishell\x1b[32m]~>\x1b[0m "
+# define PROMPT " [MINI\033[31;1mSHELL] $ \033[0m"
 
 // Structs
 typedef struct s_token
 {
-	char    *str;
+	char    **str;
+	char	*options;
 	int     token_type;
 }			t_token;
 
@@ -45,7 +40,6 @@ typedef struct s_history_node
 
 typedef struct s_minishell_state
 {
-	char            	*prompt;
 	char            	*input;
 	int             	status;
 	int             	status_signal;
@@ -57,11 +51,16 @@ typedef struct s_minishell_state
 	int             	is_interactive;
 //	struct termios  	origin;
 //	struct termios  	modified;
+//	t_terminal_control	*termc;
 	t_history_node      *history_head;
 	t_history_node      *history_index;
-//	t_terminal_control	*termc;
-	t_token		 		*token;
+	t_token		 		token;
 }                       t_minishell_state;
->>>>>>> ef150b119c54bc7542ca266bac7262852c5c3f96
+
+// Src
+void	lexer(char *str, t_token *token);
+
+// Utils
+void	signal_handling(void);
 
 #endif
