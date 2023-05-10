@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    makefile                                           :+:      :+:    :+:    #
+#    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+         #
+#    By: maricard <maricard@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 10:28:04 by maricard          #+#    #+#              #
-#    Updated: 2023/05/07 01:08:58 by maricard         ###   ########.fr        #
+#    Updated: 2023/05/10 10:53:56 by maricard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,9 @@ LIBFT = ./libft/libft.a
 INCLUDES = includes
 
 SRC = 	./srcs/lexer.c \
-		./utils/signal.c
+		./utils/signal.c \
+		./utils/variables.c \
+		./utils/tests.c
 
 SRC-OBJ = $(SRC:.c=.o)
 
@@ -30,7 +32,6 @@ $(LIBFT):
 
 $(NAME): $(SRC-OBJ) $(LIBFT)
 	$(CC) $(CFLAGS) $(SRC-OBJ) main.c $(LIBFT) -o $(NAME) -I $(INCLUDES) -lreadline
-	./minishell
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDES)
@@ -45,5 +46,8 @@ fclean: clean
 
 leaks:
 #	valgrind --leak-check=full ./$(NAME) $(ARGS)
+
+run:
+	./minishell
 
 re: fclean all

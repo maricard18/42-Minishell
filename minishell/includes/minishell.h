@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 20:34:12 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/07 01:09:57 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/10 10:53:39 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@
 // Structs
 typedef struct s_token
 {
-	char    **str;
-	char	*options;
-	int     token_type;
+	char    **args;
+	int		n_tokens;
+	int		index;
 }			t_token;
 
 typedef struct s_history_node
@@ -58,9 +58,13 @@ typedef struct s_minishell_state
 }                       t_minishell_state;
 
 // Src
+void	minishell_init(t_minishell_state *shell, char **env);
 void	lexer(char *str, t_token *token);
 
 // Utils
 void	signal_handling(void);
+
+// Tests
+void    lexer_test(t_token *token);
 
 #endif
