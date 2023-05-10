@@ -6,12 +6,12 @@
 #    By: filipa <filipa@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 10:28:04 by maricard          #+#    #+#              #
-#    Updated: 2023/05/10 21:27:01 by filipa           ###   ########.fr        #
+#    Updated: 2023/05/10 21:37:48 by filipa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g
 RM = rm -rf
 
 NAME = minishell

@@ -6,11 +6,11 @@
 /*   By: filipa <filipa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 22:11:53 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/10 20:27:05 by filipa           ###   ########.fr       */
+/*   Updated: 2023/05/10 21:38:46 by filipa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 extern t_minishell_state g_minishell;
 
