@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 22:11:53 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/10 11:11:40 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/10 19:37:07 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void    lexer(char *str, t_token *token)
     token->args = malloc(sizeof(char *) * (token->n_tokens + 1));
     if (!token->args)
         exit(1);
-    token->args[token->n_tokens + 1] = NULL;
+    token->args[token->n_tokens ] = NULL;
     token->index = 0;
     store_tokens(str, token);
 }
