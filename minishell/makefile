@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
+#    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: maricard <maricard@student.42.fr>          +#+  +:+       +#+         #
+#    By: filipa <filipa@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 10:28:04 by maricard          #+#    #+#              #
-#    Updated: 2023/05/10 10:53:56 by maricard         ###   ########.fr        #
+#    Updated: 2023/05/10 21:27:01 by filipa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,11 +17,15 @@ RM = rm -rf
 NAME = minishell
 LIBFT = ./libft/libft.a
 INCLUDES = includes
+LIBS = -ltermcap -lreadline -lncurses
 
-SRC = 	./srcs/lexer.c \
-		./utils/signal.c \
-		./utils/variables.c \
-		./utils/tests.c
+SRC = 	./srcs/parser/lexer.c \
+		./srcs/history/history.c \
+		./srcs/history/history2.c \
+		./srcs/utils/signal.c \
+		./srcs/utils/tests.c \
+		./srcs/utils/variables.c \
+		./srcs/utils/utils.c 
 
 SRC-OBJ = $(SRC:.c=.o)
 
@@ -31,7 +35,7 @@ $(LIBFT):
 	$(MAKE) -C ./libft
 
 $(NAME): $(SRC-OBJ) $(LIBFT)
-	$(CC) $(CFLAGS) $(SRC-OBJ) main.c $(LIBFT) -o $(NAME) -I $(INCLUDES) -lreadline
+	$(CC) $(CFLAGS) $(SRC-OBJ) main.c $(LIBFT) -o $(NAME) -I $(INCLUDES) $(LIBS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDES)
@@ -51,3 +55,4 @@ run:
 	./minishell
 
 re: fclean all
+
