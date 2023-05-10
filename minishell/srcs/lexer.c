@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 22:11:53 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/10 11:01:30 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/10 11:11:40 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 extern t_minishell_state g_minishell;
 
+// skip quotes in input string
 int     skip_quotes(char *str, int i)
 {
     char    quote;
@@ -27,6 +28,7 @@ int     skip_quotes(char *str, int i)
     return (i);
 }
 
+// store tokens in args array
 void    store_tokens(char *str, t_token *token)
 {
     int i;
@@ -55,7 +57,7 @@ void    store_tokens(char *str, t_token *token)
             token->index++;
     }
 }
-
+// count tokens in input string
 int    count_tokens(char *str)
 {
     int i;
@@ -84,6 +86,7 @@ int    count_tokens(char *str)
     return (tokens);
 }
 
+// Function to devide input string into tokens
 void    lexer(char *str, t_token *token)
 {
     token->n_tokens = count_tokens(str);

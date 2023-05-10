@@ -12,6 +12,7 @@ int	main(int argc, char **argv, char **envp)
 	signal_handling();
 	while (1)
 	{
+		signal_handling();
 		str = readline(PROMPT);
 		if (!str)
 			break ;
