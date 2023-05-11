@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 10:45:38 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/11 11:12:27 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/11 11:13:11 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void    clean_all(t_token *token)
     while (i <= token->n_tokens)
     {
         free(token->args[i]);
-        printf("freed token->args[%d]\n", i);
         i++;
     }
     free(token->args);
