@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: filipa <filipa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 20:34:12 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/11 11:11:47 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/11 15:00:15 by filipa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,11 @@
 # include <signal.h>
 # include <fcntl.h>
 # include <termios.h>
+#include <errno.h>
+#include <sys/ioctl.h>
 
 // # define PROMPT "\x1b[32m[\x1b[33mMinishell\x1b[32m]~>\x1b[0m "
 # define PROMPT " [MINI\033[31;1mSHELL] $ \033[0m"
-
-
-# define HIST_FILE		"./.minishell_history"
-# define HIST_SIZE		20
 
 // Structs
 typedef struct s_token
@@ -37,48 +35,28 @@ typedef struct s_token
 	int		index;
 }			t_token;
 
-typedef struct s_history_node
-{
-	void            *content;
-	struct s_history_node  *next;
-	struct s_history_node  *previous;
-}               	t_history_node;
-
-typedef struct s_terminal_control
-{
-	char			*up_key;
-	char			*down_key;
-	char			*cariage_return;
-	char			*clear_line;
-	char			*keyend;
-	char			*keystart;
-}	t_terminal_control;
-
 typedef struct s_minishell_state
 {
-	char            	*input;
-	int             	status;
-	int             	status_signal;
-	char            	**environment_variables;
-	char            	*pwd;
-	int             	fd_in;
-	int             	fd_out;
-	int             	any_redirection;
-	int             	is_interactive;
-	struct termios  	origin;
-	struct termios  	modified;
-	t_terminal_control	*term_control;
-	t_history_node      *history_head;
-	t_history_node      *history_index;
-	t_token		 		token;
+	int			ignore;
+	int			opening_prompt;
+	int			parent_pid;
+	int			*child_pids;
+	int			child_pids_count;
+	int			in_file;
+	int			out_file;
+	char		**ev;
+	char		**paths;
+	t_token		token;
+	
 }                       t_minishell_state;
+
+extern t_minishell_state g_minishell;
 
 
 // Src
-void	minishell_init(t_minishell_state *shell, char **env);
+void	minishell_init(char **env);
 void	lexer(char *str, t_token *token);
-void	initialize_history(t_minishell_state *data);
-int	set_history_mode(t_minishell_state *data);
+
 
 
 // Utils
@@ -87,8 +65,6 @@ int     		count_tokens2(char *str, int i);
 int     		store_values2(char *str, int i);
 int     		skip_quotes(char *str, int i);
 void    		clean_all(t_token *token);
-t_history_node	*ft_lstnew_2(void *content);
-void			free_data(t_minishell_state *data, int exit_code);
 
 // Tests
 void    lexer_test(t_token *token);

@@ -3,58 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   variables.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: filipa <filipa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 10:26:56 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/10 10:28:34 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/11 14:11:53 by filipa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern t_minishell_state g_minishell;
-
-int	env_size(char **env)
+char	**dup_env_var(char **ev)
 {
-	int	i;
-
-	i = 0;
-	while (env[i])
-		i++;
-	return (++i);
-}
-
-char	**env_dup(char **env)
-{
-	char	**env_array;
 	int		i;
+	char	**env_copy;
 
 	i = 0;
-	env_array = malloc(sizeof(char *) * env_size(env));
-	if (!env_array)
-		exit(EXIT_FAILURE);
-	while (env[i])
-	{
-		env_array[i] = ft_strdup(env[i]);
+	while (ev[i])
 		i++;
-	}
-	env_array[i] = 0;
-	return (env_array);
+	env_copy = malloc(sizeof(char *) * (i + 1));
+	if (!env_copy)
+		return (0);
+	i = -1;
+	while (ev[++i])
+		env_copy[i] = ft_strdup(ev[i]);
+	env_copy[i] = 0;
+	return (env_copy);
 }
 
-
-void	minishell_init(t_minishell_state *shell, char **env)
+void	minishell_init(char **ev)
 {
-	shell->status = 0;
-	shell->status_signal = 0;
-	shell->input = NULL;
-	shell->environment_variables = env_dup(env);
-	if (!shell->environment_variables)
-		exit(EXIT_FAILURE);
-	shell->pwd = getcwd(NULL, 0); //retorna o diretório de trabalho atual em forma de uma string de caracteres.
-	shell->fd_in = 0;
-	shell->fd_out = 1;
-	shell->any_redirection = 1;
-	shell->history_head = NULL;
-	shell->history_index = NULL;
+    errno = 0;//limpa qualquer codigo de erro anterior
+	g_minishell.parent_pid = getpid();//armazena ID
+    g_minishell.child_pids = (int *)malloc(sizeof(int) * 100);//aloca memoria para o array de pids
+    g_minishell.child_pids_count = 0;//inicializa o contador de pids filhos
+    g_minishell.opening_prompt = 0;//inicia a flag de prompt, determinar se o shell está no processo de exibir um prompt.
+    g_minishell.in_file = STDIN_FILENO;//inicializa o arquivo de entrada
+    g_minishell.out_file = STDOUT_FILENO;//inicializa o arquivo de saida
+	g_minishell.ev = dup_env_var(ev);//duplica a variavel de ambiente
+	g_minishell.paths = ft_split(getenv("PATH"), ':');//Divide a variável de ambiente PATH em strings separadas por ':', cada uma representando um caminho de diretório onde os executáveis podem ser encontrados. Estes são armazenados no campo paths da estrutura g_minishell
 }
