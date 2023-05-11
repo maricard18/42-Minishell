@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 22:07:12 by filipa            #+#    #+#             */
-/*   Updated: 2023/05/11 11:08:28 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/11 12:26:50 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	initialize_history(t_minishell_state *data)
 {
 	int		fd;
 
-	fd = open(HIST_FILE, O_RDONLY);
+	fd = open(HIST_FILE, O_RDONLY | O_CREAT, 0666);
 	if (fd >= 0)
 	{
 		get_history_commands(fd, data);

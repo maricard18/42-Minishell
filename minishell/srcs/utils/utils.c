@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:42:53 by filipa            #+#    #+#             */
-/*   Updated: 2023/05/11 10:39:53 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/11 12:23:55 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_history_node	*ft_lstnew_2(void *content)
 
 void	free_data(t_minishell_state *data, int exit_code)
 {
-	free_env(data->environment_variables);
+	// free_env(data->environment_variables);
 	free(data->pwd);
 	ft_putstr_fd("exit\n", 2);
 	exit(exit_code);

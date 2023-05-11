@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 23:00:53 by filipa            #+#    #+#             */
-/*   Updated: 2023/05/11 10:52:11 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/11 14:43:01 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(int argc, char **argv, char **envp)
 		str = readline(PROMPT);
 		if (!str)
 			break ;
-//		add_history(str);
+		add_history(str);
 		lexer(str, &g_minishell.token);
 		lexer_test(&g_minishell.token);
 		clean_all(&g_minishell.token);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipa <filipa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 19:11:20 by filipa            #+#    #+#             */
-/*   Updated: 2023/05/10 20:15:13 by filipa           ###   ########.fr       */
+/*   Updated: 2023/05/11 12:21:13 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	set_history_mode(t_minishell_state *data)
 		data->term_control = ft_calloc(1, sizeof(t_terminal_control));
 		if (i != 1 || !data->term_control)
 			free_data(data, EXIT_FAILURE);
-		bzero(&data->modified, sizeof(struct termios));
+		ft_bzero(&data->modified, sizeof(struct termios));
 		tcgetattr(0, &data->origin);
 		tcgetattr(0, &data->modified);//copia para poder ser modificada sem alterar a original
 		data->modified.c_iflag &= ~(IGNBRK | BRKINT | ICRNL
