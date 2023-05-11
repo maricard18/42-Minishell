@@ -3,33 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipa <filipa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 23:00:53 by filipa            #+#    #+#             */
-/*   Updated: 2023/05/11 17:41:55 by filipa           ###   ########.fr       */
+/*   Updated: 2023/05/11 18:13:13 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/minishell.h"
 
 t_minishell_state g_minishell;
-
-void    ctrl_c(int signal)
-{
-    (void)signal;
-    g_minishell.ignore = 1;//salta a linha actual
-    ioctl(STDIN_FILENO, TIOCSTI, "\n");// mete caracter nova linha no terminal
-    write(1, "\033[A", 3);
-}
-
-void    ctrl_d(char *str)
-{
-    if (!str)
-    {
-        printf("exit\n");
-        exit(errno);
-    }
-}
 
 int	main(int argc, char **argv, char **envp)
 {
