@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 20:34:12 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/11 18:20:55 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/11 19:10:18 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,13 @@ void	pwd_command(void);
 void	unset_command(char **input);
 void	export_(char **input);
 
+//signals
+void    ctrl_c(int signal);
+
+
 
 // Tests
 void    lexer_test(t_token *token);
+void    ctrl_d(char *str);
 
 #endif

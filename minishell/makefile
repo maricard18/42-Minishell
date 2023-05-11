@@ -6,7 +6,7 @@
 #    By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 10:28:04 by maricard          #+#    #+#              #
-#    Updated: 2023/05/11 18:22:04 by maricard         ###   ########.fr        #
+#    Updated: 2023/05/11 19:10:28 by maricard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,9 +33,7 @@ SRC = 	./srcs/parser/lexer.c \
 		./srcs/commands/export.c \
 		./srcs/commands/pwd.c \
 		./srcs/commands/unset.c \
-#		./srcs/utils/utils.c \
-#		./srcs/history/history.c \
-#		./srcs/history/history2.c 
+		./srcs/utils/utils.c
 
 SRC-OBJ = $(SRC:.c=.o)
 
