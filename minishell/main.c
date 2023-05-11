@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipa <filipa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 23:00:53 by filipa            #+#    #+#             */
-/*   Updated: 2023/05/11 19:39:43 by filipa           ###   ########.fr       */
+/*   Updated: 2023/05/11 19:47:00 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,10 @@ int	main(int argc, char **argv, char **envp)
 		if (*str)
 		{
 			lexer(str, &g_minishell.token);
-			//execute_builtin_command(g_minishell.token.args);
+			execute_builtin_command(g_minishell.token.args);
 			// lexer_test(&g_minishell.token);
 			clean_all(&g_minishell.token);
 			add_history(str);
-			printf("\n");
 		}
 		free(str);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipa <filipa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 20:34:12 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/11 19:37:44 by filipa           ###   ########.fr       */
+/*   Updated: 2023/05/11 19:45:44 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ void			update_path_directories(void);
 int				number_args_env_Var(void);
 void			free_array(char **arr);
 int 			handle_error(int error_code, char *custom_message);
+void			execute_builtin_command(char **arguments);
+int				is_whitespace(char c);
 
 //Commands
 void	cd_command(char **input);
