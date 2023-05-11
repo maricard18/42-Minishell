@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 20:34:12 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/11 19:10:18 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/11 19:11:13 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	env_command(void);
 void	exit_command(char **input);
 void	pwd_command(void);
 void	unset_command(char **input);
-void	export_(char **input);
+void	export_command(char **input);
 
 //signals
 void    ctrl_c(int signal);
