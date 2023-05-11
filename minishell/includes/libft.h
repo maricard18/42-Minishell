@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: filipa <filipa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 10:27:54 by firibeir          #+#    #+#             */
-/*   Updated: 2023/05/06 11:20:41 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/10 18:39:43 by filipa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <limits.h>
+#include <sys/select.h>
 
 # define BUFFER_SIZE 42
 
@@ -73,5 +74,7 @@ int		ft_lstsize(t_list *lst);
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 void	*ft_calloc(size_t nmemb, size_t size);
+int	get_next_line(int fd, char **line);
+int	ft_strcmp(const char *str1, const char *str2);
 
 #endif

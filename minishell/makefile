@@ -6,7 +6,7 @@
 #    By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 10:28:04 by maricard          #+#    #+#              #
-#    Updated: 2023/05/10 20:58:54 by maricard         ###   ########.fr        #
+#    Updated: 2023/05/11 10:32:04 by maricard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,12 +17,17 @@ RM = rm -rf
 NAME = minishell
 LIBFT = ./libft/libft.a
 INCLUDES = includes
+LIBS = -ltermcap -lreadline -lncurses
 
+<<<<<<< HEAD
 SRC = 	./srcs/lexer.c \
 		./srcs/lexer2.c \
-		./utils/signal.c \
-		./utils/variables.c \
-		./utils/tests.c
+		./srcs/history/history.c \
+		./srcs/history/history2.c \
+		./srcs/utils/signal.c \
+		./srcs/utils/tests.c \
+		./srcs/utils/variables.c \
+		./srcs/utils/utils.c 
 
 SRC-OBJ = $(SRC:.c=.o)
 
@@ -32,7 +37,7 @@ $(LIBFT):
 	$(MAKE) -C ./libft
 
 $(NAME): $(SRC-OBJ) $(LIBFT)
-	$(CC) $(CFLAGS) $(SRC-OBJ) main.c $(LIBFT) -o $(NAME) -I $(INCLUDES) -lreadline
+	$(CC) $(CFLAGS) $(SRC-OBJ) main.c $(LIBFT) -o $(NAME) -I $(INCLUDES) $(LIBS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDES)
@@ -52,3 +57,4 @@ run:
 	./minishell
 
 re: fclean all
+

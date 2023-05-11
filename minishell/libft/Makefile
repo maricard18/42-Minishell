@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: maricard <maricard@student.42.fr>          +#+  +:+       +#+         #
+#    By: filipa <filipa@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 16:59:07 by maricard          #+#    #+#              #
-#    Updated: 2023/04/21 20:40:58 by maricard         ###   ########.fr        #
+#    Updated: 2023/05/10 18:41:09 by filipa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ ft_isdigit.c ft_isprint.c ft_itoa.c ft_memchr.c ft_memcpy.c ft_memmove.c  \
 ft_memset.c ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c  \
 ft_split.c ft_strchr.c ft_strdup.c ft_striteri.c ft_strjoin.c ft_strlcat.c  \
 ft_strlcpy.c ft_strlen.c ft_strmapi.c ft_strncmp.c ft_strnstr.c ft_strtrim.c \
-ft_substr.c ft_tolower.c ft_toupper.c ft_memcmp.c ft_strrchr.c 
+ft_substr.c ft_tolower.c ft_toupper.c ft_memcmp.c ft_strrchr.c get_next_line.c \
+ft_strcmp.c 
 
 SRC-OBJ = $(SRC:.c=.o)
 
