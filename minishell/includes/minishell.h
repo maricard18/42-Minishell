@@ -6,7 +6,7 @@
 /*   By: filipa <filipa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 20:34:12 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/11 17:39:59 by filipa           ###   ########.fr       */
+/*   Updated: 2023/05/11 18:57:34 by filipa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ void			update_path_directories(void);
 int				number_args_env_Var(void);
 void			free_array(char **arr);
 int 			handle_error(int error_code, char *custom_message);
+char			*get_env(char *var_name);
 
 //Commands
 void	cd_command(char **input);
