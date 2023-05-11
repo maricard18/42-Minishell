@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 20:34:12 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/11 10:47:39 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/11 11:11:47 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # include <readline/history.h>
 # include <unistd.h>
 # include <signal.h>
-#include <fcntl.h>
-#include <termios.h>
+# include <fcntl.h>
+# include <termios.h>
 
 // # define PROMPT "\x1b[32m[\x1b[33mMinishell\x1b[32m]~>\x1b[0m "
 # define PROMPT " [MINI\033[31;1mSHELL] $ \033[0m"
