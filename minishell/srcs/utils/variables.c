@@ -6,13 +6,13 @@
 /*   By: filipa <filipa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 10:26:56 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/11 17:41:37 by filipa           ###   ########.fr       */
+/*   Updated: 2023/05/11 19:12:30 by filipa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**dup_env_var(char **ev)
+char	**dup_env_var(char **ev)//duplica a variavel de ambiente
 {
 	int		i;
 	char	**env_copy;
@@ -20,11 +20,11 @@ char	**dup_env_var(char **ev)
 	i = 0;
 	while (ev[i])
 		i++;
-	env_copy = malloc(sizeof(char *) * (i + 1));
+	env_copy = malloc(sizeof(char *) * (i + 1));//aloca memoria para o array de variaveis de ambiente
 	if (!env_copy)
 		return (0);
 	i = -1;
-	while (ev[++i])
+	while (ev[++i])//copia as variaveis de ambiente para o array
 		env_copy[i] = ft_strdup(ev[i]);
 	env_copy[i] = 0;
 	return (env_copy);

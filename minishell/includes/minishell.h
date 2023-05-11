@@ -6,7 +6,7 @@
 /*   By: filipa <filipa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 20:34:12 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/11 19:10:48 by filipa           ###   ########.fr       */
+/*   Updated: 2023/05/11 19:32:57 by filipa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	lexer(char *str, t_token *token);
 
 
 // Utils
-void			signal_handling(void);
+//void			signal_handling(void);
 int     		count_tokens2(char *str, int i);
 int     		store_values2(char *str, int i);
 int     		skip_quotes(char *str, int i);
@@ -97,6 +97,7 @@ void			update_path_directories(void);
 int				number_args_env_Var(void);
 void			free_array(char **arr);
 int 			handle_error(int error_code, char *custom_message);
+int				is_whitespace(char c);
 
 //Commands
 void	cd_command(char **input);

@@ -35,7 +35,7 @@ void	unset_command(char **input)//emover variáveis de ambiente no shell
 		input++;
 	}
 	free(data);
-	set_paths();//atualiza os caminhos
+	update_path_directories();//atualiza os caminhos
 	if (g_minishell.parent_pid != getpid())//se o processo atual não for o processo pai
 		exit(1);
 }
