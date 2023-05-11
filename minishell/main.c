@@ -6,11 +6,13 @@
 /*   By: filipa <filipa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 23:00:53 by filipa            #+#    #+#             */
-/*   Updated: 2023/05/11 14:21:51 by filipa           ###   ########.fr       */
+/*   Updated: 2023/05/11 15:48:26 by filipa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/minishell.h"
+
+t_minishell_state g_minishell;
 
 void    ctrl_c(int signal)
 {

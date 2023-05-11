@@ -6,7 +6,7 @@
 /*   By: filipa <filipa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 20:34:12 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/11 15:00:15 by filipa           ###   ########.fr       */
+/*   Updated: 2023/05/11 17:38:04 by filipa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,29 @@
 
 // # define PROMPT "\x1b[32m[\x1b[33mMinishell\x1b[32m]~>\x1b[0m "
 # define PROMPT " [MINI\033[31;1mSHELL] $ \033[0m"
+
+typedef enum e_builtin_types
+{
+    CD = 1,
+    ENV,
+    PWD,
+    ECHO_,
+    EXIT,
+    UNSET,
+    EXPORT
+} t_builtin_types;
+
+enum errors{
+	FILE_NOT_FOUND = 1,
+	SYNTAX_ERROR = 2,
+	PERM_DENIED = 4,
+	CMD_NOT_FOUND = 127,
+	SYSTEM_ERR = -1,
+	MEMORY_ERR = -2,
+	DUP_ERR = -3,
+	FORK_ERR = -4,
+	PIPE_ERR = -5
+};
 
 // Structs
 typedef struct s_token
@@ -65,6 +88,20 @@ int     		count_tokens2(char *str, int i);
 int     		store_values2(char *str, int i);
 int     		skip_quotes(char *str, int i);
 void    		clean_all(t_token *token);
+void			update_path_directories(void);
+int				number_args_env_Var(void);
+void			free_array(char **arr);
+int 			handle_error(int error_code, char *custom_message);
+
+//Commands
+void	cd_command(char **input);
+void	echo_command(char **input);
+void	env_command(void);
+void	exit_command(char **input);
+void	pwd_command(void);
+void	unset_command(char **input);
+void	export_(char **input);
+
 
 // Tests
 void    lexer_test(t_token *token);
