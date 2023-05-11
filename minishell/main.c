@@ -6,13 +6,28 @@
 /*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 23:00:53 by filipa            #+#    #+#             */
-/*   Updated: 2023/05/11 14:43:01 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/11 15:18:21 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/minishell.h"
 
-t_minishell_state g_minishell;
+void    ctrl_c(int signal)
+{
+    (void)signal;
+    g_minishell.ignore = 1;//salta a linha actual
+    ioctl(STDIN_FILENO, TIOCSTI, "\n");// mete caracter nova linha no terminal
+    write(1, "\033[A", 3);
+}
+
+void    ctrl_d(char *str)
+{
+    if (!str)
+    {
+        printf("exit\n");
+        exit(errno);
+    }
+}
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -20,20 +35,28 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	char	*str;
 
-	minishell_init(&g_minishell, envp);
-//	initialize_history(&g_minishell);
-//	set_history_mode(&g_minishell);
-	signal_handling();
+	minishell_init(envp);
 	while (1)
 	{
-		signal_handling();
+		g_minishell.ignore = 0;//ignorar tudo
+		signal(SIGINT, &ctrl_c);// quando crtl+c for pressionado aciona a nossa funcao
+        signal(SIGQUIT, SIG_IGN);//Ctrl+C ser ignorado
 		str = readline(PROMPT);
-		if (!str)
-			break ;
-		add_history(str);
-		lexer(str, &g_minishell.token);
-		lexer_test(&g_minishell.token);
-		clean_all(&g_minishell.token);
+		ctrl_d(str);//Ctrl+D, imprime "exit" e sai, como um shell real.
+		if (g_minishell.ignore)
+        {
+            free(str);
+            str = malloc(1);//Ctrl+C, liberta memória usada e substitui por uma string vazia, só com o \0
+        }
+		if (*str)
+		{
+			lexer(str, &g_minishell.token);
+			lexer_test(&g_minishell.token);
+			clean_all(&g_minishell.token);
+			add_history(str);
+			printf("\n");
+		}
 		free(str);
 	}
+	return(0);
 }
