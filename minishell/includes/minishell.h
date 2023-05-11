@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 20:34:12 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/11 18:13:48 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/11 18:20:55 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ void			free_array(char **arr);
 int 			handle_error(int error_code, char *custom_message);
 void    		ctrl_c(int signal);
 void    		ctrl_d(char *str);
+void			execute_builtin_command(char **arguments);
 
 //Commands
 void	cd_command(char **input);

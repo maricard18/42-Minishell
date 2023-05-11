@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: filipa <filipa@student.42.fr>              +#+  +:+       +#+         #
+#    By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 10:28:04 by maricard          #+#    #+#              #
-#    Updated: 2023/05/11 17:40:56 by filipa           ###   ########.fr        #
+#    Updated: 2023/05/11 18:22:04 by maricard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,14 @@ SRC = 	./srcs/parser/lexer.c \
 		./srcs/utils/signal.c \
 		./srcs/utils/tests.c \
 		./srcs/utils/variables.c \
+		./srcs/commands/command_handler.c \
+		./srcs/commands/cd.c \
+		./srcs/commands/echo.c \
+		./srcs/commands/env.c \
+		./srcs/commands/exit.c \
+		./srcs/commands/export.c \
+		./srcs/commands/pwd.c \
+		./srcs/commands/unset.c \
 #		./srcs/utils/utils.c \
 #		./srcs/history/history.c \
 #		./srcs/history/history2.c 
