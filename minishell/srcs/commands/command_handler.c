@@ -37,5 +37,5 @@ void	execute_builtin_command(char **arguments)
 	if (type == UNSET)
 		unset_command(arguments);
 	if (type == EXPORT)
-		export_command(arguments);
+		exit_command(arguments);
 }

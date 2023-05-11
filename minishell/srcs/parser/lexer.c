@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 22:11:53 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/11 14:48:52 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/11 18:18:40 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int    count_tokens(char *str)
     return (tokens);
 }
 
-// Function to devide input string into tokens
+// function to devide input string into tokens
 void    lexer(char *str, t_token *token)
 {
     token->n_tokens = count_tokens(str);
