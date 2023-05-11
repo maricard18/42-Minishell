@@ -6,7 +6,7 @@
 #    By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 10:28:04 by maricard          #+#    #+#              #
-#    Updated: 2023/05/10 18:58:58 by maricard         ###   ########.fr        #
+#    Updated: 2023/05/10 20:58:54 by maricard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ LIBFT = ./libft/libft.a
 INCLUDES = includes
 
 SRC = 	./srcs/lexer.c \
+		./srcs/lexer2.c \
 		./utils/signal.c \
 		./utils/variables.c \
 		./utils/tests.c

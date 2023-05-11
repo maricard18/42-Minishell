@@ -6,27 +6,13 @@
 /*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 22:11:53 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/10 19:37:07 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/11 10:23:42 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 extern t_minishell_state g_minishell;
-
-// skip quotes in input string
-int     skip_quotes(char *str, int i)
-{
-    char    quote;
-
-    quote = str[i];
-    i++;
-    while (str[i] && str[i] != quote)
-        i++;
-    if (str[i] == quote)
-        i++;
-    return (i);
-}
 
 // store tokens in args array
 void    store_tokens(char *str, t_token *token)
@@ -42,19 +28,16 @@ void    store_tokens(char *str, t_token *token)
         if (str[i] && str[i] != ' ')
         {
             a = i;
-            while (str[i] && str[i] != ' ')
-            {
-                if (str[i] == '\'' || str[i] == '"')
-                    i = skip_quotes(str, i);
-                else
-                    i++;
-            }
-            token->args[token->index] = ft_substr(str, a, i - a);
+            i = store_values2(str, i);
+            token->args[token->index] = ft_substr(str, a, (i - a) + 1);
         }
         if (str[i] == '\0')
             break ;
         else
+        {
             token->index++;
+            i++;
+        }
     }
 }
 // count tokens in input string
@@ -71,13 +54,7 @@ int    count_tokens(char *str)
            i++;
         if (str[i] && str[i] != ' ')
         {
-            while (str[i] && str[i] != ' ')
-            {
-                if (str[i] == '\'' || str[i] == '"')
-                    i = skip_quotes(str, i);
-                else
-                    i++;
-            }
+            i = count_tokens2(str, i);
             tokens++;
         }
         if (str[i] == '\0')
@@ -90,10 +67,11 @@ int    count_tokens(char *str)
 void    lexer(char *str, t_token *token)
 {
     token->n_tokens = count_tokens(str);
+    printf("Tokens: %d\n", token->n_tokens);
     token->args = malloc(sizeof(char *) * (token->n_tokens + 1));
     if (!token->args)
         exit(1);
-    token->args[token->n_tokens ] = NULL;
+    token->args[token->n_tokens] = NULL;
     token->index = 0;
     store_tokens(str, token);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 20:34:12 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/10 10:53:39 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/10 21:00:03 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,9 @@ void	lexer(char *str, t_token *token);
 
 // Utils
 void	signal_handling(void);
+int     count_tokens2(char *str, int i);
+int     store_values2(char *str, int i);
+int     skip_quotes(char *str, int i);
 
 // Tests
 void    lexer_test(t_token *token);
