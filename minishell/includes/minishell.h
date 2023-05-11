@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 20:34:12 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/11 10:32:39 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/11 10:47:39 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void			signal_handling(void);
 int     		count_tokens2(char *str, int i);
 int     		store_values2(char *str, int i);
 int     		skip_quotes(char *str, int i);
+void    		clean_all(t_token *token);
 t_history_node	*ft_lstnew_2(void *content);
 void			free_data(t_minishell_state *data, int exit_code);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipa <filipa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 23:00:53 by filipa            #+#    #+#             */
-/*   Updated: 2023/05/10 20:17:36 by filipa           ###   ########.fr       */
+/*   Updated: 2023/05/11 10:52:11 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	main(int argc, char **argv, char **envp)
 	char	*str;
 
 	minishell_init(&g_minishell, envp);
-	initialize_history(&g_minishell);
-	set_history_mode(&g_minishell);
+//	initialize_history(&g_minishell);
+//	set_history_mode(&g_minishell);
 	signal_handling();
 	while (1)
 	{
@@ -30,8 +30,10 @@ int	main(int argc, char **argv, char **envp)
 		str = readline(PROMPT);
 		if (!str)
 			break ;
+//		add_history(str);
 		lexer(str, &g_minishell.token);
 		lexer_test(&g_minishell.token);
-//		clean_all(&g_minishell->token);
+		clean_all(&g_minishell.token);
+		free(str);
 	}
 }

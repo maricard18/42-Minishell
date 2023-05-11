@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/10 18:42:53 by filipa            #+#    #+#             */
-/*   Updated: 2023/05/11 10:39:53 by maricard         ###   ########.fr       */
+/*   Created: 2023/05/11 10:45:38 by maricard          #+#    #+#             */
+/*   Updated: 2023/05/11 10:49:07 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_history_node	*ft_lstnew_2(void *content)
+void    clean_all(t_token *token)
 {
-	struct s_history_node	*new;
+    int i;
 
-	new = (struct s_history_node *)malloc(sizeof(struct s_history_node));
-	ft_memset(new, 0, sizeof(t_history_node));
-	if (new)
-		new->content = content;
-	new->previous = NULL;
-	return (new);
-}
-
-void	free_data(t_minishell_state *data, int exit_code)
-{
-	free_env(data->environment_variables);
-	free(data->pwd);
-	ft_putstr_fd("exit\n", 2);
-	exit(exit_code);
+    i = 0;
+    while (i <= token->n_tokens)
+    {
+        free(token->args[i]);
+        printf("freed token->args[%d]\n", i);
+        i++;
+    }
+    free(token->args);
 }

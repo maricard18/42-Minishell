@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 22:11:53 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/11 10:32:59 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/11 10:45:17 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ int    count_tokens(char *str)
 void    lexer(char *str, t_token *token)
 {
     token->n_tokens = count_tokens(str);
-    printf("Tokens: %d\n", token->n_tokens);
     token->args = malloc(sizeof(char *) * (token->n_tokens + 1));
     if (!token->args)
         exit(1);
