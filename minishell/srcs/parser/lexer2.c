@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 20:50:03 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/11 10:24:15 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/11 14:40:29 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,18 @@ int     store_values2(char *str, int i)
     while (str[i] && str[i] != ' ')
     {
         if (str[i] == '\'' || str[i] == '"')
+        {
             i = skip_quotes(str, i);
+            if (str[i] == '|' || str[i] == '<' || str[i] == '>')
+                return (i - 1);
+        }
         else if (str[i] == '|')
             return (i);
         else if (str[i] == '>' || str[i] == '<')
         {
             if (str[i + 1] == '>' || str[i + 1] == '<')
-            {
                 i++;
-                return (i);
-            }
-            else
-                return (i);
+            return (i);
         }
         else if (str[i + 1] == '|')
             return (i);
@@ -61,18 +61,18 @@ int     count_tokens2(char *str, int i)
     while (str[i] && str[i] != ' ')
     {
         if (str[i] == '\'' || str[i] == '"')
+        {
             i = skip_quotes(str, i);
+            if (str[i] == '|' || str[i] == '<' || str[i] == '>')
+                return (i);
+        }
         else if (str[i] == '|')
             return (++i);
         else if (str[i] == '>' || str[i] == '<')
         {
             if (str[i + 1] == '>' || str[i + 1] == '<')
-            {
                 i++;
-                return (++i);
-            }
-            else
-                return (++i);
+            return (++i);
         }
         else if (str[i + 1] == '|')
             return (++i);

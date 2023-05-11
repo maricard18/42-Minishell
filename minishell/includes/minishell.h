@@ -6,7 +6,7 @@
 /*   By: filipa <filipa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 20:34:12 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/11 17:38:04 by filipa           ###   ########.fr       */
+/*   Updated: 2023/05/11 17:39:59 by filipa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,18 @@ enum errors{
 };
 
 // Structs
-typedef struct s_token
+typedef struct	s_token
 {
 	char    **args;
 	int		n_tokens;
 	int		index;
-}			t_token;
+}				t_token;
+
+typedef struct s_sig
+{
+	int		ctrl_c;
+	int		ctrl_d;
+}				t_sig;
 
 typedef struct s_minishell_state
 {
@@ -79,7 +85,6 @@ extern t_minishell_state g_minishell;
 // Src
 void	minishell_init(char **env);
 void	lexer(char *str, t_token *token);
-
 
 
 // Utils
