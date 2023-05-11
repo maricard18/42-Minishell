@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   history.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipa <filipa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 22:07:12 by filipa            #+#    #+#             */
-/*   Updated: 2023/05/10 18:36:20 by filipa           ###   ########.fr       */
+/*   Updated: 2023/05/11 11:08:28 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
-#include "../../includes/libft.h"
+#include "minishell.h"
 
 void	add_command_to_history(t_history_node **hist_head, char *command)
 {
