@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: filipa <filipa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 23:36:29 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/11 18:13:17 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/11 19:05:39 by filipa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void    ctrl_c(int signal)
     write(1, "\033[A", 3);
 }
 
-void    ctrl_d(char *str)
+void    ctrl_d(char *str)//saio do programa
 {
     if (!str)
     {

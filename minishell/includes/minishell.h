@@ -6,7 +6,7 @@
 /*   By: filipa <filipa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 20:34:12 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/11 18:59:04 by filipa           ###   ########.fr       */
+/*   Updated: 2023/05/11 19:05:48 by filipa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,13 @@ void	pwd_command(void);
 void	unset_command(char **input);
 void	export_(char **input);
 
+//signals
+void    ctrl_c(int signal);
+
+
 
 // Tests
 void    lexer_test(t_token *token);
+void    ctrl_d(char *str);
 
 #endif
