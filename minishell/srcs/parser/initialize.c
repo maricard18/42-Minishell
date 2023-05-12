@@ -8,8 +8,7 @@ void	initialize_shell(char *str)
 	//test = funçao_para_dividir_guardar_e_identificar_tokens
 	if (validate_syntax(test))//de estiver tudo bem segue se nao retorna
 		return ;
-	//parsed_commands = parse_commands(0, 1, test);
-    //executor(parsed_commands);
+	
 }
 
 int validate_syntax(t_token *my_tokens)//comandos sejam interpretados corretamente e executados adequadamente
