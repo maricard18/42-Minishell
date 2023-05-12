@@ -14,7 +14,7 @@ void	initialize_shell(char *str)
 }
 
 
-//next_token(t_token *my_tokens)//próximo token a partir da entrada do usuário e adicioná-lo à lista de tokens
+/*next_token(t_token *my_tokens)//próximo token a partir da entrada do usuário e adicioná-lo à lista de tokens
 {
     t_token *tmp_tokens;
     t_token *new_tokens;
@@ -27,7 +27,7 @@ void	initialize_shell(char *str)
     //new_tokens = funcao para extrair os tokens separa-los e guarda-los para converter a entrada do usuário em uma lista de tokens new_tokens
     new_tokens->prev = tmp_tokens;//atualizam os ponteiros prev e next para adicionar new_tokens como o próximo nó na lista de tokens
     tmp_tokens->next = new_tokens;
-}
+}*/
 
 int validate_syntax(t_token *my_tokens)//comandos sejam interpretados corretamente e executados adequadamente
 {
