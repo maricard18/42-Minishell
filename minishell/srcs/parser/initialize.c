@@ -8,7 +8,25 @@ void	initialize_shell(char *str)
 	//test = funçao_para_dividir_guardar_e_identificar_tokens
 	if (validate_syntax(test))//de estiver tudo bem segue se nao retorna
 		return ;
-	
+    //Funcao para a analise a lista de tokens e crie uma estrutura de dados que represente os comandos a serem executados.
+    //Funçao redirecionamentos, processos filhos e a ordem de execução dos comandos com base nos operadores lógicos
+	//Nessas funcoes tb sera necessario tratar da expansao das variaveis de ambiente.
+}
+
+
+//next_token(t_token *my_tokens)//próximo token a partir da entrada do usuário e adicioná-lo à lista de tokens
+{
+    t_token *tmp_tokens;
+    t_token *new_tokens;
+    char *user_input;
+
+    tmp_tokens = my_tokens;
+    while (tmp_tokens->next)
+        tmp_tokens = tmp_tokens->next;//percorrem a lista de tokens my_tokens até chegar ao último nó
+    user_input = readline("> ");//obter a entrada do usuário. O prompt "> " é exibido para pedir a entrada
+    //new_tokens = funcao para extrair os tokens separa-los e guarda-los para converter a entrada do usuário em uma lista de tokens new_tokens
+    new_tokens->prev = tmp_tokens;//atualizam os ponteiros prev e next para adicionar new_tokens como o próximo nó na lista de tokens
+    tmp_tokens->next = new_tokens;
 }
 
 int validate_syntax(t_token *my_tokens)//comandos sejam interpretados corretamente e executados adequadamente
