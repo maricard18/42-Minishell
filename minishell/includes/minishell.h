@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: filipa <filipa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 20:34:12 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/11 19:45:44 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/12 19:41:04 by filipa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,19 @@
 
 // # define PROMPT "\x1b[32m[\x1b[33mMinishell\x1b[32m]~>\x1b[0m "
 # define PROMPT " [MINI\033[31;1mSHELL] $ \033[0m"
+
+enum tokens{
+	TOKEN_PIPE,
+	TOKEN_OR,
+	TOKEN_AND,
+	TOKEN_GREATER,
+	TOKEN_SMALLER,
+	TOKEN_APPEND,
+	TOKEN_HERE_DOC,
+	TOKEN_OPEN_PAR,
+	TOKEN_CLOSE_PAR,
+	TOKEN_STR
+};
 
 typedef enum e_builtin_types
 {
@@ -56,6 +69,10 @@ typedef struct	s_token
 	char    **args;
 	int		n_tokens;
 	int		index;
+	enum tokens		type;
+	char			*value;
+	struct s_token	*prev;
+	struct s_token	*next;
 }				t_token;
 
 typedef struct s_sig
