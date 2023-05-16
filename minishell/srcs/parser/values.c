@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 10:57:46 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/16 11:28:01 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/16 11:34:01 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void    give_values_threads()
 {
-    ola tudo bem ?
+    ola tudo bem vamos nessa vanessa ?
 }
