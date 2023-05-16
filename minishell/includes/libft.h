@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipa <filipa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 10:27:54 by firibeir          #+#    #+#             */
-/*   Updated: 2023/05/10 18:39:43 by filipa           ###   ########.fr       */
+/*   Updated: 2023/05/16 17:19:26 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int		ft_lstsize(t_list *lst);
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 void	*ft_calloc(size_t nmemb, size_t size);
-int	get_next_line(int fd, char **line);
-int	ft_strcmp(const char *str1, const char *str2);
+int		get_next_line(int fd, char **line);
+int		ft_strcmp(const char *str1, const char *str2);
 
 #endif

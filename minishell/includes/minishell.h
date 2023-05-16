@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 20:34:12 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/16 10:57:11 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/16 17:51:41 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,35 +24,31 @@
 #include <errno.h>
 #include <sys/ioctl.h>
 
+# define B "\033[1m\033[30m"
+# define R "\033[1m\033[31m"
+# define G "\033[1m\033[32m"
+# define Y "\033[1m\033[33m"
+# define BL "\033[1m\033[34m"
+# define P "\033[1m\033[35m"
+# define CYAN "\033[1m\033[36m"
+# define W "\033[1m\033[37m"
+# define RT "\033[0m"
+
 // # define PROMPT "\x1b[32m[\x1b[33mMinishell\x1b[32m]~>\x1b[0m "
 # define PROMPT " [MINI\033[31;1mSHELL] $ \033[0m"
 
-# define PIPE "|"
-# define RED_IN ">"
-
 enum tokens{
-	TOKEN_PIPE,
-	TOKEN_OR,
-	TOKEN_AND,
-	TOKEN_GREATER,
-	TOKEN_SMALLER,
-	TOKEN_APPEND,
-	TOKEN_HERE_DOC,
-	TOKEN_OPEN_PAR,
-	TOKEN_CLOSE_PAR,
-	TOKEN_STR
+	PIPE,
+	OR,
+	AND,
+	GREATER,
+	SMALLER,
+	APPEND,
+	HERE_DOC,
+	OPEN_PAR,
+	CLOSE_PAR,
+	STRING,
 };
-
-typedef enum e_builtin_types
-{
-    CD = 1,
-    ENV,
-    PWD,
-    ECHO_,
-    EXIT,
-    UNSET,
-    EXPORT
-} 			t_builtin_types;
 
 enum errors{
 	FILE_NOT_FOUND = 1,
@@ -66,10 +62,20 @@ enum errors{
 	PIPE_ERR = -5
 };
 
+typedef enum e_builtin_types
+{
+    CD = 1,
+    ENV,
+    PWD,
+    ECHO_,
+    EXIT,
+    UNSET,
+    EXPORT
+} 			t_builtin_types;
+
 // Structs
 typedef struct	s_token
 {
-	char    		**args;
 	int				n_tokens;
 	enum tokens		type;
 	char			*value;
@@ -78,14 +84,15 @@ typedef struct	s_token
 	struct s_token	*next;
 }				t_token;
 
-typdef struct s_parser
+typedef struct s_parser
 {
 	char			*command;
 	char			**args;
-	strcuct			t_token;
-	strcut s_parser *next;
-	strcut s_parser *next;
-}
+	int				flag;
+	t_token			token;
+	struct s_parser *next;
+	struct s_parser *prev;
+}				t_parser;
 
 typedef struct s_sig
 {
@@ -104,30 +111,44 @@ typedef struct s_minishell_state
 	int			out_file;
 	char		**ev;
 	char		**paths;
+	char    	**input;
+	int			n_tokens;
+	int			index;
 	t_token		token;
 	
-}                       t_minishell_state;
+}               t_minishell_state;
 
 extern t_minishell_state g_minishell;
 
-
 // Src
 void	minishell_init(char **env);
-void	lexer(char *str, t_token *token);
+void	lexer(char *str);
 
 
 // Utils
-//void			signal_handling(void);
-int     		count_tokens2(char *str, int i);
-int     		store_values2(char *str, int i);
-int     		skip_quotes(char *str, int i);
-void    		clean_all(t_token *token);
-void			update_path_directories(void);
-int				number_args_env_Var(void);
-void			free_array(char **arr);
-int 			handle_error(int error_code, char *custom_message);
-void			execute_builtin_command(char **arguments);
-int				is_whitespace(char c);
+int		count_tokens2(char *str, int i);
+int		store_values2(char *str, int i);
+int		skip_quotes(char *str, int i);
+void	clean_all(char *str);
+void	update_path_directories(void);
+int		number_args_env_Var(void);
+void	free_array(char **arr);
+int 	handle_error(int error_code, char *custom_message);
+void	execute_builtin_command(char **arguments);
+int		is_whitespace(char c);
+int 	is_string(char *str);
+void 	special_chars(char *str);
+int 	ft_strchr2(const char *s, char c);
+int		ft_strchr3(const char *s, char c, char d);
+int 	ft_strchr4(const char *s, char c);
+void	check_for_redirect_in(char *str);
+void	check_for_redirect_out(char *str);
+void	check_for_pipes(char *str);
+void	check_for_string(char *str);
+void	check_for_(char *str);
+void	check_for_parentheses(char *str);
+void	check_for_and(char *str);
+void	tokanizer(void);
 
 //Commands
 void	cd_command(char **input);
@@ -141,10 +162,8 @@ void	export_command(char **input);
 //signals
 void    ctrl_c(int signal);
 
-
-
 // Tests
-void    lexer_test(t_token *token);
+void    lexer_test(void);
 void    ctrl_d(char *str);
 
 #endif

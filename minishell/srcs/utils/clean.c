@@ -6,22 +6,26 @@
 /*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 10:45:38 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/11 11:13:11 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/16 17:04:10 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// clean function for lexer
-void    clean_all(t_token *token)
+extern t_minishell_state g_minishell;
+
+// clean function for lexer and tokanizer
+void    clean_all(char *str)
 {
     int i;
 
     i = 0;
-    while (i <= token->n_tokens)
+    free(str);
+    while (i < g_minishell.n_tokens)
     {
-        free(token->args[i]);
+        free(g_minishell.input[i]);
         i++;
     }
-    free(token->args);
+    free(g_minishell.input);
+//    free(g_minishell.token);
 }

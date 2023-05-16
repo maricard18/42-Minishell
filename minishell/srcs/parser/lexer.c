@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 22:11:53 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/11 18:18:40 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/16 17:03:24 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 extern t_minishell_state g_minishell;
 
 // store tokens in args array
-void    store_tokens(char *str, t_token *token)
+void    store_tokens(char *str)
 {
     int i;
     int a;
 
     i = 0;
-    while (token->index <= token->n_tokens)
+    while (g_minishell.index <= g_minishell.n_tokens)
     {
         while (str[i] && str[i] == ' ')
            i++;
@@ -29,17 +29,18 @@ void    store_tokens(char *str, t_token *token)
         {
             a = i;
             i = store_values2(str, i);
-            token->args[token->index] = ft_substr(str, a, (i - a) + 1);
+            g_minishell.input[g_minishell.index] = ft_substr(str, a, (i - a) + 1);
         }
         if (str[i] == '\0')
             break ;
         else
         {
-            token->index++;
+            g_minishell.index++;
             i++;
         }
     }
 }
+
 // count tokens in input string
 int    count_tokens(char *str)
 {
@@ -63,14 +64,14 @@ int    count_tokens(char *str)
     return (tokens);
 }
 
-// function to devide input string into tokens
-void    lexer(char *str, t_token *token)
+// function that devides the input string into arguments
+void    lexer(char *str)
 {
-    token->n_tokens = count_tokens(str);
-    token->args = malloc(sizeof(char *) * (token->n_tokens + 1));
-    if (!token->args)
+    g_minishell.n_tokens = count_tokens(str);
+    g_minishell.input = malloc(sizeof(char *) * (g_minishell.n_tokens + 1));
+    if (!g_minishell.input)
         exit(1);
-    token->args[token->n_tokens] = NULL;
-    token->index = 0;
-    store_tokens(str, token);
+    g_minishell.input[g_minishell.n_tokens] = NULL;
+    g_minishell.index = 0;
+    store_tokens(str);
 }
