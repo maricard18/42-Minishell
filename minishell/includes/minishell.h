@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipa <filipa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 20:34:12 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/12 19:41:04 by filipa           ###   ########.fr       */
+/*   Updated: 2023/05/16 10:57:11 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@
 
 // # define PROMPT "\x1b[32m[\x1b[33mMinishell\x1b[32m]~>\x1b[0m "
 # define PROMPT " [MINI\033[31;1mSHELL] $ \033[0m"
+
+# define PIPE "|"
+# define RED_IN ">"
 
 enum tokens{
 	TOKEN_PIPE,
@@ -49,7 +52,7 @@ typedef enum e_builtin_types
     EXIT,
     UNSET,
     EXPORT
-} t_builtin_types;
+} 			t_builtin_types;
 
 enum errors{
 	FILE_NOT_FOUND = 1,
@@ -66,14 +69,23 @@ enum errors{
 // Structs
 typedef struct	s_token
 {
-	char    **args;
-	int		n_tokens;
-	int		index;
+	char    		**args;
+	int				n_tokens;
 	enum tokens		type;
 	char			*value;
+	int				index;
 	struct s_token	*prev;
 	struct s_token	*next;
 }				t_token;
+
+typdef struct s_parser
+{
+	char			*command;
+	char			**args;
+	strcuct			t_token;
+	strcut s_parser *next;
+	strcut s_parser *next;
+}
 
 typedef struct s_sig
 {

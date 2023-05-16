@@ -27,7 +27,7 @@ void	exit_command(char **input)//encerra o programa
 {
 	if (number_args(input) == 1)//se for só exit
 	{
-		printf("minishell: exit: no argument provided\n");
+		printf("exit\n");
 		exit(errno);
 	}
 	else
