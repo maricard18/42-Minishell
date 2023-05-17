@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 20:34:12 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/16 17:51:41 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/17 13:29:51 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ typedef struct s_minishell_state
 	int			n_tokens;
 	int			index;
 	t_token		token;
-	
+	t_parser	parser;
 }               t_minishell_state;
 
 extern t_minishell_state g_minishell;
@@ -134,7 +134,8 @@ void	update_path_directories(void);
 int		number_args_env_Var(void);
 void	free_array(char **arr);
 int 	handle_error(int error_code, char *custom_message);
-void	execute_builtin_command(char **arguments);
+
+// Tokeniser
 int		is_whitespace(char c);
 int 	is_string(char *str);
 void 	special_chars(char *str);
@@ -148,7 +149,14 @@ void	check_for_string(char *str);
 void	check_for_(char *str);
 void	check_for_parentheses(char *str);
 void	check_for_and(char *str);
-void	tokanizer(void);
+void	tokeniser(t_token *temp);
+
+// Execution 
+void	execution(void);
+void    execute_commands(void);
+void    execute_execve(char **args);
+void	execute_builtin_command(char **arguments);
+char	*ft_strchr5(const char *s, int c);
 
 //Commands
 void	cd_command(char **input);

@@ -14,7 +14,7 @@
 
 extern t_minishell_state g_minishell;
 
-// parentheses checker
+// () checker
 void    check_for_parentheses(char *str)
 {
     if (ft_strchr3(str, '(', ')') == 1)
@@ -34,6 +34,7 @@ void    check_for_string(char *str)
         return ;
 }
 
+// && checker
 void    check_for_and(char *str)
 {   
     if (ft_strchr2(str, '&') == 2)

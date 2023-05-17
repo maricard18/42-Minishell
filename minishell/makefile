@@ -6,7 +6,7 @@
 #    By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 10:28:04 by maricard          #+#    #+#              #
-#    Updated: 2023/05/16 12:42:19 by maricard         ###   ########.fr        #
+#    Updated: 2023/05/17 11:11:10 by maricard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ LIBS = -ltermcap -lreadline -lncurses
 
 SRC = 	./srcs/parser/lexer.c \
 		./srcs/parser/lexer2.c \
-		./srcs/parser/values.c \
+		./srcs/parser/tokeniser.c \
 		./srcs/utils/clean.c \
 		./srcs/utils/signal.c \
 		./srcs/utils/tests.c \
@@ -37,7 +37,9 @@ SRC = 	./srcs/parser/lexer.c \
 		./srcs/commands/exit.c \
 		./srcs/commands/export.c \
 		./srcs/commands/pwd.c \
-		./srcs/commands/unset.c
+		./srcs/commands/unset.c \
+		./srcs/execution/execution.c \
+		./srcs/execution/execve.c
 
 SRC-OBJ = $(SRC:.c=.o)
 
