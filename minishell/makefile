@@ -6,7 +6,7 @@
 #    By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 10:28:04 by maricard          #+#    #+#              #
-#    Updated: 2023/05/17 11:11:10 by maricard         ###   ########.fr        #
+#    Updated: 2023/05/17 16:11:27 by maricard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,6 @@ SRC = 	./srcs/parser/lexer.c \
 		./srcs/utils/utils2.c \
 		./srcs/utils/special_chars.c \
 		./srcs/utils/special_chars2.c \
-		./srcs/commands/command_handler.c \
 		./srcs/commands/cd.c \
 		./srcs/commands/echo.c \
 		./srcs/commands/env.c \
@@ -39,7 +38,8 @@ SRC = 	./srcs/parser/lexer.c \
 		./srcs/commands/pwd.c \
 		./srcs/commands/unset.c \
 		./srcs/execution/execution.c \
-		./srcs/execution/execve.c
+		./srcs/execution/execve.c \
+		./srcs/execution/builtins.c
 
 SRC-OBJ = $(SRC:.c=.o)
 

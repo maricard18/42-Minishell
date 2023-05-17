@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 20:34:12 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/17 13:29:51 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/17 15:35:13 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@
 # include <signal.h>
 # include <fcntl.h>
 # include <termios.h>
-#include <errno.h>
-#include <sys/ioctl.h>
+# include <errno.h>
+# include <sys/ioctl.h>
+# include <sys/wait.h>
 
 # define B "\033[1m\033[30m"
 # define R "\033[1m\033[31m"
@@ -156,7 +157,7 @@ void	execution(void);
 void    execute_commands(void);
 void    execute_execve(char **args);
 void	execute_builtin_command(char **arguments);
-char	*ft_strchr5(const char *s, int c);
+char    *ft_strtok(char *str, char delimeter);
 
 //Commands
 void	cd_command(char **input);

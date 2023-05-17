@@ -16,11 +16,12 @@ extern t_minishell_state g_minishell;
 
 void    test_values()
 {
-    g_minishell.parser.args = malloc(sizeof(char *) * 2);
+    g_minishell.parser.args = malloc(sizeof(char *) * 3);
+    g_minishell.parser.args[2] = NULL;
     g_minishell.parser.args[0] = malloc(sizeof(char) * 3);
-    g_minishell.parser.args[0] = "ls\0";
-//    g_minishell.parser.args[1] = malloc(sizeof(char) * 3);
-//    g_minishell.parser.args[1] = "-l\0";   
+    g_minishell.parser.args[0] = ft_strdup("ls");
+    g_minishell.parser.args[1] = malloc(sizeof(char) * 3);
+    g_minishell.parser.args[1] = ft_strdup("-l")  ; 
     g_minishell.parser.token.type = STRING;
     g_minishell.parser.flag = 0;
     g_minishell.parser.next = NULL;
