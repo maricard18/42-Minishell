@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 20:34:12 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/17 15:35:13 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/18 12:43:05 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,21 @@ typedef struct	s_token
 	struct s_token	*next;
 }				t_token;
 
+typedef	struct	s_file
+{
+	enum tokens		type;
+	char			*file;
+	struct s_file	*next;
+}				t_file;
+
 typedef struct s_parser
 {
+	int				in;
+	int				out;
+	int				flag;
 	char			*command;
 	char			**args;
-	int				flag;
-	t_token			token;
+	t_file			file;
 	struct s_parser *next;
 	struct s_parser *prev;
 }				t_parser;
@@ -158,6 +167,8 @@ void    execute_commands(void);
 void    execute_execve(char **args);
 void	execute_builtin_command(char **arguments);
 char    *ft_strtok(char *str, char delimeter);
+
+void    check_files();
 
 //Commands
 void	cd_command(char **input);

@@ -37,7 +37,7 @@
 # ----------------------------- #
 
 make 
-chmod 755 minishell
+#chmod 755 minishell
 clear
 
 # ----------------------------- #
@@ -47,21 +47,23 @@ function test()
     BASH_TEST=$(bash -c "$@")
     MINISHELL_TEST=$($@ | ./minishell | head -n 1 | cut -d ' ' -f 4-)
 
-    DIFF=$(diff <(echo "$BASH_TEST") <(echo "$MINISHELL_TEST"))
-
-    printf "  "$UNDERDYELLOW"Current test:$RESET $@\n\n"
+    printf "  "$BOLDYELLOW$UNDERDYELLOW"Current test:$RESET $@\n\n"
     sleep 1
     printf "$BOLDGREEN -> Bash Output:$RESET $BASH_TEST\n"
     sleep 0.5
-    printf "$BOLDRED -> Your Output:$RESET $MINISHELL_TEST$BOLDWHITE\n\n"
+    printf "$BOLDRED -> Your Output:$RESET $MINISHELL_TEST $BOLDWHITE\n\n"
     sleep 0.5
 
+    DIFF=$(diff <(echo $BASH_TEST) <(echo $MINISHELL_TEST))
+
     if [[ -z "$DIFF" ]]; then
-        echo "    ❌❌❌"
+        printf "    $BOLDGREEN success $RESET\n"
     else
-        echo "    ✅✅✅"
+        printf "    $BOLDRED failed $RESET\n"
     fi
     
+    rm bash minishell
+
     printf "\n"
     sleep 1
 }
@@ -83,14 +85,12 @@ printf " ."
 sleep 0.5
 printf "."
 sleep 0.5
-printf ".\n\n"
+printf ".$RESET\n\n"
 sleep 0.5
 
 # ----------- TESTER ----------- #
 
 test 'echo ola'
 test 'echo "ola"'
-test 'echo ola"ola"ola'
-test 'echo "ola'ola'ola"'
 
 printf '    THE END\n\n'

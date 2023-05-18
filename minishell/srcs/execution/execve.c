@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 10:35:27 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/17 16:00:12 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/18 10:55:06 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char    *search_path(char *arg)
 			tok = ft_strtok(NULL, ':');
 		}
 	}
-	perror("command not found\n");
+	perror("minishell: command not found\n");
 	exit(errno);
 }
 

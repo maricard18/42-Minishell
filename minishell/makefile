@@ -6,7 +6,7 @@
 #    By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 10:28:04 by maricard          #+#    #+#              #
-#    Updated: 2023/05/17 16:11:27 by maricard         ###   ########.fr        #
+#    Updated: 2023/05/18 12:43:22 by maricard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,8 @@ SRC = 	./srcs/parser/lexer.c \
 		./srcs/commands/unset.c \
 		./srcs/execution/execution.c \
 		./srcs/execution/execve.c \
-		./srcs/execution/builtins.c
+		./srcs/execution/builtins.c \
+		./srcs/execution/files.c
 
 SRC-OBJ = $(SRC:.c=.o)
 
