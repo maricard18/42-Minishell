@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+         #
+#    By: filipa <filipa@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 10:28:04 by maricard          #+#    #+#              #
-#    Updated: 2023/05/11 19:45:14 by maricard         ###   ########.fr        #
+#    Updated: 2023/05/21 14:55:20 by filipa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,11 +21,17 @@ LIBS = -ltermcap -lreadline -lncurses
 
 SRC = 	./srcs/parser/lexer.c \
 		./srcs/parser/lexer2.c \
+		./srcs/parser/parser.c \
+		./srcs/parser/initialize.c \
+		./srcs/parser/parser_extras_for_testes.c \
+		./srcs/parser/parser_utils.c \
 		./srcs/utils/clean.c \
 		./srcs/utils/signal.c \
 		./srcs/utils/tests.c \
 		./srcs/utils/variables.c \
 		./srcs/utils/utils.c \
+		./srcs/utils/utils2.c \
+		./srcs/utils/erro.c \
 		./srcs/commands/command_handler.c \
 		./srcs/commands/cd.c \
 		./srcs/commands/echo.c \

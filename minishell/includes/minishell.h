@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: filipa <filipa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 20:34:12 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/16 10:57:11 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/21 14:53:16 by filipa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,6 @@
 
 // # define PROMPT "\x1b[32m[\x1b[33mMinishell\x1b[32m]~>\x1b[0m "
 # define PROMPT " [MINI\033[31;1mSHELL] $ \033[0m"
-
-# define PIPE "|"
-# define RED_IN ">"
 
 enum tokens{
 	TOKEN_PIPE,
@@ -78,14 +75,26 @@ typedef struct	s_token
 	struct s_token	*next;
 }				t_token;
 
-typdef struct s_parser
+typedef struct s_file
 {
-	char			*command;
-	char			**args;
-	strcuct			t_token;
-	strcut s_parser *next;
-	strcut s_parser *next;
-}
+	enum tokens		type;
+	char			*file_name;
+	struct s_file	*next;
+}					t_file;
+
+typedef struct s_parsed
+{
+	int			exec;
+	int			in_file;
+	int			out_file;
+	char		*cmd;//command
+	char		**arguments;//arguments
+	t_token		*paranthesis;
+	struct s_parsed	**parantheses_and_or;//parantheses and or
+	t_file		*file_list;
+	struct s_parsed	*prev;
+	struct s_parsed	*next;
+}				t_parsed;
 
 typedef struct s_sig
 {
@@ -104,6 +113,8 @@ typedef struct s_minishell_state
 	int			out_file;
 	char		**ev;
 	char		**paths;
+	struct s_parsed	**parsed_commands;
+	struct s_token	*tokens;
 	t_token		token;
 	
 }                       t_minishell_state;
@@ -114,6 +125,8 @@ extern t_minishell_state g_minishell;
 // Src
 void	minishell_init(char **env);
 void	lexer(char *str, t_token *token);
+int validate_syntax(t_token *my_tokens);
+t_parsed	**parse_commands(int in_file, int out_file, t_token *token_sequence);
 
 
 // Utils
@@ -129,6 +142,9 @@ int 			handle_error(int error_code, char *custom_message);
 void			execute_builtin_command(char **arguments);
 int				is_whitespace(char c);
 
+//utils utils2.c
+char *ft_strcpy(char *dest, const char *src);
+
 //Commands
 void	cd_command(char **input);
 void	echo_command(char **input);
@@ -141,10 +157,33 @@ void	export_command(char **input);
 //signals
 void    ctrl_c(int signal);
 
+//Parser utils
+void skip_to_matching_parenthesis(t_token **command_token_list);
+void handle_paranthesis(t_token **tokens_list, t_parsed **command);
+void add_command_to_list(t_parsed *current_command, t_parsed **command_list);
+t_parsed *allocate_and_init_command(int in_file, int out_file);
+int count_and_or_tokens(t_token *command_token_list);
+
+
+void get_next_token(t_token *command_table);
 
 
 // Tests
 void    lexer_test(t_token *token);
 void    ctrl_d(char *str);
+
+//tests filipa
+
+int carater_especial(char c);
+int ve_se_tem_na_string(char *string, char *chars_to_search, size_t size);
+int encontra_o_par(char *input, char c);
+int retorna_strings(char *input);
+int adiciona_token_a_lista(char *input, t_token *tokens_list, enum tokens type, int size);
+void analisa_e_atribui_significado(char *input, t_token *tokens_list);
+t_token *identificar_agrupar_tokens(char *input);
+
+
+//utils
+char *ft_strcpy(char *dest, const char *src);
 
 #endif
