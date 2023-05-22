@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 20:34:12 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/18 12:43:05 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/22 15:54:07 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ typedef struct	s_token
 typedef	struct	s_file
 {
 	enum tokens		type;
-	char			*file;
+	char			*name;
 	struct s_file	*next;
 }				t_file;
 

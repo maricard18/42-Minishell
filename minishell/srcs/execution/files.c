@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 12:20:20 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/18 16:47:41 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/22 16:23:49 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,25 @@
 void    check_files()
 {
     int file;
-    int dup;
-    int id;
+    int fd;
+    int old_fd;
     
-    id = fork();
-    if (id == 0)
+    old_fd = dup(STDOUT_FILENO);
+    file = open(g_minishell.parser.file.name, O_CREAT | O_WRONLY, 0777);
+    if (file == -1)
     {
-        file = open("file", O_CREAT | O_WRONLY, 0777);
-        if (file == -1)
-        {
-            perror("error opening file\n");
-            exit(1);
-        }
-        dup = dup2(file, STDOUT_FILENO);
-        if (dup == -1)
-        {
-            perror("error on dip2()\n");
-            exit(1);
-        }
-        close(file);
+        perror("error opening file\n");
+        exit(1);
     }
-    else
+    fd = dup2(file, STDOUT_FILENO);
+    if (fd == -1)
     {
-        wait(NULL);
-        execute_execve(g_minishell.parser.args);   
+        perror("error on dip2()\n");
+        exit(1);
     }
+    close(file);
+    execute_execve(g_minishell.parser.args); 
+    dup2(old_fd, STDOUT_FILENO);
+    close(old_fd);
     return ;
 }
