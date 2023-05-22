@@ -6,7 +6,7 @@
 #    By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 10:28:04 by maricard          #+#    #+#              #
-#    Updated: 2023/05/16 12:42:19 by maricard         ###   ########.fr        #
+#    Updated: 2023/05/22 16:31:26 by maricard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,10 @@ LIBS = -ltermcap -lreadline -lncurses
 SRC = 	./srcs/parser/lexer.c \
 		./srcs/parser/lexer2.c \
 		./srcs/parser/values.c \
+		./srcs/parser/parser.c \
+		./srcs/parser/initialize.c \
+		./srcs/parser/parser_extras_for_testes.c \
+		./srcs/parser/parser_utils.c \
 		./srcs/utils/clean.c \
 		./srcs/utils/signal.c \
 		./srcs/utils/tests.c \
@@ -30,21 +34,16 @@ SRC = 	./srcs/parser/lexer.c \
 		./srcs/utils/utils2.c \
 		./srcs/utils/special_chars.c \
 		./srcs/utils/special_chars2.c \
+		./srcs/utils/erro.c \
 		./srcs/commands/command_handler.c \
 		./srcs/commands/cd.c \
 		./srcs/commands/echo.c \
-		./srcs/commands/env.c \
-		./srcs/commands/exit.c \
-		./srcs/commands/export.c \
-		./srcs/commands/pwd.c \
-		./srcs/commands/unset.c
-
-SRC-OBJ = $(SRC:.c=.o)
-
-all: $(NAME)
-
-$(LIBFT):
-	$(MAKE) -C ./libft
+		./srcs/commands/env.c \minishell/includes/minishell.h: needs merge
+minishell/main.c: needs merge
+minishell/makefile: needs merge
+minishell/srcs/parser/values.c: needs merge
+minishell/srcs/utils/utils2.c: needs merge
+error: you need to resolve your current index first
 
 $(NAME): $(SRC-OBJ) $(LIBFT)
 	$(CC) $(CFLAGS) $(SRC-OBJ) main.c $(LIBFT) -o $(NAME) -I $(INCLUDES) $(LIBS)
