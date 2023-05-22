@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 20:34:12 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/22 15:54:07 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/22 16:33:20 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,24 +85,26 @@ typedef struct	s_token
 	struct s_token	*next;
 }				t_token;
 
-typedef	struct	s_file
+typedef struct s_file
 {
 	enum tokens		type;
-	char			*name;
+	char			*file_name;
 	struct s_file	*next;
-}				t_file;
+}					t_file;
 
-typedef struct s_parser
+typedef struct s_parsed
 {
-	int				in;
-	int				out;
-	int				flag;
-	char			*command;
-	char			**args;
-	t_file			file;
-	struct s_parser *next;
-	struct s_parser *prev;
-}				t_parser;
+	int			exec;
+	int			in_file;
+	int			out_file;
+	char		*cmd;//command
+	char		**arguments;//arguments
+	t_token		*paranthesis;
+	struct s_parsed	**parantheses_and_or;//parantheses and or
+	t_file		*file_list;
+	struct s_parsed	*prev;
+	struct s_parsed	*next;
+}				t_parsed;
 
 typedef struct s_sig
 {
@@ -124,6 +126,8 @@ typedef struct s_minishell_state
 	char    	**input;
 	int			n_tokens;
 	int			index;
+	struct s_parsed	**parsed_commands;
+	struct s_token	*tokens;
 	t_token		token;
 	t_parser	parser;
 }               t_minishell_state;
@@ -131,8 +135,10 @@ typedef struct s_minishell_state
 extern t_minishell_state g_minishell;
 
 // Src
-void	minishell_init(char **env);
-void	lexer(char *str);
+void		minishell_init(char **env);
+void		lexer(char *str, t_token *token);
+int 		validate_syntax(t_token *my_tokens);
+t_parsed	**parse_commands(int in_file, int out_file, t_token *token_sequence);
 
 
 // Utils
@@ -170,6 +176,9 @@ char    *ft_strtok(char *str, char delimeter);
 
 void    check_files();
 
+//utils utils2.c
+char *ft_strcpy(char *dest, const char *src);
+
 //Commands
 void	cd_command(char **input);
 void	echo_command(char **input);
@@ -182,8 +191,33 @@ void	export_command(char **input);
 //signals
 void    ctrl_c(int signal);
 
+//Parser utils
+void 		skip_to_matching_parenthesis(t_token **command_token_list);
+void 		handle_paranthesis(t_token **tokens_list, t_parsed **command);
+void 		dd_command_to_list(t_parsed *current_command, t_parsed **command_list);
+t_parsed 	*allocate_and_init_command(int in_file, int out_file);
+int 		count_and_or_tokens(t_token *command_token_list);
+
+
+void get_next_token(t_token *command_table);
+
+
 // Tests
 void    lexer_test(void);
 void    ctrl_d(char *str);
+
+//tests filipa
+
+int carater_especial(char c);
+int ve_se_tem_na_string(char *string, char *chars_to_search, size_t size);
+int encontra_o_par(char *input, char c);
+int retorna_strings(char *input);
+int adiciona_token_a_lista(char *input, t_token *tokens_list, enum tokens type, int size);
+void analisa_e_atribui_significado(char *input, t_token *tokens_list);
+t_token *identificar_agrupar_tokens(char *input);
+
+
+//utils
+char *ft_strcpy(char *dest, const char *src);
 
 #endif

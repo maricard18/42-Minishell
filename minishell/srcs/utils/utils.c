@@ -6,7 +6,7 @@
 /*   By: filipa <filipa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:42:53 by filipa            #+#    #+#             */
-/*   Updated: 2023/05/11 18:57:02 by filipa           ###   ########.fr       */
+/*   Updated: 2023/05/20 13:14:19 by filipa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,3 +71,4 @@ int	is_whitespace(char c)//verifica se o caracter é um espaço ou um tab
 {
 	return (c == ' ' || c == '\t');
 }
+

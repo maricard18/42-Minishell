@@ -6,7 +6,7 @@
 #    By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 10:28:04 by maricard          #+#    #+#              #
-#    Updated: 2023/05/18 12:43:22 by maricard         ###   ########.fr        #
+#    Updated: 2023/05/22 16:34:02 by maricard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,11 @@ LIBS = -ltermcap -lreadline -lncurses
 SRC = 	./srcs/parser/lexer.c \
 		./srcs/parser/lexer2.c \
 		./srcs/parser/tokeniser.c \
+		./srcs/parser/values.c \
+		./srcs/parser/parser.c \
+		./srcs/parser/initialize.c \
+		./srcs/parser/parser_extras_for_testes.c \
+		./srcs/parser/parser_utils.c \
 		./srcs/utils/clean.c \
 		./srcs/utils/signal.c \
 		./srcs/utils/tests.c \
