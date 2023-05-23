@@ -22,7 +22,7 @@ void    test_values()
 	g_minishell.parsed.args[0] = malloc(sizeof(char) * 6);
 	g_minishell.parsed.args[0] = ft_strdup("echo");
    	g_minishell.parsed.args[1] = malloc(sizeof(char) * 4);
-   	g_minishell.parsed.args[1] = ft_strdup("ola")  ; 
+   	g_minishell.parsed.args[1] = ft_strdup("yes sir")  ; 
 	g_minishell.parsed.args[2] = NULL;
 	
 	g_minishell.parsed.file.type = STRING;
