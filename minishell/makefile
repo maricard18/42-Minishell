@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+         #
+#    By: maricard <maricard@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 10:28:04 by maricard          #+#    #+#              #
-#    Updated: 2023/05/22 16:35:36 by maricard         ###   ########.fr        #
+#    Updated: 2023/05/23 11:17:21 by maricard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,11 +22,6 @@ LIBS = -ltermcap -lreadline -lncurses
 SRC = 	./srcs/parser/lexer.c \
 		./srcs/parser/lexer2.c \
 		./srcs/parser/tokeniser.c \
-		./srcs/parser/values.c \
-		./srcs/parser/parser.c \
-		./srcs/parser/initialize.c \
-		./srcs/parser/parser_extras_for_testes.c \
-		./srcs/parser/parser_utils.c \
 		./srcs/utils/clean.c \
 		./srcs/utils/signal.c \
 		./srcs/utils/tests.c \
@@ -45,7 +40,11 @@ SRC = 	./srcs/parser/lexer.c \
 		./srcs/execution/execution.c \
 		./srcs/execution/execve.c \
 		./srcs/execution/builtins.c \
-		./srcs/execution/files.c
+		./srcs/execution/redirect.c
+#		./srcs/parser/parser.c \
+#		./srcs/parser/initialize.c \
+#		./srcs/parser/parser_extras_for_testes.c \
+#		./srcs/parser/parser_utils.c 
 
 SRC-OBJ = $(SRC:.c=.o)
 

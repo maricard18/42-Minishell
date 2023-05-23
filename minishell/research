@@ -6,3 +6,6 @@ How bash works \ YouTube
 Single and Double Quotes | YouTube
 -> https://www.youtube.com/watch?v=4Gcz27lKBBU
 
+Tests:
+-> echo test 1> file (cat file = test)
+->

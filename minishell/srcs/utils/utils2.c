@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 11:51:04 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/22 16:33:30 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/23 11:18:31 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,31 +82,31 @@ int ft_strchr4(const char *s, char c)
 	return (0);
 }
 
-char *ft_strcpy(char *dest, const char *src)
-{
-    int i = 0;
+// char *ft_strcpy(char *dest, const char *src)
+// {
+//     int i = 0;
     
-    while (src[i] != '\0')
-    {
-        dest[i] = src[i];
-        i++;
-    }
-    dest[i] = '\0';
+//     while (src[i] != '\0')
+//     {
+//         dest[i] = src[i];
+//         i++;
+//     }
+//     dest[i] = '\0';
     
-    return dest;
-}
+//     return dest;
+// }
 
-void get_next_token(t_token *command_table)
-{
-    t_token *tmp_command_table;
-    t_token *new_tokens;
-    char *input;
+// void get_next_token(t_token *command_table)
+// {
+//     t_token *tmp_command_table;
+//     t_token *new_tokens;
+//     char *input;
 
-    tmp_command_table = command_table;
-    while (tmp_command_table->next)
-        tmp_command_table = tmp_command_table->next;
-    input = readline("> ");
-    new_tokens = identificar_agrupar_tokens(input);
-    new_tokens->prev = tmp_command_table;
-    tmp_command_table->next = new_tokens;
-}
+//     tmp_command_table = command_table;
+//     while (tmp_command_table->next)
+//         tmp_command_table = tmp_command_table->next;
+//     input = readline("> ");
+//     new_tokens = identificar_agrupar_tokens(input);
+//     new_tokens->prev = tmp_command_table;
+//     tmp_command_table->next = new_tokens;
+// }

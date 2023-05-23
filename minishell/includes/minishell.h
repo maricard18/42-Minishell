@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 20:34:12 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/22 16:33:20 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/23 11:15:40 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ typedef struct	s_token
 typedef struct s_file
 {
 	enum tokens		type;
-	char			*file_name;
+	char			*name;
 	struct s_file	*next;
 }					t_file;
 
@@ -98,10 +98,10 @@ typedef struct s_parsed
 	int			in_file;
 	int			out_file;
 	char		*cmd;//command
-	char		**arguments;//arguments
+	char		**args;//arguments
 	t_token		*paranthesis;
 	struct s_parsed	**parantheses_and_or;//parantheses and or
-	t_file		*file_list;
+	t_file		file;
 	struct s_parsed	*prev;
 	struct s_parsed	*next;
 }				t_parsed;
@@ -129,14 +129,14 @@ typedef struct s_minishell_state
 	struct s_parsed	**parsed_commands;
 	struct s_token	*tokens;
 	t_token		token;
-	t_parser	parser;
+	t_parsed	parsed;
 }               t_minishell_state;
 
 extern t_minishell_state g_minishell;
 
 // Src
 void		minishell_init(char **env);
-void		lexer(char *str, t_token *token);
+void		lexer(char *str);
 int 		validate_syntax(t_token *my_tokens);
 t_parsed	**parse_commands(int in_file, int out_file, t_token *token_sequence);
 
@@ -173,8 +173,11 @@ void    execute_commands(void);
 void    execute_execve(char **args);
 void	execute_builtin_command(char **arguments);
 char    *ft_strtok(char *str, char delimeter);
-
-void    check_files();
+void    redirect_in();
+void    redirect_out();
+void    append();
+void    here_doc();
+void    pipe_handle();
 
 //utils utils2.c
 char *ft_strcpy(char *dest, const char *src);
