@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: maricard <maricard@student.42.fr>          +#+  +:+       +#+         #
+#    By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 10:28:04 by maricard          #+#    #+#              #
-#    Updated: 2023/05/23 11:17:21 by maricard         ###   ########.fr        #
+#    Updated: 2023/05/23 15:04:18 by maricard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRC = 	./srcs/parser/lexer.c \
 		./srcs/utils/utils2.c \
 		./srcs/utils/special_chars.c \
 		./srcs/utils/special_chars2.c \
+		./srcs/utils/get_next_line2.c \
 		./srcs/commands/cd.c \
 		./srcs/commands/echo.c \
 		./srcs/commands/env.c \

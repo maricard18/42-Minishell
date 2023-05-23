@@ -19,12 +19,19 @@ void    test_values()
 	g_minishell.parsed = *(t_parsed *)malloc(sizeof(t_parsed));
 	
 	g_minishell.parsed.args = malloc(sizeof(char *) * 3);
-	g_minishell.parsed.args[0] = malloc(sizeof(char) * 6);
-	g_minishell.parsed.args[0] = ft_strdup("echo");
-   	g_minishell.parsed.args[1] = malloc(sizeof(char) * 4);
-   	g_minishell.parsed.args[1] = ft_strdup("yes sir")  ; 
+	g_minishell.parsed.args[0] = ft_strdup("ls");
+	g_minishell.parsed.args[1] = ft_strdup("-l");
 	g_minishell.parsed.args[2] = NULL;
-	
+
+
+	g_minishell.parsed.next = malloc(sizeof(t_parsed));
+
+	g_minishell.parsed.next->args = malloc(sizeof(char *) * 3);
+	g_minishell.parsed.next->args[0] = ft_strdup("echo"); 
+	g_minishell.parsed.next->args[1] = ft_strdup("ola");
+	g_minishell.parsed.next->args[2] = NULL;
+
+
 	g_minishell.parsed.file.type = STRING;
 	g_minishell.parsed.file.name = "1";
 	g_minishell.parsed.next = NULL;
@@ -32,15 +39,14 @@ void    test_values()
 
 void    execution()
 {
-	test_values();
+
+// test_values();
 //	execute_execve(g_minishell.parsed.args);
 //	execute_builtin_command(g_minishell.parsed.args);
 //	redirect_in();
 //	redirect_out();
-	append();
-
-	free(g_minishell.parsed.args[0]);
-	free(g_minishell.parsed.args[1]);
-	free(g_minishell.parsed.args);
+//	append();
+//	here_doc(g_minishell.parsed.args[0]);
+	pipe_handle();
 	return ;
 }

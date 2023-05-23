@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 20:34:12 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/23 11:15:40 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/23 20:14:48 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # include <errno.h>
 # include <sys/ioctl.h>
 # include <sys/wait.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 
 # define B "\033[1m\033[30m"
 # define R "\033[1m\033[31m"
@@ -102,7 +104,7 @@ typedef struct s_parsed
 	t_token		*paranthesis;
 	struct s_parsed	**parantheses_and_or;//parantheses and or
 	t_file		file;
-	struct s_parsed	*prev;
+	struct s_parsed *prev;
 	struct s_parsed	*next;
 }				t_parsed;
 
@@ -150,6 +152,7 @@ void	update_path_directories(void);
 int		number_args_env_Var(void);
 void	free_array(char **arr);
 int 	handle_error(int error_code, char *custom_message);
+char 	*get_next_line2(int fd);
 
 // Tokeniser
 int		is_whitespace(char c);
