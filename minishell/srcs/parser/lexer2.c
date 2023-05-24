@@ -6,25 +6,11 @@
 /*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 20:50:03 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/16 18:23:15 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/24 19:23:27 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// skip quotes in input string
-int     skip_quotes(char *str, int i)
-{
-    char    quote;
-
-    quote = str[i];
-    i++;
-    while (str[i] && str[i] != quote)
-        i++;
-    if (str[i] == quote)
-        i++;
-    return (i);
-}
 
 // return token index to store in args array
 int     store_values2(char *str, int i)

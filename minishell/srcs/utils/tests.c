@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 10:29:23 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/17 10:20:22 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/24 19:29:47 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 extern t_minishell_state g_minishell;
 
+// print list types
 void	print_list_types()
 {
 	t_token *temp;
@@ -28,6 +29,7 @@ void	print_list_types()
 	printf("\n");
 }
 
+// print list values
 void	print_list_values()
 {
 	t_token *temp;
@@ -42,6 +44,7 @@ void	print_list_values()
 	printf("\n");
 }
 
+// print list index
 void	print_list_index()
 {
 	t_token *temp;
@@ -56,6 +59,7 @@ void	print_list_index()
 	printf("\n");
 }
 
+// print strings
 void	print_string_array()
 {
 	int	i;

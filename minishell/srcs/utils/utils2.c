@@ -3,15 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 11:51:04 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/23 11:18:31 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/24 19:25:36 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+// skip quotes in input string
+int     skip_quotes(char *str, int i)
+{
+    char    quote;
+
+    quote = str[i];
+    i++;
+    while (str[i] && str[i] != quote)
+        i++;
+    if (str[i] == quote)
+        i++;
+    return (i);
+}
+
+// check if is a word
 int is_string(char *str)
 {
     int i;
@@ -31,6 +46,7 @@ int is_string(char *str)
     return (1);
 }
 
+// ft_strchr variation to check next character
 int ft_strchr2(const char *s, char c)
 {
 	int	i;
@@ -49,6 +65,7 @@ int ft_strchr2(const char *s, char c)
 	return (0);
 }
 
+// ft_strchr variation to check parentesis
 int ft_strchr3(const char *s, char c, char d)
 {
 	int	i;
@@ -65,6 +82,7 @@ int ft_strchr3(const char *s, char c, char d)
 	return (0);
 }
 
+// ft_strchr variation to only check next character
 int ft_strchr4(const char *s, char c)
 {
 	int	i;

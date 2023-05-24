@@ -6,48 +6,13 @@
 /*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 12:20:20 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/23 20:42:42 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/24 19:31:52 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void    pipe_handle()
-{
-    int pipe_fd[2];
-    int pid;
-    int fd_out;
-    int fd_in;
-
-    fd_out = dup(STDOUT_FILENO);
-    fd_in = dup(STDIN_FILENO);
-    if (pipe(pipe_fd) == -1)
-    {
-        printf("pipe error\n");
-        exit(1);
-    }
-    pid = fork();
-    if (pid == 0)
-    {
-        close(pipe_fd[0]);
-        dup2(pipe_fd[1], STDOUT_FILENO);
-        close(pipe_fd[1]);
-        execute_execve(g_minishell.parsed.args);
-        dup2(fd_out, STDOUT_FILENO);
-        close(fd_out);
-    }
-    else
-    {
-        close(pipe_fd[1]);
-        dup2(pipe_fd[0], STDIN_FILENO);
-        close(pipe_fd[0]);
-        execute_execve(g_minishell.parsed.next->args);
-        dup2(fd_in, STDIN_FILENO);
-        close(fd_in);
-        wait(NULL);
-    }
-}
-
+// here doc handler
 void    here_doc(char *keyword)
 {
     char *str;
@@ -65,6 +30,7 @@ void    here_doc(char *keyword)
     }
 }
 
+// append handler
 void    append()
 {
     int file;
@@ -91,6 +57,7 @@ void    append()
     return ;
 }
 
+// redirect_out handler
 void    redirect_out()
 {
     int file;
@@ -117,6 +84,7 @@ void    redirect_out()
     return ;
 }
 
+// redirect_in handler
 void    redirect_in()
 {
     int file;

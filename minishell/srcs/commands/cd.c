@@ -1,5 +1,6 @@
 #include "minishell.h"
 
+// cd handler
 void	cd_command(char **input)
 {
 	if (input[1])//diretorio existe

@@ -1,5 +1,6 @@
 #include "minishell.h"
 
+// pwd handler
 void	pwd_command(void)
 {
 	char	*current_dir;

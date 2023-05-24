@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 10:26:56 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/23 20:38:03 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/24 17:57:14 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,20 @@ void	minishell_init(char **ev)
 
 	// g_minishell.parsed = *(t_parsed *)malloc(sizeof(t_parsed));
 	
-	g_minishell.parsed.args = malloc(sizeof(char *) * 3);
-	g_minishell.parsed.args[0] = ft_strdup("ls");
-	g_minishell.parsed.args[1] = ft_strdup("-l");
-	g_minishell.parsed.args[2] = NULL;
+	g_minishell.parsed.args = malloc(sizeof(char *) * 2);
+	g_minishell.parsed.args[0] = ft_strdup("cal");
+	// g_minishell.parsed.args[1] = ft_strdup("ola tudo bem");
+	g_minishell.parsed.args[1] = NULL;
 
 
 	g_minishell.parsed.next = malloc(sizeof(t_parsed));
 
 	g_minishell.parsed.next->args = malloc(sizeof(char *) * 3);
-	g_minishell.parsed.next->args[0] = ft_strdup("echo"); 
-	g_minishell.parsed.next->args[1] = ft_strdup("ola");
+	g_minishell.parsed.next->args[0] = ft_strdup("grep"); 
+	g_minishell.parsed.next->args[1] = ft_strdup("7");
 	g_minishell.parsed.next->args[2] = NULL;
+
+	// g_minishell.parsed.file.type = STRING;
+	// g_minishell.parsed.file.name = "1";
+	// g_minishell.parsed.next = NULL;
 }

@@ -1,5 +1,6 @@
 #include "minishell.h"
 
+// print ambient variables
 void	env_command(void)
 {
 	char	**env;

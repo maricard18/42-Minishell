@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   special_chars.c                                    :+:      :+:    :+:   */
+/*   types.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 12:01:01 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/16 18:49:21 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/24 19:31:06 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void    check_for_pipes(char *str)
         return ;
 }
 
-// redirect in checker
+// redirect_in checker
 void    check_for_redirect_in(char *str)
 {
     if (ft_strchr2(str, '>') == 1)
@@ -36,7 +36,7 @@ void    check_for_redirect_in(char *str)
         return ;
 }
 
-// redirect out checker
+// redirect_out checker
 void    check_for_redirect_out(char *str)
 {
     if (ft_strchr2(str, '<') == 1)

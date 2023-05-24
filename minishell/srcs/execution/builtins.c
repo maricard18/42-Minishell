@@ -1,9 +1,10 @@
 #include "minishell.h"
 
-int	get_builtin_type(char *command)// é um dos comandos built-in conhecidos.
+// buitlin commands checker
+int	get_builtin_type(char *command)
 {
-	if (!ft_strcmp(command, "cd"))// se o comando for cd
-		return (CD);// retorna o valor CD
+	if (!ft_strcmp(command, "cd"))
+		return (CD);
 	if (!ft_strcmp(command, "env"))
 		return (ENV);
 	if (!ft_strcmp(command, "pwd"))
@@ -19,6 +20,7 @@ int	get_builtin_type(char *command)// é um dos comandos built-in conhecidos.
 	return (0);
 }
 
+// buitin commands handler
 void	execute_builtin_command(char **arguments)
 {
 	int	type;

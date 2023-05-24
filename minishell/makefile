@@ -6,7 +6,7 @@
 #    By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 10:28:04 by maricard          #+#    #+#              #
-#    Updated: 2023/05/23 15:04:18 by maricard         ###   ########.fr        #
+#    Updated: 2023/05/24 19:28:03 by maricard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,8 +28,8 @@ SRC = 	./srcs/parser/lexer.c \
 		./srcs/utils/variables.c \
 		./srcs/utils/utils.c \
 		./srcs/utils/utils2.c \
-		./srcs/utils/special_chars.c \
-		./srcs/utils/special_chars2.c \
+		./srcs/utils/types.c \
+		./srcs/utils/types2.c \
 		./srcs/utils/get_next_line2.c \
 		./srcs/commands/cd.c \
 		./srcs/commands/echo.c \
@@ -41,7 +41,8 @@ SRC = 	./srcs/parser/lexer.c \
 		./srcs/execution/execution.c \
 		./srcs/execution/execve.c \
 		./srcs/execution/builtins.c \
-		./srcs/execution/redirect.c
+		./srcs/execution/redirect.c \
+		./srcs/execution/pipes.c
 #		./srcs/parser/parser.c \
 #		./srcs/parser/initialize.c \
 #		./srcs/parser/parser_extras_for_testes.c \

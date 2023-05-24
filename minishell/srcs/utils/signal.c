@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 23:36:29 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/16 18:48:30 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/24 19:30:13 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 extern t_minishell_state g_minishell;
 
+// handle ctrl C
 void    ctrl_c(int signal)
 {
     (void)signal;
@@ -22,7 +23,8 @@ void    ctrl_c(int signal)
     write(1, "\033[A", 3);
 }
 
-void    ctrl_d(char *str)//saio do programa
+// handle ctrl D
+void    ctrl_d(char *str)
 {
     if (!str)
     {

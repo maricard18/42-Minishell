@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 10:45:38 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/16 17:04:10 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/24 19:30:46 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,4 @@ void    clean_all(char *str)
         i++;
     }
     free(g_minishell.input);
-//    free(g_minishell.token);
 }

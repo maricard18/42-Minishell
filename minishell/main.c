@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 23:00:53 by filipa            #+#    #+#             */
-/*   Updated: 2023/05/22 16:33:35 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/24 20:31:16 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	main(int argc, char **argv, char **envp)
 			tokeniser(&g_minishell.token);
 //			lexer_test();
 			add_history(str);
-			execution();
+//			execution();
 			clean_all(str);
 //		}
 	}

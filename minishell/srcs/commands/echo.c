@@ -1,5 +1,6 @@
 #include "minishell.h"
 
+// write character
 void	put_char(char *input)
 {
 	int	i;
@@ -12,6 +13,7 @@ void	put_char(char *input)
 	}
 }
 
+// echo handler
 void	echo_command(char **input)
 {
 	int	i;

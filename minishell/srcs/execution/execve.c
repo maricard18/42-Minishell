@@ -6,12 +6,13 @@
 /*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 10:35:27 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/18 10:55:06 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/24 19:34:36 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+// runs trough the string until it finds a delimeter
 char    *ft_strtok(char *str, char delimeter)
 {
 	int         i;
@@ -41,6 +42,7 @@ char    *ft_strtok(char *str, char delimeter)
 	}
 }
 
+// search command path
 char    *search_path(char *arg)
 {
 	char 	*full_path;
@@ -66,6 +68,7 @@ char    *search_path(char *arg)
 	exit(errno);
 }
 
+// execve handler
 void    execute_execve(char **args)
 {
 	int		pid;

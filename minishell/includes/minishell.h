@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 20:34:12 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/23 20:14:48 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/24 20:31:32 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,8 @@ typedef struct s_file
 typedef struct s_parsed
 {
 	int			exec;
-	int			in_file;
-	int			out_file;
+	int			in;
+	int			out;
 	char		*cmd;//command
 	char		**args;//arguments
 	t_token		*paranthesis;
