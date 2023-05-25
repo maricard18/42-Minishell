@@ -6,7 +6,7 @@
 #    By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 10:28:04 by maricard          #+#    #+#              #
-#    Updated: 2023/05/25 17:54:56 by maricard         ###   ########.fr        #
+#    Updated: 2023/05/25 19:52:21 by maricard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,27 +68,27 @@ SRC-OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(LIBFT):
-	@echo "[$(CYAN)Compiling$(RESET)] $(CFLAGS) $(GREEN)libft/*$(RESET)"
-	make $(MK) -C ./libft
+	@echo "[$(CYAN)Compiling stuff$(RESET)] $(GREEN)libft/*$(RESET)"
+	@make -s -C ./libft
 
 $(NAME): $(SRC-OBJ) $(LIBFT)
-	@echo "[$(CYAN)Linking$(RESET)] $(GREEN)*$(RESET)"
+	@echo "[$(CYAN)Linking stuff$(RESET)] $(GREEN)*$(RESET)"
 	$(CC) $(CFLAGS) $(SRC-OBJ) main.c $(LIBFT) -o $(NAME) -I $(INCLUDES) $(LIBS)
 	
 	@echo "[$(GREEN)Done$(RESET)]"
 	
 %.o: %.c
-	@echo "[$(CYAN)Compiling$(RESET)] $(CFLAGS) $(GREEN)$<$(RESET)"
+	@echo "[$(CYAN)Compiling other stuff$(RESET)] $(GREEN)$<$(RESET)"
 	$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDES)
 
 clean:
-	@echo "[$(RED)Cleaned$(RESET)] $(GREEN)*/*.o$(RESET)"
-	make $(MK) clean -C ./libft
+	@echo "[$(RED)Cleaned the stuff$(RESET)]"
+	@make -s clean -C ./libft
 	$(RM) $(SRC-OBJ)
 
 fclean: clean
-	@echo "[$(RED)Deleted$(RESET)] $(GREEN)$(NAME)$(RESET)"
-	make $(MK) fclean -C ./libft
+	@echo "[$(RED)Cleaned even better$(RESET)] -> $(GREEN)$(NAME)$(RESET)"
+	@make -s $(MK) fclean -C ./libft
 	$(RM) $(NAME)
 
 leaks:
