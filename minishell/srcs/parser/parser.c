@@ -2,22 +2,22 @@
 
 void process_redirection(t_token **tokens_list, t_parsed **current_command)//alocação de memoria para a strct t_file em caso de existir um redirecionamento
 {
-	t_file	*file_list;
+	t_file	*file;
 	t_file	*tmp_list;
 
-	tmp_list = (*current_command)->file_list;//tmp_list is a pointer to the file_list
-	file_list = (t_file *)malloc(sizeof(t_file));//allocate memory for the file_list
-	file_list->next = NULL;
-	file_list->type = (*tokens_list)->type;//file_list->type is the type of the token
+	tmp_list = (*current_command)->file;//tmp_list is a pointer to the file
+	file = (t_file *)malloc(sizeof(t_file));//allocate memory for the file
+	file->next = NULL;
+	file->type = (*tokens_list)->type;//file_list->type is the type of the token
 	(*tokens_list) = (*tokens_list)->next;
-	file_list->file_name = (*tokens_list)->value;
+	file->name = (*tokens_list)->value;
 	if (!tmp_list)
-		(*current_command)->file_list = file_list;
+		(*current_command)->file = file;
 	else
 	{
 		while (tmp_list->next)
 			tmp_list = tmp_list->next;
-		tmp_list->next = file_list;
+		tmp_list->next = file;
 	}
 	(*tokens_list) = (*tokens_list)->next;
 }
@@ -44,15 +44,15 @@ void add_argument(t_token **tokens_list, t_parsed **command)
 		(*command)->cmd = ft_calloc(ft_strlen((*tokens_list)->value) + 2, sizeof(char));
 		ft_strcpy((*command)->cmd, (*tokens_list)->value);
 	}
-	while ((*command)->arguments[i])
+	while ((*command)->args[i])
 		i++;
 	new_arguments = ft_calloc((i + 2), sizeof(char *));
 	new_arguments[i + 1] = NULL;
 	new_arguments[i] = ft_strdup((*tokens_list)->value);
 	while (i--)
-		new_arguments[i] = ft_strdup((*command)->arguments[i]);
-	free_array((*command)->arguments);
-	(*command)->arguments = new_arguments;
+		new_arguments[i] = ft_strdup((*command)->args[i]);
+	free_array((*command)->args);
+	(*command)->args = new_arguments;
 	(*tokens_list) = (*tokens_list)->next;
 }
 
@@ -69,25 +69,25 @@ t_parsed	**parse_commands(int in_file, int out_file, t_token *token_sequence)
 			current_command->exec = 3;//exec is always 3 for first command
 		else
 			current_command->exec = token_sequence->prev->type;//exec is the type of the token before the command
-		add_command_to_list(current_command, command_list);//adicina o comando a lista de comandos
+		// add_command_to_list(current_command, command_list);//adicina o comando a lista de comandos
 		while (token_sequence)
 		{
-			if (token_sequence->type == TOKEN_AND
-				|| token_sequence->type == TOKEN_OR)
+			if (token_sequence->type == AND
+				|| token_sequence->type == OR)
 			{
 				(token_sequence) = (token_sequence)->next;
 				break ;
 			}
-			else if (token_sequence->type == TOKEN_SMALLER
-				|| token_sequence->type == TOKEN_HERE_DOC
-				|| token_sequence->type == TOKEN_GREATER
-				|| token_sequence->type == TOKEN_APPEND)
+			else if (token_sequence->type == SMALLER
+				|| token_sequence->type == HERE_DOC
+				|| token_sequence->type == GREATER
+				|| token_sequence->type == APPEND)
 				process_redirection(&token_sequence, &current_command);
-			else if (token_sequence->type == TOKEN_OPEN_PAR)
-				handle_paranthesis(&token_sequence, &current_command);
-			else if (token_sequence->type == TOKEN_STR)
+			// else if (token_sequence->type == OPEN_PAR)
+			// 	handle_paranthesis(&token_sequence, &current_command);
+			else if (token_sequence->type == STRING)
 				add_argument(&token_sequence, &current_command);
-			else if (token_sequence->type == TOKEN_PIPE)
+			else if (token_sequence->type == PIPE)
 				current_command = create_next_command(&token_sequence, &current_command);
 		}
 	}

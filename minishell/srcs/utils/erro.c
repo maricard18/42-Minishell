@@ -1,5 +1,8 @@
 #include "minishell.h"
 
+extern t_minishell_state g_minishell;
+
+// error handler
 int handle_error(int error_code, char *custom_message)// função que trata os erros.
 {
     errno = error_code;// errno é uma variável global que armazena o código de erro.

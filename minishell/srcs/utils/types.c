@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 12:01:01 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/24 19:31:06 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/25 12:50:03 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,34 +15,34 @@
 extern t_minishell_state g_minishell;
 
 // pipe checker
-void    check_for_pipes(char *str)
+void    check_for_pipes(char *str, t_token *temp)
 {
     if (ft_strchr2(str, '|') == 1)
-        g_minishell.token.type = PIPE;
+        temp->type = PIPE;
     else if (ft_strchr2(str, '|') == 2)
-        g_minishell.token.type = OR;
+        temp->type = OR;
     else
         return ;
 }
 
 // redirect_in checker
-void    check_for_redirect_in(char *str)
+void    check_for_redirect_in(char *str, t_token *temp)
 {
     if (ft_strchr2(str, '>') == 1)
-        g_minishell.token.type = GREATER;
+        temp->type = GREATER;
     else if (ft_strchr2(str, '>') == 2)
-        g_minishell.token.type = APPEND;
+        temp->type = APPEND;
     else
         return ;
 }
 
 // redirect_out checker
-void    check_for_redirect_out(char *str)
+void    check_for_redirect_out(char *str, t_token *temp)
 {
     if (ft_strchr2(str, '<') == 1)
-        g_minishell.token.type = SMALLER;
+        temp->type = SMALLER;
     else if (ft_strchr2(str, '<') == 2)
-        g_minishell.token.type = HERE_DOC;
+        temp->type = HERE_DOC;
     else
         return ;
 }

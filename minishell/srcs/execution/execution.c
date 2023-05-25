@@ -14,40 +14,42 @@
 
 extern t_minishell_state g_minishell;
 
-void    test_values()
+// execute the input given
+void    testing()
 {
-	g_minishell.parsed = *(t_parsed *)malloc(sizeof(t_parsed));
-	
-	g_minishell.parsed.args = malloc(sizeof(char *) * 3);
-	g_minishell.parsed.args[0] = ft_strdup("ls");
-	g_minishell.parsed.args[1] = ft_strdup("-l");
-	g_minishell.parsed.args[2] = NULL;
-
-
-	g_minishell.parsed.next = malloc(sizeof(t_parsed));
-
-	g_minishell.parsed.next->args = malloc(sizeof(char *) * 3);
-	g_minishell.parsed.next->args[0] = ft_strdup("wc"); 
-	g_minishell.parsed.next->args[1] = ft_strdup("-l");
-	g_minishell.parsed.next->args[2] = NULL;
-
-
-	g_minishell.parsed.file.type = STRING;
-	g_minishell.parsed.file.name = "1";
-	g_minishell.parsed.next = NULL;
+	execute_execve(g_minishell.parsed->args);
+	execute_builtin_command(g_minishell.parsed->args);
+    redirect_in();
+	redirect_out();
+	append();
+	here_doc(g_minishell.parsed->args[0]);
+	pipe_handle();
 }
 
 // execute the input given
 void    execution()
 {
+    int pipe_fd[2];
+    int i;
+    t_parsed *temp;
 
-//  test_values();
-//	execute_execve(g_minishell.parsed.args);
-//	execute_builtin_command(g_minishell.parsed.args);
-//  redirect_in();
-//	redirect_out();
-//	append();
-//	here_doc(g_minishell.parsed.args[0]);
-	pipe_handle();
-	return ;
+    temp = g_minishell.parsed;
+    i = 0;
+    if (g_minishell.commands > 1)
+        pipe(pipe_fd);
+    while (temp)
+    {
+        // if (i != 1 && i % 2 != 0) // only open pipe in third iteration
+        //     pipe(pipe_fd);
+        if (temp->file != NULL)
+            testing();
+            // execute redirections and change file descriptors
+        else
+        {
+            if (get_builtin_type(temp->args[0]) != 0)
+                execute_builtin_command(temp->args);
+            else
+                execute_execve(temp->args);
+        }
+    }
 }

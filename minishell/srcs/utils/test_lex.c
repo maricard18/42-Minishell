@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tests.c                                            :+:      :+:    :+:   */
+/*   test_lex.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 10:29:23 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/24 19:29:47 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/25 17:08:20 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,15 @@ extern t_minishell_state g_minishell;
 // print list types
 void	print_list_types()
 {
+	char *str;
 	t_token *temp;
 	
-	temp = &g_minishell.token;
-	printf(""R"["RT"List types"R"]"RT" ");
+	temp = g_minishell.token;
+	printf("    List types    | ");
 	while (temp)
 	{
-		printf(""R"["RT"%d"R"]"RT" ", temp->type);
+		str = check_type(temp->type);
+		printf("["G"%s"RT"] ", str);
 		temp = temp->next;
 	}
 	printf("\n");
@@ -34,41 +36,26 @@ void	print_list_values()
 {
 	t_token *temp;
 	
-	temp = &g_minishell.token;
-	printf(""R"["RT"List values"R"]"RT" ");
+	temp = g_minishell.token;
+	printf("    List values   | ");
 	while (temp)
 	{
-		printf(""R"["RT"%s"R"]"RT" ", temp->value);
-		temp = temp->next;
-	}
-	printf("\n");
-}
-
-// print list index
-void	print_list_index()
-{
-	t_token *temp;
-	
-	temp = &g_minishell.token;
-	printf(""R"["RT"List index"R"]"RT" ");
-	while (temp)
-	{
-		printf(""R"["RT"%d"R"]"RT" ", temp->index);
+		printf("["G"%s"RT"] ", temp->value);
 		temp = temp->next;
 	}
 	printf("\n");
 }
 
 // print strings
-void	print_string_array()
+void	print_string_array(char **str)
 {
 	int	i;
 	
 	i = 0;
-	printf(""R"["RT"String array"R"]"RT" ");
-	while (g_minishell.input[i])
+	printf("   String array   | ");
+	while (str[i])
 	{
-		printf(""R"["RT"%s"R"]"RT" ", g_minishell.input[i]);
+		printf("["G"%s"RT"] ", str[i]);
 		i++;
 	}
 	printf("\n");	
@@ -77,12 +64,12 @@ void	print_string_array()
 // test for lexer and tokanizer
 void    lexer_test()
 {
-	printf("\n"G"--> "R"["RT"LEXER TEST"R"] "G"<--"RT"\n\n");
-	printf(""R"["RT"Number of tokens: "G"%d"R"]"RT"\n", g_minishell.n_tokens);
-	print_string_array();
-	print_list_index();
+	printf("\n"G"      --------------      "RT"");
+	printf("\n"G"----> | "RT"LEXER TEST "G"| <----"RT"\n");
+	printf(""G"      --------------      "RT"\n\n");
+	printf(" Number of tokens | ["G"%d"RT"]\n", g_minishell.n_tokens);
+	print_string_array(g_minishell.input);
 	print_list_values();
 	print_list_types();
-	printf ("\n");
-	printf(""G"---------------------"RT"\n\n");
+	printf("\n"G"--------------------------"RT"\n\n");
 }

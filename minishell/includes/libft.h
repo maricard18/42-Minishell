@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 10:27:54 by firibeir          #+#    #+#             */
-/*   Updated: 2023/05/23 14:56:44 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/25 17:01:49 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <limits.h>
-#include <sys/select.h>
+# include <sys/select.h>
 
 # define BUFFER_SIZE 42
 

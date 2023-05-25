@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 10:26:56 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/24 17:57:14 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/25 13:30:59 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ char	**dup_env_var(char **ev)//duplica a variavel de ambiente
 	return (env_copy);
 }
 
+// init minishell variables
 void	minishell_init(char **ev)
 {
     errno = 0;//limpa qualquer codigo de erro anterior
@@ -41,24 +42,20 @@ void	minishell_init(char **ev)
     g_minishell.out_file = STDOUT_FILENO;//inicializa o arquivo de saida
 	g_minishell.ev = dup_env_var(ev);//duplica a variavel de ambiente
 	g_minishell.paths = ft_split(getenv("PATH"), ':');//Divide a variável de ambiente PATH em strings separadas por ':', cada uma representando um caminho de diretório onde os executáveis podem ser encontrados. Estes são armazenados no campo paths da estrutura g_minishell
-	// g_minishell.token.next = NULL;
 
-	// g_minishell.parsed = *(t_parsed *)malloc(sizeof(t_parsed));
 	
-	g_minishell.parsed.args = malloc(sizeof(char *) * 2);
-	g_minishell.parsed.args[0] = ft_strdup("cal");
-	// g_minishell.parsed.args[1] = ft_strdup("ola tudo bem");
-	g_minishell.parsed.args[1] = NULL;
+	// g_minishell.parsed.args = malloc(sizeof(char *) * 2);
+	// g_minishell.parsed.args[0] = ft_strdup("cal");
+	// // g_minishell.parsed.args[1] = ft_strdup("ola tudo bem");
+	// g_minishell.parsed.args[1] = NULL;
 
+	// g_minishell.parsed.next = malloc(sizeof(t_parsed));
+	// g_minishell.parsed.next->args = malloc(sizeof(char *) * 3);
+	// g_minishell.parsed.next->args[0] = ft_strdup("grep"); 
+	// g_minishell.parsed.next->args[1] = ft_strdup("7");
+	// g_minishell.parsed.next->args[2] = NULL;
 
-	g_minishell.parsed.next = malloc(sizeof(t_parsed));
-
-	g_minishell.parsed.next->args = malloc(sizeof(char *) * 3);
-	g_minishell.parsed.next->args[0] = ft_strdup("grep"); 
-	g_minishell.parsed.next->args[1] = ft_strdup("7");
-	g_minishell.parsed.next->args[2] = NULL;
-
-	// g_minishell.parsed.file.type = STRING;
-	// g_minishell.parsed.file.name = "1";
+	// g_minishell.parsed.file->type = STRING;
+	// g_minishell.parsed.file->name = "1";
 	// g_minishell.parsed.next = NULL;
 }

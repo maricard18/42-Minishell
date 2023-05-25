@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 12:20:20 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/24 19:31:52 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/25 13:10:57 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void    append()
     int old_fd;
     
     old_fd = dup(STDOUT_FILENO);
-    file = open(g_minishell.parsed.file.name,  O_CREAT | O_WRONLY | O_APPEND, 0777);
+    file = open(g_minishell.parsed->file->name,  O_CREAT | O_WRONLY | O_APPEND, 0777);
     if (file == -1)
     {
         perror("error opening file\n");
@@ -51,7 +51,7 @@ void    append()
         exit(1);
     }
     close(file);
-    execute_execve(g_minishell.parsed.args);
+    execute_execve(g_minishell.parsed->args);
     dup2(old_fd, STDOUT_FILENO);
     close(old_fd);
     return ;
@@ -65,7 +65,7 @@ void    redirect_out()
     int old_fd;
 
     old_fd = dup(STDIN_FILENO);
-    file = open(g_minishell.parsed.file.name, O_RDONLY, 0777);
+    file = open(g_minishell.parsed->file->name, O_RDONLY, 0777);
     if (file == -1)
     {
         perror("file does not exist\n");
@@ -78,7 +78,7 @@ void    redirect_out()
         exit(1);
     }
     close(file);
-    execute_execve(g_minishell.parsed.args);
+    execute_execve(g_minishell.parsed->args);
     dup2(old_fd, STDIN_FILENO);
     close(old_fd);
     return ;
@@ -92,7 +92,7 @@ void    redirect_in()
     int old_fd;
     
     old_fd = dup(STDOUT_FILENO);
-    file = open(g_minishell.parsed.file.name, O_CREAT | O_WRONLY | O_TRUNC, 0777);
+    file = open(g_minishell.parsed->file->name, O_CREAT | O_WRONLY | O_TRUNC, 0777);
     if (file == -1)
     {
         perror("error opening file\n");
@@ -105,7 +105,7 @@ void    redirect_in()
         exit(1);
     }
     close(file);
-    execute_execve(g_minishell.parsed.args); 
+    execute_execve(g_minishell.parsed->args);
     dup2(old_fd, STDOUT_FILENO);
     close(old_fd);
     return ;

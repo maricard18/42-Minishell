@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 10:57:46 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/17 10:15:02 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/25 14:02:06 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,41 +15,48 @@
 extern t_minishell_state g_minishell;
 
 // check the special characters
-void special_chars(char *str)
+void special_chars(char *str, t_token *temp)
 {
-    check_for_pipes(str);
-    check_for_redirect_in(str);
-    check_for_redirect_out(str);
-    check_for_and(str);
-    check_for_parentheses(str);
-    check_for_string(str);
+    check_for_pipes(str, temp);
+    check_for_redirect_in(str, temp);
+    check_for_redirect_out(str, temp);
+    check_for_and(str, temp);
+    check_for_parentheses(str, temp);
+    check_for_string(str, temp);
+}
+
+void    init_values(t_token *temp)
+{
+    temp->value = NULL;
+    temp->index = 0;
+    temp->prev = NULL;
+    temp->next = NULL;
 }
 
 // atribute values to the arguments
-void    tokeniser(t_token *temp)
+void    tokeniser(char **str)
 {
     int i;
+    t_token *new;
+    t_token *temp;
 
     i = 0;
-    g_minishell.token = *(t_token*)malloc(sizeof(t_token));
-    while (g_minishell.input[i])
+    temp = NULL;
+    new = malloc(sizeof(t_token));
+    while (str[i])
     {
-        g_minishell.token.value = ft_strdup(g_minishell.input[i]);
-        special_chars(g_minishell.input[i]);
-        g_minishell.token.index = i;
-        if (i == 0)
-            temp = &g_minishell.token;
-        if (g_minishell.input[i + 1])
-        {
-           g_minishell.token.next = malloc(sizeof(t_token));
-           g_minishell.token = *g_minishell.token.next;
-        }
+        init_values(new);
+        new->value = ft_strdup(str[i]);
+        special_chars(str[i], new);
+        new->index = i;
+        if (temp != NULL)
+            new->prev = temp;
         else
-        {
-            g_minishell.token.next = NULL;
-            break ;
-        }
+            g_minishell.token = new;
+        if (str[i + 1])
+            new->next = malloc(sizeof(t_token));
+        temp = new;
+        new = new->next;
         i++;
     }
-    g_minishell.token = *temp;
 }
