@@ -6,7 +6,7 @@
 #    By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 10:28:04 by maricard          #+#    #+#              #
-#    Updated: 2023/05/25 19:52:21 by maricard         ###   ########.fr        #
+#    Updated: 2023/05/26 09:29:40 by maricard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,6 @@ NAME = minishell
 LIBFT = ./libft/libft.a
 INCLUDES = includes
 LIBS = -ltermcap -lreadline -lncurses
-MK = --no-print-directory
 
 SRC = 	./srcs/parser/lexer.c \
 		./srcs/parser/lexer2.c \
@@ -68,34 +67,32 @@ SRC-OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(LIBFT):
-	@echo "[$(CYAN)Compiling stuff$(RESET)] $(GREEN)libft/*$(RESET)"
+	@echo "[$(CYAN)Compiling$(RESET)] $(GREEN)libft$(RESET)"
 	@make -s -C ./libft
 
 $(NAME): $(SRC-OBJ) $(LIBFT)
-	@echo "[$(CYAN)Linking stuff$(RESET)] $(GREEN)*$(RESET)"
-	$(CC) $(CFLAGS) $(SRC-OBJ) main.c $(LIBFT) -o $(NAME) -I $(INCLUDES) $(LIBS)
+	@echo "[ $(CYAN)Linking$(RESET) ] $(GREEN)all$(RESET)"
+	@$(CC) $(CFLAGS) $(SRC-OBJ) main.c $(LIBFT) -o $(NAME) -I $(INCLUDES) $(LIBS)
 	
 	@echo "[$(GREEN)Done$(RESET)]"
 	
 %.o: %.c
-	@echo "[$(CYAN)Compiling other stuff$(RESET)] $(GREEN)$<$(RESET)"
-	$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDES)
+	@echo "[$(CYAN)Compiling$(RESET)] $(GREEN)$<$(RESET)"
+	@$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDES) 
 
 clean:
-	@echo "[$(RED)Cleaned the stuff$(RESET)]"
+	@echo "[$(RED)Cleaned$(RESET)]"
 	@make -s clean -C ./libft
-	$(RM) $(SRC-OBJ)
+	@$(RM) $(SRC-OBJ)
 
 fclean: clean
-	@echo "[$(RED)Cleaned even better$(RESET)] -> $(GREEN)$(NAME)$(RESET)"
-	@make -s $(MK) fclean -C ./libft
-	$(RM) $(NAME)
+	@echo "[$(RED)Cleaned even better$(RESET)] $(GREEN)$(RESET)"
+	@make -s fclean -C ./libft
+	@$(RM) $(NAME)
 
 leaks:
 #	valgrind --leak-check=full ./$(NAME) $(ARGS)
 
-run:
-	./minishell
+run: ./minishell
 
 re: fclean all
-

@@ -35,21 +35,26 @@ void    execution()
 
     temp = g_minishell.parsed;
     i = 0;
-    if (g_minishell.commands > 1)
+    int commands  = 3;
+    int fd_in = dup(STDIN_FILENO);
+    int fd_out = dup(STDOUT_FILENO);
+    if (commands > 1)
         pipe(pipe_fd);
     while (temp)
     {
-        // if (i != 1 && i % 2 != 0) // only open pipe in third iteration
-        //     pipe(pipe_fd);
-        if (temp->file != NULL)
-            testing();
-            // execute redirections and change file descriptors
-        else
+        dup2(pipe_fd[1], STDOUT_FILENO);
+        close(pipe_fd[1]);
+        execute_execve(temp->args);
+        dup2(fd_out, STDOUT_FILENO);
+        close(fd_out); 
+        dup2(pipe_fd[0], STDIN_FILENO);
+        close(pipe_fd[0]);
+        if (temp->next == NULL)
         {
-            if (get_builtin_type(temp->args[0]) != 0)
-                execute_builtin_command(temp->args);
-            else
-                execute_execve(temp->args);
+            dup2(fd_in, STDIN_FILENO);
+            close(pipe_fd[0]);
         }
+        temp = temp->next;
+        i++;
     }
 }
