@@ -53,7 +53,7 @@ char    *ft_strtok(char *str, char delimeter);
 void    redirect_in();
 void    redirect_out();
 void    append();
-void    here_doc();
+void    here_doc(char **args);
 void    pipe_handle();
 
 //Commands

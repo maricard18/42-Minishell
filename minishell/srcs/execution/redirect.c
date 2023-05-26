@@ -3,20 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 12:20:20 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/25 13:10:57 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/26 11:48:28 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 // here doc handler
-void    here_doc(char *keyword)
+void    here_doc(char **args)
 {
     char *str;
+    char *keyword;
 
+    keyword = args[0];
     while (1)
     {
         str = readline("> ");

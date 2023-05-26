@@ -17,12 +17,15 @@ extern t_minishell_state g_minishell;
 // execute the input given
 void    testing()
 {
-	execute_execve(g_minishell.parsed->args);
-	execute_builtin_command(g_minishell.parsed->args);
+    t_parsed *temp;
+
+    temp = g_minishell.parsed;
+	execute_execve(temp->args);
+	execute_builtin_command(temp->args);
     redirect_in();
 	redirect_out();
 	append();
-	here_doc(g_minishell.parsed->args[0]);
+	here_doc(temp->args);
 	pipe_handle();
 }
 
@@ -30,11 +33,10 @@ void    testing()
 void    execution()
 {
     int pipe_fd[2];
-    int i;
+    int pid;
     t_parsed *temp;
 
     temp = g_minishell.parsed;
-    i = 0;
     int commands  = 3;
     int fd_in = dup(STDIN_FILENO);
     int fd_out = dup(STDOUT_FILENO);
@@ -42,19 +44,26 @@ void    execution()
         pipe(pipe_fd);
     while (temp)
     {
-        dup2(pipe_fd[1], STDOUT_FILENO);
-        close(pipe_fd[1]);
-        execute_execve(temp->args);
-        dup2(fd_out, STDOUT_FILENO);
-        close(fd_out); 
-        dup2(pipe_fd[0], STDIN_FILENO);
-        close(pipe_fd[0]);
+        pid = fork();
+        if (pid = 0)
+        {
+            dup2(pipe_fd[1], STDOUT_FILENO);
+            close(pipe_fd[1]);
+            execute_execve(temp->args);
+            dup2(fd_out, STDOUT_FILENO);
+            close(fd_out); 
+            dup2(pipe_fd[0], STDIN_FILENO);
+            close(pipe_fd[0]);
+        }
+        else
+        {
+            waitpid(pid, NULL, 0);
+        }
         if (temp->next == NULL)
         {
             dup2(fd_in, STDIN_FILENO);
             close(pipe_fd[0]);
         }
         temp = temp->next;
-        i++;
     }
 }

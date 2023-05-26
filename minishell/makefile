@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+         #
+#    By: maricard <maricard@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 10:28:04 by maricard          #+#    #+#              #
-#    Updated: 2023/05/26 09:29:40 by maricard         ###   ########.fr        #
+#    Updated: 2023/05/26 11:51:01 by maricard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,7 +71,7 @@ $(LIBFT):
 	@make -s -C ./libft
 
 $(NAME): $(SRC-OBJ) $(LIBFT)
-	@echo "[ $(CYAN)Linking$(RESET) ] $(GREEN)all$(RESET)"
+	@echo "[$(CYAN)Linking$(RESET)] $(GREEN)all$(RESET)"
 	@$(CC) $(CFLAGS) $(SRC-OBJ) main.c $(LIBFT) -o $(NAME) -I $(INCLUDES) $(LIBS)
 	
 	@echo "[$(GREEN)Done$(RESET)]"
