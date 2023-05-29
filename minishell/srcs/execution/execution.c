@@ -95,17 +95,17 @@ void    check_command(t_parsed **temp)
 // execute the input given
 void    execution()
 {
-    int pid;
-    int status;
+    //int pid;
+    //int status;
     t_parsed **temp;
 
     temp = g_minishell.parsed;
-    pid = fork();
-    if (pid == 0)
-	{
+    //pid = fork();
+    //if (pid == 0)
+	//{
         check_command(temp);
-		exit(0);
-	}
-	else
-        waitpid(pid, &status, 0);
+	//	exit(0);
+	//}
+	//else
+    //    waitpid(pid, &status, 0);
 }
