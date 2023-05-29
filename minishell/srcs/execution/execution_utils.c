@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 18:20:40 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/29 19:37:47 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/29 23:49:14 by mariohenriq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void    execve_or_builtin(char **args)
 }
 
 // handler for execution in pipes
-void    execution_in_pipes(t_parsed *temp)
+void    execute_commands(t_parsed *temp)
 {
     if (temp->file == NULL)
         execve_or_builtin(temp->args);

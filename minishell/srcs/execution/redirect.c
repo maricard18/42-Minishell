@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 12:20:20 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/29 19:37:03 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/30 00:09:40 by mariohenriq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void    append(t_parsed *temp)
     int file;
     int fd;
     
-    g_minishell.out_file = dup(STDOUT_FILENO);
     file = open(temp->file->name,  O_CREAT | O_WRONLY | O_APPEND, 0777);
     if (file == -1)
     {
@@ -51,10 +50,10 @@ void    append(t_parsed *temp)
         perror("error on dup2()\n");
         exit(1);
     }
-    close(file);
     execve_or_builtin(temp->args);
-    dup2(g_minishell.out_file, STDOUT_FILENO);
-    close(g_minishell.out_file);
+    close(file);
+	dup2(g_minishell.out_file, STDOUT_FILENO);
+    //close(g_minishell.out_file);
     return ;
 }
 
@@ -64,7 +63,6 @@ void    redirect_out(t_parsed *temp)
     int file;
     int fd;
 
-    g_minishell.in_file = dup(STDIN_FILENO);
     file = open(temp->file->name, O_RDONLY, 0777);
     if (file == -1)
     {
@@ -77,11 +75,10 @@ void    redirect_out(t_parsed *temp)
         perror("error on dup2()\n");
         exit(1);
     }
-    close(file);
     execve_or_builtin(temp->args);
-    dup2(g_minishell.in_file, STDIN_FILENO);
-    close(g_minishell.in_file);
-    return ;
+    close(file);
+	dup2(g_minishell.in_file, STDIN_FILENO);
+    //close(g_minishell.in_file);
 }
 
 // redirect_in handler
@@ -90,7 +87,6 @@ void    redirect_in(t_parsed *temp)
     int file;
     int fd;
     
-    g_minishell.out_file = dup(STDOUT_FILENO);
     file = open(temp->file->name, O_CREAT | O_WRONLY | O_TRUNC, 0777);
     if (file == -1)
     {
@@ -103,9 +99,8 @@ void    redirect_in(t_parsed *temp)
         perror("error on dup2()\n");
         exit(1);
     }
-    close(file);
     execve_or_builtin(temp->args);
+	close(file);
     dup2(g_minishell.out_file, STDOUT_FILENO);
-    close(g_minishell.out_file);
-    return ;
+    //close(g_minishell.out_file);
 }
