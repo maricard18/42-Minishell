@@ -42,7 +42,7 @@ void add_command_to_list(t_parsed *current_command, t_parsed **command_list)
 
 	i = 0;
 	while (command_list[i])	
-		i++;
+		i++;	
 	command_list[i] = current_command;
 	command_list[i + 1] = NULL;
 }

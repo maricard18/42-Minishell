@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 16:14:42 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/25 16:27:15 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/29 14:37:32 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char    *check_type(int type)
     else if (type == 2)
         return ("AND");
     else if (type == 3)
-        return ("GRATER");
+        return ("GREATER");
     else if (type == 4)
         return ("SMALLER");
     else if (type == 5)

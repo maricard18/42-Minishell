@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:01:27 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/25 18:46:18 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/29 17:49:18 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ typedef struct s_parsed
 }				t_parsed;
 
 typedef struct	s_sig
-{
+{	
 	int			ctrl_c;
 	int			ctrl_d;
 }				t_sig;
@@ -104,8 +104,7 @@ typedef struct s_minishell_state
 	char			**paths;
 	char    		**input;
 	t_token			*token;
-	t_parsed		*parsed;
-	struct s_parsed	**parsed_commands;
+	t_parsed		**parsed;
 }               t_minishell_state;
 
 extern t_minishell_state g_minishell;

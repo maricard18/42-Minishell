@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 10:35:27 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/24 19:34:36 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/29 17:52:49 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ char    *search_path(char *arg)
 void    execute_execve(char **args)
 {
 	int		pid;
+	int		status;
 	char 	*full_path;
 
 	full_path = search_path(args[0]);
@@ -79,6 +80,6 @@ void    execute_execve(char **args)
 	if (pid == 0)
  		execve(full_path, args, NULL);
 	else
-		wait(NULL);
+		waitpid(pid, &status, 0);
 	return ;
 }

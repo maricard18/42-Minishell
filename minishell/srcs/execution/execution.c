@@ -14,56 +14,98 @@
 
 extern t_minishell_state g_minishell;
 
-// execute the input given
-void    testing()
+// handler execuntion to pipes
+void    write_to_pipe(t_parsed **temp, int *pipe_fd, int i)
 {
-    t_parsed *temp;
+    if (i == 0)
+        write_process(temp[i], pipe_fd, 1);
+	else if (i > 0 && temp[i + 1] && i % 2 == 1)
+        write_process(temp[i], pipe_fd, 3);
+	else if (i > 0 && temp[i + 1] && i % 2 == 0)
+        write_process(temp[i], pipe_fd, 1);
+    else if (i > 0 && !temp[i + 1] && i % 2 == 1)
+		execution_in_pipes(temp[i]);
+	else if (i > 0 && !temp[i + 1] && i % 2 == 0)
+        execution_in_pipes(temp[i]);
+}
 
-    temp = g_minishell.parsed;
-	execute_execve(temp->args);
-	execute_builtin_command(temp->args);
-    redirect_in();
-	redirect_out();
-	append();
-	here_doc(temp->args);
-	pipe_handle();
+// handler connection in pipes
+void    connect_pipes(t_parsed **temp, int *pipe_fd, int i)
+{
+    if (i > 0 && temp[i + 1] && i % 2 == 1)
+        dup2(pipe_fd[0], STDIN_FILENO);
+    else if (i > 0 && temp[i + 1] && i % 2 == 0)
+        dup2(pipe_fd[2], STDIN_FILENO);
+    else if (i > 0 && !temp[i + 1] && i % 2 == 1)
+        dup2(pipe_fd[0], STDIN_FILENO);
+    else if (i > 0 && !temp[i + 1] && i % 2 == 0)
+        dup2(pipe_fd[2], STDIN_FILENO);
+}
+
+// handler pipes
+void    pipe_handling(t_parsed **temp)
+{
+    int i;
+    int pipe_fd[4];
+
+    i = 0;
+	g_minishell.in_file = dup(STDIN_FILENO);
+	g_minishell.out_file = dup(STDOUT_FILENO);
+    pipe(pipe_fd);
+    if (temp[i + 2] == NULL)
+    {
+        write_process(temp[i], pipe_fd, 1);
+        read_process(temp[i + 1], pipe_fd, 0);
+		return ;
+    }
+	pipe(pipe_fd + 2);
+    while (temp[i])
+    {
+        write_to_pipe(temp, pipe_fd, i);
+        i++;
+        connect_pipes(temp, pipe_fd, i);
+	}
+}
+
+// check what function to execute
+void    check_command(t_parsed **temp)
+{
+    if (temp[1] != NULL)
+        pipe_handling(temp);
+	else
+    {
+        if (temp[0]->file == NULL)
+            execve_or_builtin(temp[0]->args);
+        else if (temp[0]->file->type == GREATER)
+            redirect_in(temp[0]);
+        else if (temp[0]->file->type == SMALLER)
+            redirect_out(temp[0]);
+        else if (temp[0]->file->type == APPEND)
+            append(temp[0]);
+        else if (temp[0]->file->type == HERE_DOC)
+            here_doc(temp[0]);
+        else
+        {
+            printf("error\n");
+            exit(1);
+        }
+    }
 }
 
 // execute the input given
 void    execution()
 {
-    int pipe_fd[2];
     int pid;
-    t_parsed *temp;
+    int status;
+    t_parsed **temp;
 
     temp = g_minishell.parsed;
-    int commands  = 3;
-    int fd_in = dup(STDIN_FILENO);
-    int fd_out = dup(STDOUT_FILENO);
-    if (commands > 1)
-        pipe(pipe_fd);
-    while (temp)
-    {
-        pid = fork();
-        if (pid = 0)
-        {
-            dup2(pipe_fd[1], STDOUT_FILENO);
-            close(pipe_fd[1]);
-            execute_execve(temp->args);
-            dup2(fd_out, STDOUT_FILENO);
-            close(fd_out); 
-            dup2(pipe_fd[0], STDIN_FILENO);
-            close(pipe_fd[0]);
-        }
-        else
-        {
-            waitpid(pid, NULL, 0);
-        }
-        if (temp->next == NULL)
-        {
-            dup2(fd_in, STDIN_FILENO);
-            close(pipe_fd[0]);
-        }
-        temp = temp->next;
-    }
+    pid = fork();
+    if (pid == 0)
+	{
+        check_command(temp);
+		exit(0);
+	}
+	else
+        waitpid(pid, &status, 0);
 }

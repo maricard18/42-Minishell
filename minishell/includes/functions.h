@@ -50,11 +50,16 @@ void    execute_execve(char **args);
 void	execute_builtin_command(char **arguments);
 int	    get_builtin_type(char *command);
 char    *ft_strtok(char *str, char delimeter);
-void    redirect_in();
-void    redirect_out();
-void    append();
-void    here_doc(char **args);
-void    pipe_handle();
+void    redirect_in(t_parsed *temp);
+void    redirect_out(t_parsed *temp);
+void    append(t_parsed *temp);
+void    here_doc(t_parsed *temp);
+void    write_to_pipe(t_parsed **temp, int *pipe_fd, int i);
+void    connect_pipes(t_parsed **temp, int *pipe_fd, int i);
+void    write_process(t_parsed *temp, int *pipe_fd, int a);
+void    read_process(t_parsed *temp, int *pipe_fd, int a);
+void    execution_in_pipes(t_parsed *temp);
+void    execve_or_builtin(char **args);
 
 //Commands
 void	cd_command(char **input);

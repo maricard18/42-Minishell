@@ -6,7 +6,7 @@
 #    By: maricard <maricard@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 10:28:04 by maricard          #+#    #+#              #
-#    Updated: 2023/05/26 11:51:01 by maricard         ###   ########.fr        #
+#    Updated: 2023/05/29 18:21:12 by maricard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,6 +53,7 @@ SRC = 	./srcs/parser/lexer.c \
 		./srcs/execution/builtins.c \
 		./srcs/execution/redirect.c \
 		./srcs/execution/pipes.c \
+		./srcs/execution/execution_utils.c \
 		./srcs/parser/initialize.c \
 		./srcs/parser/syntax.c \
 		./srcs/parser/parser.c \
@@ -60,7 +61,6 @@ SRC = 	./srcs/parser/lexer.c \
 		./srcs/utils/test_lex.c \
 		./srcs/utils/test_utils.c \
 		./srcs/utils/test_pars.c 
-#		./srcs/parser/parser_extras_for_testes.c
 
 SRC-OBJ = $(SRC:.c=.o)
 
@@ -90,9 +90,12 @@ fclean: clean
 	@make -s fclean -C ./libft
 	@$(RM) $(NAME)
 
-leaks:
-#	valgrind --leak-check=full ./$(NAME) $(ARGS)
-
-run: ./minishell
-
 re: fclean all
+
+run: re
+	@echo "[$(RED)running$(RESET)] $(GREEN)$(RESET)"
+	@./minishell
+
+leaks:
+	@echo "[$(RED)looking for leaks$(RESET)] $(GREEN)$(RESET)"
+	@valgrind -s --leak-check=full ./$(NAME)

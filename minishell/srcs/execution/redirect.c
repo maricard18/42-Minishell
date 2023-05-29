@@ -6,19 +6,19 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 12:20:20 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/26 11:48:28 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/29 19:37:03 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 // here doc handler
-void    here_doc(char **args)
+void    here_doc(t_parsed *temp)
 {
     char *str;
     char *keyword;
 
-    keyword = args[0];
+    keyword = temp->args[0];
     while (1)
     {
         str = readline("> ");
@@ -33,14 +33,13 @@ void    here_doc(char **args)
 }
 
 // append handler
-void    append()
+void    append(t_parsed *temp)
 {
     int file;
     int fd;
-    int old_fd;
     
-    old_fd = dup(STDOUT_FILENO);
-    file = open(g_minishell.parsed->file->name,  O_CREAT | O_WRONLY | O_APPEND, 0777);
+    g_minishell.out_file = dup(STDOUT_FILENO);
+    file = open(temp->file->name,  O_CREAT | O_WRONLY | O_APPEND, 0777);
     if (file == -1)
     {
         perror("error opening file\n");
@@ -53,21 +52,20 @@ void    append()
         exit(1);
     }
     close(file);
-    execute_execve(g_minishell.parsed->args);
-    dup2(old_fd, STDOUT_FILENO);
-    close(old_fd);
+    execve_or_builtin(temp->args);
+    dup2(g_minishell.out_file, STDOUT_FILENO);
+    close(g_minishell.out_file);
     return ;
 }
 
 // redirect_out handler
-void    redirect_out()
+void    redirect_out(t_parsed *temp)
 {
     int file;
     int fd;
-    int old_fd;
 
-    old_fd = dup(STDIN_FILENO);
-    file = open(g_minishell.parsed->file->name, O_RDONLY, 0777);
+    g_minishell.in_file = dup(STDIN_FILENO);
+    file = open(temp->file->name, O_RDONLY, 0777);
     if (file == -1)
     {
         perror("file does not exist\n");
@@ -80,21 +78,20 @@ void    redirect_out()
         exit(1);
     }
     close(file);
-    execute_execve(g_minishell.parsed->args);
-    dup2(old_fd, STDIN_FILENO);
-    close(old_fd);
+    execve_or_builtin(temp->args);
+    dup2(g_minishell.in_file, STDIN_FILENO);
+    close(g_minishell.in_file);
     return ;
 }
 
 // redirect_in handler
-void    redirect_in()
+void    redirect_in(t_parsed *temp)
 {
     int file;
     int fd;
-    int old_fd;
     
-    old_fd = dup(STDOUT_FILENO);
-    file = open(g_minishell.parsed->file->name, O_CREAT | O_WRONLY | O_TRUNC, 0777);
+    g_minishell.out_file = dup(STDOUT_FILENO);
+    file = open(temp->file->name, O_CREAT | O_WRONLY | O_TRUNC, 0777);
     if (file == -1)
     {
         perror("error opening file\n");
@@ -107,8 +104,8 @@ void    redirect_in()
         exit(1);
     }
     close(file);
-    execute_execve(g_minishell.parsed->args);
-    dup2(old_fd, STDOUT_FILENO);
-    close(old_fd);
+    execve_or_builtin(temp->args);
+    dup2(g_minishell.out_file, STDOUT_FILENO);
+    close(g_minishell.out_file);
     return ;
 }
