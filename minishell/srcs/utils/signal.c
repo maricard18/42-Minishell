@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 23:36:29 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/24 19:30:13 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/30 19:08:27 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,13 @@ extern t_minishell_state g_minishell;
 void    ctrl_c(int signal)
 {
     (void)signal;
-    g_minishell.ignore = 1;//salta a linha actual
-    ioctl(STDIN_FILENO, TIOCSTI, "\n");// mete caracter nova linha no terminal
-    write(1, "\033[A", 3);
+    //g_minishell.ignore = 1;//salta a linha actual
+    //ioctl(STDIN_FILENO, TIOCSTI, "\n");// mete caracter nova linha no terminal
+    //write(1, "\033[A", 3);
+	ft_putchar_fd('\n', STDOUT_FILENO);	// Print a newline
+	rl_on_new_line(); 					// Go to a new line
+	rl_replace_line("", 0);  			// Replace the current line with an empty line 					// Move to a new line
+    rl_redisplay();  					// Redisplay the prompt
 }
 
 // handle ctrl D

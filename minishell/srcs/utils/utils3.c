@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 16:09:10 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/29 18:20:54 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/30 18:30:29 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,22 @@ char *ft_strcpy(char *dest, const char *src)
     }
     dest[i] = '\0';
     return dest;
+}
+
+int	token_counter(char **str)
+{
+	int i;
+	int a;
+
+	i = 0;
+	a = 0;
+	while (str[i])
+	{
+		if (str[i][0] == '|')
+			a++;
+		i++;
+	}
+	return (i - a);
 }
 
 // void get_next_token(t_token *command_table)

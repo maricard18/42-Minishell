@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 10:35:27 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/30 10:13:59 by mariohenriq      ###   ########.fr       */
+/*   Updated: 2023/05/30 18:35:32 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	*search_path(char *arg)
 		}
 	}
 	perror("minishell: command not found\n");
-	exit(errno);
+	return (NULL);
 }
 
 // execve handler
@@ -76,6 +76,8 @@ void	execute_execve(char **args)
 	char	*full_path;
 
 	full_path = search_path(args[0]);
+	if (full_path == NULL)
+		return ;
 	pid = fork();
 	if (pid == 0)
 		execve(full_path, args, NULL);

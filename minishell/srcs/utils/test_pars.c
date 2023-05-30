@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_pars.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 16:12:41 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/30 10:15:11 by mariohenriq      ###   ########.fr       */
+/*   Updated: 2023/05/30 17:37:49 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

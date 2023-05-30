@@ -61,7 +61,8 @@ t_parsed	**parse_commands(int in_file, int out_file, t_token *token_sequence)
 	t_parsed	**command_list;//array de arrays of commands caso nao tenha and e or ira ser apenas um array
 	t_parsed	*current_command;//array of commands
 
-	command_list = ft_calloc(count_and_or_tokens(token_sequence) + 2, sizeof(t_parsed *));// + 2 for NULL
+	//command_list = ft_calloc(count_and_or_tokens(token_sequence) + 2, sizeof(t_parsed *));// + 2 for NULL
+	command_list = ft_calloc(token_counter(g_minishell.input) + 1, sizeof(t_parsed *));
 	while (token_sequence)
 	{
 		current_command = allocate_and_init_command(in_file, out_file);

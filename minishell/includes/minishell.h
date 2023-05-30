@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 20:34:12 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/29 16:16:39 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/30 17:35:52 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,9 @@
 # define P "\033[1m\033[35m"
 # define CY "\033[1m\033[36m"
 # define RT "\033[0m"
+# define W "\033[1m"
 
 // # define PROMPT "\x1b[32m[\x1b[33mMinishell\x1b[32m]~>\x1b[0m "
-# define PROMPT "[mini\033[31;1mshell] \033[0m"
+# define PROMPT ""W"[mini"R"shell]"RT" "
 
 #endif

@@ -42,6 +42,7 @@ void 		add_command_to_list(t_parsed *current_command, t_parsed **command_list);
 t_parsed 	*allocate_and_init_command(int in_file, int out_file);
 int 		count_and_or_tokens(t_token *command_token_list);
 void 		get_next_token(t_token *command_table);
+int			token_counter(char **str);
 
 // Execution 
 void	execution(void);
