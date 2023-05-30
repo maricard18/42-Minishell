@@ -23,7 +23,7 @@ int	get_builtin_type(char *command)
 // buitin commands handler
 void	execute_builtin_command(char **arguments)
 {
-	int	type;
+	int type;
 
 	type = get_builtin_type(arguments[0]);
 	if (type == CD)

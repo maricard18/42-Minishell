@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_pars.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 16:12:41 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/29 17:50:03 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/30 10:15:11 by mariohenriq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,24 @@
 // print t_file list
 void	print_t_file(t_file *temp, int i)
 {
-	char *str;
+	char	*str;
 
 	printf("   t_file list  | ");
 	if (temp == NULL)
-		printf("["G"NULL"RT"] ");
+		printf("[" G "NULL" RT "] ");
 	else
 	{
 		while (temp)
 		{
 			str = check_type(temp->type);
-			printf("["G"%s"RT"] ", str);
+			printf("[" G "%s" RT "] ", str);
 			temp = temp->next;
 		}
 		printf("\n");
 		temp = g_minishell.parsed[i]->file;
 		while (temp)
 		{
-			printf("   t_file name  | ["G"%s"RT"] ", temp->name);
+			printf("   t_file name  | [" G "%s" RT "] ", temp->name);
 			temp = temp->next;
 		}
 		printf("\n");
@@ -42,37 +42,37 @@ void	print_t_file(t_file *temp, int i)
 // print list args
 void	print_list_args(t_parsed *temp)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	printf("    List args   | ");
 	while (temp->args[i])
 	{
-		printf("["G"%s"RT"] ", temp->args[i]);
+		printf("[" G "%s" RT "] ", temp->args[i]);
 		i++;
 	}
 	printf("\n");
 }
 
 // test for parser
-void    parser_test()
+void	parser_test(void)
 {
-	int	i;
+	int i;
 	t_parsed **temp;
 
 	i = 0;
 	temp = g_minishell.parsed;
-	printf("\n"G"      ---------------      "RT"");
-	printf("\n"G"----> | "RT"PARSER TEST "G"| <----"RT"\n");
-	printf(""G"      ---------------      "RT"\n\n");
+	printf("\n" G "      ---------------      " RT "");
+	printf("\n" G "----> | " RT "PARSER TEST " G "| <----" RT "\n");
+	printf("" G "      ---------------      " RT "\n\n");
 	while (temp[i])
 	{
-		printf("   List number  | ["G"%d"RT"]\n", i + 1);
+		printf("   List number  | [" G "%d" RT "]\n", i + 1);
 		print_list_args(temp[i]);
 		print_t_file(temp[i]->file, i);
 		i++;
 		if (temp[i])
-			printf("\n---------------------------"RT"\n");
+			printf("\n---------------------------" RT "\n");
 	}
-	printf("\n"G"---------------------------"RT"\n\n");
+	printf("\n" G "---------------------------" RT "\n\n");
 }
