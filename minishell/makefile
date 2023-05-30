@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: maricard <maricard@student.42.fr>          +#+  +:+       +#+         #
+#    By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 10:28:04 by maricard          #+#    #+#              #
-#    Updated: 2023/05/29 18:21:12 by maricard         ###   ########.fr        #
+#    Updated: 2023/05/30 22:06:13 by mariohenriq      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 

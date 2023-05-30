@@ -36,8 +36,7 @@
 
 # ----------------------------- #
 
-make 
-#chmod 755 minishell
+make re
 clear
 
 # ----------------------------- #
@@ -45,41 +44,36 @@ clear
 function test()
 {
     BASH_TEST=$(bash -c "$@")
-    MINISHELL_TEST=$($@ | ./minishell | head -n 1 | cut -d ' ' -f 4-)
+	MINISHELL_TEST=$(echo "$@" | ./minishell | head -n 1 | cut -d ' ' -f 4-)
 
-    printf "  "$BOLDYELLOW$UNDERDYELLOW"Current test:$RESET $@\n\n"
-    sleep 1
-    printf "$BOLDGREEN -> Bash Output:$RESET $BASH_TEST\n"
+    printf ""$BOLDYELLOW$UNDERDYELLOW"Current test:$RESET$BOLDWHITE [$@]\n\n"
     sleep 0.5
-    printf "$BOLDRED -> Your Output:$RESET $MINISHELL_TEST $BOLDWHITE\n\n"
+    printf "$BOLDGREEN -> Bash output:$RESET $BASH_TEST\n"
+	sleep 0.5
+    printf "$BOLDRED -> Your output:$RESET $MINISHELL_TEST $BOLDWHITE\n\n"
     sleep 0.5
 
     DIFF=$(diff <(echo $BASH_TEST) <(echo $MINISHELL_TEST))
 
-    if [[ -z "$DIFF" ]]; then
-        printf "    $BOLDGREEN success $RESET\n"
-    else
-        printf "    $BOLDRED failed $RESET\n"
-    fi
-    
-    rm bash minishell
+    if [ -z "$DIFF" ]; then
+    	printf "$BOLDGREEN---- [SUCCESS] ----$RESET\n\n\n"
+	else
+    	printf "$BOLDRED---- [FAILED] ----$RESET\n\n\n"
+	fi
 
-    printf "\n"
-    sleep 1
+    sleep 0.5
 }
 
 # ------------------------------- #
 
 printf "\n"
 printf "$BOLDCYAN  -----------------------------------\n"
-printf "$BOLDCYAN  |"
-printf "$BOLDWHITE WELCOME TO THE MINISHELL TESTER"
-printf "$BOLDCYAN |\n"
+printf "$BOLDCYAN  |$BOLDWHITE WELCOME TO THE MINISHELL TESTER $BOLDCYAN|\n"
 printf "$BOLDCYAN  -----------------------------------\n"
 printf "$RESET\n"
 
 sleep 0.5
-printf "$BOLDMAGENTA   [loading tests]"
+printf "$BOLDMAGENTA  [loading tests]"
 sleep 0.5
 printf " ."
 sleep 0.5
@@ -88,9 +82,30 @@ sleep 0.5
 printf ".$RESET\n\n"
 sleep 0.5
 
-# ----------- TESTER ----------- #
+# ----------- ECHO TESTER ----------- #
+
+printf "$BOLDCYAN-------------"
+printf "$BOLDCYAN [$BOLDWHITE"ECHO"$BOLDCYAN] "
+printf "$BOLDCYAN-------------\n"
+printf "$RESET\n"
 
 test 'echo ola'
 test 'echo "ola"'
+test 'echo ola" boas "pessoal'
+test 'echo -n ola'
+test 'echo -nnnnnnnnnnnnnnnnnnnnn ola'
 
-printf '    THE END\n\n'
+# ----------- EXECVE TESTER ----------- #
+
+printf "$BOLDCYAN-------------"
+printf "$BOLDCYAN [$BOLDWHITE"EXECVE"$BOLDCYAN] "
+printf "$BOLDCYAN-------------\n"
+printf "$RESET\n"
+
+test 'date'
+test 'pwd'
+
+printf "$BOLDMAGENTA  -----------\n"
+printf "$BOLDMAGENTA  |$BOLDWHITE THE END $BOLDMAGENTA|\n"
+printf "$BOLDMAGENTA  -----------\n"
+printf "$RESET\n"

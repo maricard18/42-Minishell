@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   functions.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/30 22:10:59 by mariohenriq       #+#    #+#             */
+/*   Updated: 2023/05/30 22:11:02 by mariohenriq      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FUNCTIONS_H
 # define FUNCTIONS_H
 
@@ -9,6 +21,8 @@ void	clean_all(char *str);
 // Signals
 void    ctrl_c(int signal);
 void    ctrl_d(char *str);
+void	rl_replace_line(const char *text, int clear_undo);
+
 
 // Lexer
 void	lexer(char *str);
