@@ -2,6 +2,7 @@
 
 extern t_minishell_state	g_minishell;
 
+// handle double quotes
 void	handle_double_quotes(char *input, int *i)
 {
 	(*i)++;
@@ -20,6 +21,7 @@ void	handle_double_quotes(char *input, int *i)
 		(*i)++;
 }
 
+// handle single quotes
 void 		handle_single_quotes(char *input, int *i)
 {
 	(*i)++;
@@ -46,9 +48,9 @@ void	put_char(char *input)
 			handle_single_quotes(input, &i);
 		else if (input[i] == '$')
 		{
-			printf("[handle env variables]");
-			// handle_env_variables(input, &i);
+			printf("[env variables]\n");
 			i++;
+			// handle_env_variables(input, &i);
 		}
 		else
 		{
@@ -58,23 +60,40 @@ void	put_char(char *input)
 	}
 }
 
+// check if -n option is present
+int	check_n_option(char *input)
+{
+	int	i;
+
+	i = 0;
+	if (input[i] == '-')
+	{
+		i++;
+		while (input[i] == 'n')
+			i++;
+	}
+	if (input[i] == '\0')
+		return (1);
+	return (0);
+}
+
 // echo handler
 void	echo_command(char **input)
 {
 	int	i;
+	int flag;
 
 	i = 1;
-	while (!ft_strcmp(input[i], "-n"))
+	flag = check_n_option(input[1]);
+	if (flag == 1)
 		i++;
 	while (input[i])
 	{
-		put_char(input[i]);//imprime os argumentos
+		put_char(input[i]);
 		if (input[i + 1])
-			write(STDOUT_FILENO, " ", 1);//adiciona um espaço entre os argumentos
+			write(STDOUT_FILENO, " ", 1);
 		i++;
 	}
-	if (ft_strcmp(input[1], "-n"))//verifica se o primeiro argumento é -n
-		write(STDOUT_FILENO, "\n", 1);//se não for, imprime uma nova linha
-	if (g_minishell.parent_pid != getpid())//não for o processo pai do minishell
-		exit(0);
+	if (flag == 0)
+		write(STDOUT_FILENO, "\n", 1);
 }
