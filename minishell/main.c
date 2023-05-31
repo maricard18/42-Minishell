@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 23:00:53 by filipa            #+#    #+#             */
-/*   Updated: 2023/05/25 14:25:42 by maricard         ###   ########.fr       */
+/*   Updated: 2023/05/31 12:05:21 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	main(int argc, char **argv, char **envp)
 		signal(SIGINT, &ctrl_c);
         signal(SIGQUIT, SIG_IGN);
 		str = readline(PROMPT);
+		g_minishell.str = str;
 		ctrl_d(str);
 		initialize_shell(str);
 		clean_all(str);

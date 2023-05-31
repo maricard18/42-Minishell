@@ -112,5 +112,7 @@ void	execution(void)
 	temp = g_minishell.parsed;
 	g_minishell.in_file = dup(STDIN_FILENO);
 	g_minishell.out_file = dup(STDOUT_FILENO);
+	if (ft_strlen(g_minishell.str) == 0)
+		return ;
 	check_command(temp);
 }

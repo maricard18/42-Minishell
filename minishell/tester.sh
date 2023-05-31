@@ -48,9 +48,9 @@ function test()
 
     printf ""$BOLDYELLOW$UNDERDYELLOW"Current test:$RESET$BOLDWHITE [$@]\n\n"
     sleep 0.5
-    printf "$BOLDGREEN -> Bash output:$RESET $BASH_TEST\n"
+    printf "$BOLDGREEN-> Bash output:$RESET $BASH_TEST\n"
 	sleep 0.5
-    printf "$BOLDRED -> Your output:$RESET $MINISHELL_TEST $BOLDWHITE\n\n"
+    printf "$BOLDRED-> Your output:$RESET $MINISHELL_TEST $BOLDWHITE\n\n"
     sleep 0.5
 
     DIFF=$(diff <(echo $BASH_TEST) <(echo $MINISHELL_TEST))

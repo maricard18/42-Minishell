@@ -5,3 +5,4 @@
 | << ola                    | open here_doc until <ola> is typed    |
 | exit | exit               | does nothing                          |
 | echo $?                   | prints exit status of last command    |
+|___________________________________________________________________|
