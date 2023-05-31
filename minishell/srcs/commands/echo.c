@@ -1,5 +1,37 @@
 #include "minishell.h"
 
+extern t_minishell_state	g_minishell;
+
+void	handle_double_quotes(char *input, int *i)
+{
+	(*i)++;
+	while (input[*i] != '"')
+	{
+		if (input[*i] == '$')
+		{
+			printf("[handle env variables]");
+			// handle_env_variables(input, i);
+			(*i)++;
+		}
+		write(1, &input[*i], 1);
+		(*i)++;
+	}
+	if (input[*i] == '"')
+		(*i)++;
+}
+
+void 		handle_single_quotes(char *input, int *i)
+{
+	(*i)++;
+	while (input[*i] != '\'')
+	{
+		write(1, &input[*i], 1);
+		(*i)++;
+	}
+	if (input[*i] == '\'')
+		(*i)++;
+}
+
 // write character
 void	put_char(char *input)
 {
@@ -8,8 +40,21 @@ void	put_char(char *input)
 	i = 0;
 	while (input[i])
 	{
-		write(1, &input[i], 1);
-		i++;
+		if (input[i] == '"')
+			handle_double_quotes(input, &i);
+		else if (input[i] == '\'')
+			handle_single_quotes(input, &i);
+		else if (input[i] == '$')
+		{
+			printf("[handle env variables]");
+			// handle_env_variables(input, &i);
+			i++;
+		}
+		else
+		{
+			write(1, &input[i], 1);
+			i++;
+		}
 	}
 }
 
@@ -19,7 +64,7 @@ void	echo_command(char **input)
 	int	i;
 
 	i = 1;
-	while (!ft_strcmp(input[i], "-n"))//-n indica não imprimir uma nova linha
+	while (!ft_strcmp(input[i], "-n"))
 		i++;
 	while (input[i])
 	{
