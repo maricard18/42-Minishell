@@ -11,8 +11,8 @@ void	handle_double_quotes(char *input, int *i)
 		if (input[*i] == '$')
 		{
 			printf("[handle env variables]");
-			// handle_env_variables(input, i);
 			(*i)++;
+			//handle_env_variables(input, &i);
 		}
 		write(1, &input[*i], 1);
 		(*i)++;
@@ -84,7 +84,9 @@ void	echo_command(char **input)
 	int flag;
 
 	i = 1;
-	flag = check_n_option(input[1]);
+	flag = 0;
+	if (input[1] != NULL)
+		flag = check_n_option(input[1]);
 	if (flag == 1)
 		i++;
 	while (input[i])

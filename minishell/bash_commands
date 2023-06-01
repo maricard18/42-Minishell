@@ -6,4 +6,5 @@
 | exit | exit               | does nothing                          |
 | echo $?                   | prints exit status of last command    |
 | echo -nnnnnnna ola        | print -nnnnnnna ola                   |
+| cat << end                | try env vars, must display them !     |
 |___________________________________________________________________|

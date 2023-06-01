@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 23:36:29 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/31 16:47:52 by mariohenriq      ###   ########.fr       */
+/*   Updated: 2023/06/01 11:21:48 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void    ctrl_c(int signal)
 	
 	ft_putchar_fd('\n', STDOUT_FILENO);	// Print a newline
 	rl_on_new_line(); 					// Go to a new line
-	//rl_replace_line("", 0);  			// Replace the current line with an empty line
+	rl_replace_line("", 0);  			// Replace the current line with an empty line
 	rl_redisplay();  					// Redisplay the prompt
 }
 
