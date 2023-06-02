@@ -6,7 +6,7 @@
 /*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:01:27 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/02 18:18:57 by mariohenriq      ###   ########.fr       */
+/*   Updated: 2023/06/02 23:14:43 by mariohenriq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ typedef struct s_minishell_state
 	int						n_tokens;
 	int						index;
 	int						commands;
+	int						flag;
 	char					*str;
 	char					**ev;
 	char					**paths;

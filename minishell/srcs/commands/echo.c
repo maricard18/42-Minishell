@@ -10,7 +10,7 @@ void	handle_double_quotes(char *input, int *i)
 	{
 		if (input[*i] == '$')
 		{
-			while (input[*i] >= 'A' && input[*i] <= 'Z')
+			while (input[*i] >= 'A' && input[*i] <= 'Z') // ! bad condition
 			{
 				write(1, &input[*i], 1);
 				(*i)++;
@@ -50,6 +50,7 @@ void	put_char(char *input)
 			handle_single_quotes(input, &i);
 		else
 		{
+			g_minishell.flag = 1;
 			write(1, &input[i], 1);
 			i++;
 		}
@@ -87,11 +88,12 @@ void	echo_command(char **input)
 		i++;
 	while (input[i])
 	{
+		g_minishell.flag = 0;
 		put_char(input[i]);
 		if (input[i + 1])
 			write(STDOUT_FILENO, " ", 1);
 		i++;
 	}
-	if (flag == 0)
+	if (flag == 0 || g_minishell.flag == 0)
 		write(STDOUT_FILENO, "\n", 1);
 }

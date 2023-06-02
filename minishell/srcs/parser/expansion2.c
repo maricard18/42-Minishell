@@ -6,7 +6,7 @@
 /*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 17:11:25 by mariohenriq       #+#    #+#             */
-/*   Updated: 2023/06/02 18:19:55 by mariohenriq      ###   ########.fr       */
+/*   Updated: 2023/06/02 22:52:44 by mariohenriq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ char	*double_quotes(char **env, char *input, int *i)
 	char	*var;
 
 	new_str = ft_strdup("");
-	new_str = ft_strjoin(new_str, ft_char_string(input[*i]));
 	(*i)++;
 	while (input[*i] != '"')
 	{
@@ -27,8 +26,8 @@ char	*double_quotes(char **env, char *input, int *i)
 		{
 			(*i)++;
 			var = handle_env_variables(env, input, i);
-				// missing a free on "var"
 			new_str = ft_strjoin(new_str, var);
+			free(var);
 		}
 		if (!input[*i])
 			return (new_str);
@@ -36,10 +35,7 @@ char	*double_quotes(char **env, char *input, int *i)
 		(*i)++;
 	}
 	if (input[*i] == '"')
-	{
-		new_str = ft_strjoin(new_str, ft_char_string(input[*i]));
 		(*i)++;
-	}
 	return (new_str);
 }
 
@@ -49,14 +45,14 @@ char	*single_quotes(char *input, int *i)
 	char *new_str;
 	int j;
 
-	j = *i;
 	(*i)++;
+	j = *i;
 	while (input[*i] != '\'')
 	{
 		(*i)++;
 	}
 	if (input[*i] == '\'')
 		(*i)++;
-	new_str = ft_substr(input, j, *i - j);
+	new_str = ft_substr(input, j, (*i - j) - 1);
 	return (new_str);
 }

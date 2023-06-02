@@ -103,6 +103,8 @@ void	check_command(t_parsed **temp)
 		}
 	}
 }
+// ! cat not working
+// ! here doc not working
 
 // execute the input given
 void	execution(void)

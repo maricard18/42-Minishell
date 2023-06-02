@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 10:35:27 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/30 18:35:32 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/02 22:44:52 by mariohenriq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*search_path(char *arg)
 	char	*path;
 	char	*tok;
 
-	command = ft_strjoin("/", arg);
+	command = ft_strjoin2("/", arg);
 	path = getenv("PATH");
 	tok = ft_strtok(path, ':');
 	while (tok != NULL)

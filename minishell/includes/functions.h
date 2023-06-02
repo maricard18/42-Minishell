@@ -6,7 +6,7 @@
 /*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 22:10:59 by mariohenriq       #+#    #+#             */
-/*   Updated: 2023/06/02 18:09:31 by mariohenriq      ###   ########.fr       */
+/*   Updated: 2023/06/02 22:43:35 by mariohenriq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void		write_process(t_parsed *temp, int pipe_fd);
 void		read_process(t_parsed *temp, int pipe_fd);
 void		execute_commands(t_parsed *temp);
 void		execve_or_builtin(char **args);
+char		*ft_strjoin2(char const *s1, char const *s2);
 
 //--------Commands---------------//
 void		cd_command(char **input);

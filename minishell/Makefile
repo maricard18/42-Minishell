@@ -6,7 +6,7 @@
 #    By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 10:28:04 by maricard          #+#    #+#              #
-#    Updated: 2023/06/02 17:15:15 by mariohenriq      ###   ########.fr        #
+#    Updated: 2023/06/02 21:44:54 by mariohenriq      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ CYAN 	= \033[1;36m
 WHITE 	= \033[1;37m
 
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -g
+CFLAGS = -Wall -Werror -Wextra -g -fsanitize=address #-fno-omit-frame-pointer
 RM = rm -rf
 
 NAME = minishell

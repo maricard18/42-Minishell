@@ -6,7 +6,7 @@
 /*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 16:09:10 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/02 18:09:15 by mariohenriq      ###   ########.fr       */
+/*   Updated: 2023/06/02 22:43:09 by mariohenriq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,30 @@ char	*ft_char_string(char c)
 	str = malloc(sizeof(char) * 2);
 	str[0] = c;
 	str[1] = '\0';
+	return (str);
+}
+
+char	*ft_strjoin2(char const *s1, char const *s2)
+{
+	int		i;
+	int		a;
+	char	*str;
+
+	if (!s1)
+		return (0);
+	i = ft_strlen(s1);
+	a = ft_strlen(s2);
+	str = malloc((a + i) * sizeof(char) + 1);
+	if (!str)
+		return (0);
+	i = 0;
+	a = 0;
+	while (s1[i])
+		str[a++] = s1[i++];
+	i = 0;
+	while (s2[i])
+		str[a++] = s2[i++];
+	str[a] = '\0';
 	return (str);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 18:00:11 by mariohenriq       #+#    #+#             */
-/*   Updated: 2023/06/02 18:20:54 by mariohenriq      ###   ########.fr       */
+/*   Updated: 2023/06/02 23:09:52 by mariohenriq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*handle_env_variables(char **env, char *str, int *i)
 		a = 0;
 		while (str[k] == env[j][a])
 		{
-			if (ft_isalnum(str[k + 1]) == 0 || env[j][a + 1] == '=')
+			if (ft_isalnum(str[k + 1]) == 0 || env[j][a + 1] == '=') // ! bad condition
 			{
 				*i = k + 1;
 				return (env_var(env[j], a + 1));
@@ -96,7 +96,7 @@ char	*check_string(char *str, int *a)
 		return (new_str);
 	}
 }
-
+// ! not handled $ not existing
 // search for env variables
 void	search_env_vars(void)
 {
