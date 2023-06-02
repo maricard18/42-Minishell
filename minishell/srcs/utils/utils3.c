@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 16:09:10 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/30 18:30:29 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/02 18:09:15 by mariohenriq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ char *ft_strcpy(char *dest, const char *src)
     return dest;
 }
 
+// token counter
 int	token_counter(char **str)
 {
 	int i;
@@ -40,6 +41,24 @@ int	token_counter(char **str)
 		i++;
 	}
 	return (i - a);
+}
+
+// modify string
+void	modify_string(char **str, char *new_str)
+{
+	free(*str);
+    *str = ft_strdup(new_str);
+}
+
+// one char string
+char	*ft_char_string(char c)
+{
+	char *str;
+
+	str = malloc(sizeof(char) * 2);
+	str[0] = c;
+	str[1] = '\0';
+	return (str);
 }
 
 // void get_next_token(t_token *command_table)

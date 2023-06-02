@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 11:06:19 by maricard          #+#    #+#             */
-/*   Updated: 2022/11/25 10:33:41 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/02 17:36:42 by mariohenriq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	while (s2[i])
 		str[a++] = s2[i++];
 	str[a] = '\0';
+	free((char *)s1);
 	return (str);
 }
 

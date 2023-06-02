@@ -10,9 +10,11 @@ void	handle_double_quotes(char *input, int *i)
 	{
 		if (input[*i] == '$')
 		{
-			printf("[handle env variables]");
-			(*i)++;
-			//handle_env_variables(input, &i);
+			while (input[*i] >= 'A' && input[*i] <= 'Z')
+			{
+				write(1, &input[*i], 1);
+				(*i)++;
+			}
 		}
 		write(1, &input[*i], 1);
 		(*i)++;
@@ -22,7 +24,7 @@ void	handle_double_quotes(char *input, int *i)
 }
 
 // handle single quotes
-void 		handle_single_quotes(char *input, int *i)
+void	handle_single_quotes(char *input, int *i)
 {
 	(*i)++;
 	while (input[*i] != '\'')
@@ -46,12 +48,6 @@ void	put_char(char *input)
 			handle_double_quotes(input, &i);
 		else if (input[i] == '\'')
 			handle_single_quotes(input, &i);
-		else if (input[i] == '$')
-		{
-			printf("[env variables]\n");
-			i++;
-			// handle_env_variables(input, &i);
-		}
 		else
 		{
 			write(1, &input[i], 1);
@@ -81,7 +77,7 @@ int	check_n_option(char *input)
 void	echo_command(char **input)
 {
 	int	i;
-	int flag;
+	int	flag;
 
 	i = 1;
 	flag = 0;

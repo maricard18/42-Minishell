@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_lex.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 10:29:23 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/30 17:37:59 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/02 16:20:43 by mariohenriq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	lexer_test(void)
 	printf("\n" G "----> | " RT "LEXER TEST " G "| <----" RT "\n");
 	printf("" G "      --------------      " RT "\n\n");
 	printf(" Number of tokens | [" G "%d" RT "]\n", g_minishell.n_tokens);
+	printf("   Input string   | [" G "%s" RT "]\n", g_minishell.str);
 	print_string_array(g_minishell.input);
 	print_list_values();
 	print_list_types();

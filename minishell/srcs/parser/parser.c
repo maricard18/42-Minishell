@@ -70,7 +70,7 @@ t_parsed	**parse_commands(int in_file, int out_file, t_token *token_sequence)
 			current_command->exec = 3;//exec is always 3 for first command
 		else
 			current_command->exec = token_sequence->prev->type;//exec is the type of the token before the command
-		add_command_to_list(current_command, command_list);//adicina o comando a lista de comandos
+		add_cmd_to_list(current_command, command_list);//adicina o comando a lista de comandos
 		while (token_sequence)
 		{
 			if (token_sequence->type == AND
@@ -91,7 +91,7 @@ t_parsed	**parse_commands(int in_file, int out_file, t_token *token_sequence)
 			else if (token_sequence->type == PIPE)
 			{
 				current_command = create_next_command(&token_sequence, &current_command);
-				add_command_to_list(current_command, command_list);//adicina o comando a lista de comandos
+				add_cmd_to_list(current_command, command_list);//adicina o comando a lista de comandos
 			}
 		}
 	}

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: maricard <maricard@student.42.fr>          +#+  +:+       +#+         #
+#    By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 10:28:04 by maricard          #+#    #+#              #
-#    Updated: 2023/05/31 14:45:18 by maricard         ###   ########.fr        #
+#    Updated: 2023/06/02 17:15:15 by mariohenriq      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,8 @@ LIBS = -ltermcap -lreadline -lncurses
 
 SRC = 	./srcs/parser/lexer.c \
 		./srcs/parser/lexer2.c \
+		./srcs/parser/expansion.c \
+		./srcs/parser/expansion2.c \
 		./srcs/parser/tokeniser.c \
 		./srcs/utils/clean.c \
 		./srcs/utils/signal.c \
@@ -93,6 +95,7 @@ fclean: clean
 re: fclean all
 
 run: re
+	@clear
 	@echo "[$(RED)running$(RESET)] $(GREEN)$(RESET)"
 	@./minishell
 

@@ -36,7 +36,7 @@ t_parsed *allocate_and_init_command(int in_file, int out_file)
 	return (command);
 }
 
-void add_command_to_list(t_parsed *current_command, t_parsed **command_list)
+void add_cmd_to_list(t_parsed *current_command, t_parsed **command_list)
 {
 	int i;
 
