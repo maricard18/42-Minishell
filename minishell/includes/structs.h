@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:01:27 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/02 23:14:43 by mariohenriq      ###   ########.fr       */
+/*   Updated: 2023/06/03 11:18:51 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ typedef struct s_minishell_state
 	int						index;
 	int						commands;
 	int						flag;
+	int						exit_status;
 	char					*str;
 	char					**ev;
 	char					**paths;

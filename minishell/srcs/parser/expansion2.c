@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 17:11:25 by mariohenriq       #+#    #+#             */
-/*   Updated: 2023/06/02 22:52:44 by mariohenriq      ###   ########.fr       */
+/*   Updated: 2023/06/03 10:55:42 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 // handle expansion in double quotes
 char	*double_quotes(char **env, char *input, int *i)
 {
+	char 	*char_str;
 	char	*new_str;
 	char	*var;
 
@@ -31,7 +32,9 @@ char	*double_quotes(char **env, char *input, int *i)
 		}
 		if (!input[*i])
 			return (new_str);
-		new_str = ft_strjoin(new_str, ft_char_string(input[*i]));
+		char_str = ft_char_string(input[*i]);
+		new_str = ft_strjoin(new_str, char_str);
+		free(char_str);
 		(*i)++;
 	}
 	if (input[*i] == '"')

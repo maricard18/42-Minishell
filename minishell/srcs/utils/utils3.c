@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 16:09:10 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/02 22:43:09 by mariohenriq      ###   ########.fr       */
+/*   Updated: 2023/06/03 10:55:57 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ char	*ft_char_string(char c)
 	return (str);
 }
 
+// join two strings without free
 char	*ft_strjoin2(char const *s1, char const *s2)
 {
 	int		i;

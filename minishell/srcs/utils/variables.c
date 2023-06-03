@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   variables.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 10:26:56 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/29 22:07:29 by mariohenriq      ###   ########.fr       */
+/*   Updated: 2023/06/03 11:19:53 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,5 @@ void	minishell_init(char **ev)
     g_minishell.out_file = STDOUT_FILENO;//inicializa o arquivo de saida
 	g_minishell.ev = dup_env_var(ev);//duplica a variavel de ambiente
 	g_minishell.paths = ft_split(getenv("PATH"), ':');//Divide a variável de ambiente PATH em strings separadas por ':', cada uma representando um caminho de diretório onde os executáveis podem ser encontrados. Estes são armazenados no campo paths da estrutura g_minishell
+	g_minishell.exit_status = 0;
 }

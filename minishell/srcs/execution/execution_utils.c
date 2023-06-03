@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 18:20:40 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/30 11:51:03 by mariohenriq      ###   ########.fr       */
+/*   Updated: 2023/06/03 11:54:49 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@ void	execve_or_builtin(char **args)
 {
 	if (get_builtin_type(args[0]) != 0)
 		execute_builtin_command(args);
+	else if (ft_strcmp(args[0], "$?") == 0)
+	{
+		printf("minishell: command not found: %d\n", g_minishell.exit_status);
+	}
 	else
 		execute_execve(args);
 }

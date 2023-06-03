@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 12:20:20 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/01 12:28:26 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/03 11:13:39 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,22 @@ void	here_doc(t_parsed *temp)
 	char	*str;
 	char	*keyword;
 
-	keyword = temp->args[0];
+	keyword = temp->file->name;
 	while (1)
 	{
 		str = readline("> ");
 		if (!str)
 		{
-			printf("did not found keywork: %s\n", keyword);
+			printf("%s : not found\n", keyword);
+			free(str);
 			break ;
 		}
 		if (ft_strcmp(str, keyword) == 0)
+		{
+			free(str);
 			break ;
+		}
+		free(str);
 	}
 }
 

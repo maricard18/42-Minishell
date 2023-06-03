@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 18:00:11 by mariohenriq       #+#    #+#             */
-/*   Updated: 2023/06/02 23:09:52 by mariohenriq      ###   ########.fr       */
+/*   Updated: 2023/06/03 11:43:42 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,17 +78,18 @@ char	*check_string(char *str, int *a)
 	env = g_minishell.ev;
 	if (str[*a] == '$')
 	{
+		if (str[*a + 1] == '?' && str[*a + 2] == '\0')
+		{
+			(*a)++;
+			return (ft_strdup("$"));
+		}
 		(*a)++;
 		return (handle_env_variables(env, str, a));
 	}
 	else if (str[*a] == '"')
-	{
 		return (double_quotes(env, str, a));
-	}
 	else if (str[*a] == '\'')
-	{
 		return (single_quotes(str, a));
-	}
 	else
 	{
 		new_str = ft_char_string(str[*a]);
@@ -96,7 +97,7 @@ char	*check_string(char *str, int *a)
 		return (new_str);
 	}
 }
-// ! not handled $ not existing
+
 // search for env variables
 void	search_env_vars(void)
 {

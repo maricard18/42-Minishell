@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+         #
+#    By: maricard <maricard@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 10:28:04 by maricard          #+#    #+#              #
-#    Updated: 2023/06/02 21:44:54 by mariohenriq      ###   ########.fr        #
+#    Updated: 2023/06/03 12:21:26 by maricard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ CYAN 	= \033[1;36m
 WHITE 	= \033[1;37m
 
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -g -fsanitize=address #-fno-omit-frame-pointer
+CFLAGS = -Wall -Werror -Wextra -g #-fsanitize=address -fno-omit-frame-pointer
 RM = rm -rf
 
 NAME = minishell
@@ -99,6 +99,8 @@ run: re
 	@echo "[$(RED)running$(RESET)] $(GREEN)$(RESET)"
 	@./minishell
 
-leaks:
-	@echo "[$(RED)looking for leaks$(RESET)] $(GREEN)$(RESET)"
-	@valgrind -s --leak-check=full ./$(NAME)
+valgrind: re
+	@clear
+	@echo "[$(RED)looking for valgrind leaks$(RESET)] $(GREEN)$(RESET)"
+	@sleep 1
+	@valgrind -s --leak-check=full ./minishell

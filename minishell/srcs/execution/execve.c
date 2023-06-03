@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 10:35:27 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/02 22:44:52 by mariohenriq      ###   ########.fr       */
+/*   Updated: 2023/06/03 12:22:48 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,17 @@ char	*search_path(char *arg)
 	{
 		full_path = ft_strjoin(tok, command);
 		if (access(full_path, F_OK) == 0)
+		{
+			free(command);
 			return (full_path);
+		}
 		else
 		{
 			free(full_path);
 			tok = ft_strtok(NULL, ':');
 		}
 	}
+	free(command);
 	perror("minishell: command not found\n");
 	return (NULL);
 }
@@ -72,7 +76,6 @@ char	*search_path(char *arg)
 void	execute_execve(char **args)
 {
 	int		pid;
-	int		status;
 	char	*full_path;
 
 	full_path = search_path(args[0]);
@@ -82,6 +85,8 @@ void	execute_execve(char **args)
 	if (pid == 0)
 		execve(full_path, args, NULL);
 	else
-		waitpid(pid, &status, 0);
+	{
+		waitpid(pid, &g_minishell.exit_status, 0);
+	}
 	return ;
 }
