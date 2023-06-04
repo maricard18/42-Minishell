@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 10:45:38 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/03 12:21:08 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/03 19:28:56 by mariohenriq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,8 @@ void    clean_lexer(t_token *token)
 void	clean_all(char *str)
 {
 	t_token	*token;
-	int		i;
 	
 	token = g_minishell.token;
-	i = 0;
 	if (str)
 		free(str);
 	if (g_minishell.input)

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: maricard <maricard@student.42.fr>          +#+  +:+       +#+         #
+#    By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 10:28:04 by maricard          #+#    #+#              #
-#    Updated: 2023/06/03 12:21:26 by maricard         ###   ########.fr        #
+#    Updated: 2023/06/03 19:34:37 by mariohenriq      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ CYAN 	= \033[1;36m
 WHITE 	= \033[1;37m
 
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -g #-fsanitize=address -fno-omit-frame-pointer
+CFLAGS = -Wall -Werror -Wextra -g -fsanitize=address -fno-omit-frame-pointer
 RM = rm -rf
 
 NAME = minishell

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 10:35:27 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/03 12:22:48 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/03 20:07:50 by mariohenriq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,10 @@ void	execute_execve(char **args)
 	int		pid;
 	char	*full_path;
 
-	full_path = search_path(args[0]);
+	if (args[0][0] != '/')
+		full_path = search_path(args[0]);
+	else
+		full_path = args[0];
 	if (full_path == NULL)
 		return ;
 	pid = fork();

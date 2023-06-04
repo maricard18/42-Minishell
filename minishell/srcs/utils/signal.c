@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 23:36:29 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/03 12:27:22 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/04 11:58:38 by mariohenriq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void    ctrl_d(char *str)
     if (!str)
     {
         printf("exit\n");
+		clean_all(str);
 		exit(errno);
     }
 }

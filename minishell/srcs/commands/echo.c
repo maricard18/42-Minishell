@@ -66,8 +66,13 @@ int	check_n_option(char *input)
 	if (input[i] == '-')
 	{
 		i++;
-		while (input[i] == 'n')
-			i++;
+		if (input[i] == 'n')
+		{
+			while (input[i] == 'n')
+				i++;
+		}
+		else
+			return (0);
 	}
 	if (input[i] == '\0')
 		return (1);

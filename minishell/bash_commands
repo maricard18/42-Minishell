@@ -1,7 +1,13 @@
 -------------------- BASH COMMAND LIST ------------------------------
 |                                                                   |
 ------------------------ [TESTS] ------------------------------------
+|                                       							|
+------------------------ [ECHO] -------------------------------------
 | echo test 1> file         | cat file = test                       |
+| echo $?                   | prints exit status of last command    |
+| echo -nnnnnnna ola        | print -> -nnnnnnna ola                |
+| echo - ola                | printf -> - ola,                      |
+
 | << ola                    | open here_doc until <ola> is typed    |
 | exit | exit               | does nothing                          |
 | echo $?                   | prints exit status of last command    |
