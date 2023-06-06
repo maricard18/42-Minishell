@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 16:12:41 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/06 13:12:33 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/06 14:45:26 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ void	print_list_args(t_parsed *temp)
 // test for parser
 void	parser_test(void)
 {
-	int i;
-	t_parsed **temp;
+	int			i;
+	t_parsed	**temp;
 
 	i = 0;
 	temp = g_minishell.parsed;

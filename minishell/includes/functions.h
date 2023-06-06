@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 22:10:59 by mariohenriq       #+#    #+#             */
-/*   Updated: 2023/06/06 13:29:34 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/06 19:54:10 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void		clean_all(char *str);
 //----------Signals---------------//
 void		ctrl_c(int signal);
 void		ctrl_d(char *str);
-void		rl_replace_line(const char *text, int clear_undo);
+//void		rl_replace_line(const char *text, int clear_undo);
 
 //-----------Lexer----------------//
 void		lexer(char *str);
@@ -70,22 +70,22 @@ void		execute_execve(char **args);
 void		execute_builtin_command(char **arguments);
 int			get_builtin_type(char *command);
 char		*ft_strtok(char *str, char delimeter);
-void		redirect_in(t_parsed *temp, char *name);
-void		redirect_out(t_parsed *temp, char *name);
-void		append(t_parsed *temp, char *name);
+void		redirect_in(t_parsed *temp, t_file *file);
+void		redirect_out(t_parsed *temp, t_file *file);
+void		append(t_parsed *temp, t_file *file);
 void		here_doc(t_parsed *temp, char *name);
-void		write_to_pipe(t_parsed **temp, int *pipe_fd, int i);
-void		connect_pipes(t_parsed **temp, int *pipe_fd, int i);
 void		write_process(t_parsed *temp, int pipe_fd);
 void		read_process(t_parsed *temp, int pipe_fd);
 void		execute_commands(t_parsed *temp);
 void		execve_or_builtin(char **args);
 char		*ft_strjoin2(char const *s1, char const *s2);
+int			**open_pipes(void);
+void		close_pipes(int *pipe_fd);
 
 //--------Commands---------------//
 void		cd_command(char **input);
 void		echo_command(char **input);
-void		env_command(void);
+void		env_command(char **input);
 void		exit_command(char **input);
 void		pwd_command(void);
 void		unset_command(char **input);
@@ -93,7 +93,7 @@ void		export_command(char **input);
 
 //---------Utils-----------------//
 void		update_path_directories(void);
-int			number_args_env_Var(void);
+int			number_args_env_var(void);
 void		free_array(char **arr);
 int			handle_error(int error_code, char *custom_message);
 char		*ft_strcpy(char *dest, const char *src);

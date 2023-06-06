@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtins.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/06 14:32:36 by maricard          #+#    #+#             */
+/*   Updated: 2023/06/06 19:49:17 by maricard         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 // buitlin commands checker
@@ -23,13 +35,13 @@ int	get_builtin_type(char *command)
 // buitin commands handler
 void	execute_builtin_command(char **arguments)
 {
-	int type;
+	int	type;
 
 	type = get_builtin_type(arguments[0]);
 	if (type == CD)
 		cd_command(arguments);
 	if (type == ENV)
-		env_command();
+		env_command(arguments);
 	if (type == PWD)
 		pwd_command();
 	if (type == ECHO_)

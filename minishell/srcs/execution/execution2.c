@@ -1,16 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution_utils.c                                  :+:      :+:    :+:   */
+/*   execution2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 18:20:40 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/06 13:28:49 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/06 19:08:18 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// function to close pipes
+void	close_pipes(int *pipe_fd)
+{
+	int	i;
+	int	a;
+
+	i = (g_minishell.n_tokens2 - 1) * 2;
+	a = 0;
+	while (a < i)
+	{
+		close(pipe_fd[a]);
+		printf("closed pipe[%d]\n", a);
+		a++;
+	}
+}
+
+// function to open pipes
+int		**open_pipes()
+{
+	int	**pipe_fd;
+	int	i;
+	int	a;
+
+	i = (g_minishell.n_tokens2 - 1);
+	pipe_fd = ft_calloc(i + 1, sizeof(int *));
+	a = -1;
+	while (++a < i)
+	{
+		pipe_fd[a] = malloc(sizeof(int) * 2);
+		pipe(pipe_fd[a]);
+	}
+	return (pipe_fd);
+}
 
 // check if its a builtin command or not
 void	execve_or_builtin(char **args)
@@ -19,7 +53,7 @@ void	execve_or_builtin(char **args)
 		execute_builtin_command(args);
 	else if (ft_strcmp(args[0], "$?") == 0)
 	{
-		printf("minishell: command not found: %d\n", g_minishell.exit_status);
+		printf("%d: command not found\n", g_minishell.exit_status);
 	}
 	else
 		execute_execve(args);
@@ -28,7 +62,7 @@ void	execve_or_builtin(char **args)
 // handler for execution in pipes
 void	execute_commands(t_parsed *temp)
 {
-	t_file *file;
+	t_file	*file;
 
 	file = temp->file;
 	if (file == NULL)
@@ -38,11 +72,11 @@ void	execute_commands(t_parsed *temp)
 	while (file != NULL)
 	{
 		if (file->type == GREATER)
-			redirect_in(temp, file->name);
+			redirect_in(temp, file);
 		else if (file->type == SMALLER)
-			redirect_out(temp, file->name);
+			redirect_out(temp, file);
 		else if (file->type == APPEND)
-			append(temp, file->name);
+			append(temp, file);
 		else if (file->type == HERE_DOC)
 			here_doc(temp, file->name);
 		file = file->next;

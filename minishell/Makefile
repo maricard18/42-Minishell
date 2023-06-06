@@ -6,7 +6,7 @@
 #    By: maricard <maricard@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 10:28:04 by maricard          #+#    #+#              #
-#    Updated: 2023/06/06 12:35:40 by maricard         ###   ########.fr        #
+#    Updated: 2023/06/06 19:03:46 by maricard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,12 @@ CYAN 	= \033[1;36m
 WHITE 	= \033[1;37m
 
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -g #-fsanitize=address -fno-omit-frame-pointer
+CFLAGS = -Wall -Werror -Wextra
 RM = rm -rf
+
+ifdef DEBUG
+	CFLAGS += -g -fsanitize=address -fno-omit-frame-pointer
+endif
 
 NAME = minishell
 LIBFT = ./libft/libft.a
@@ -52,11 +56,11 @@ SRC = 	./srcs/parser/lexer.c \
 		./srcs/commands/pwd.c \
 		./srcs/commands/unset.c \
 		./srcs/execution/execution.c \
+		./srcs/execution/execution2.c \
 		./srcs/execution/execve.c \
 		./srcs/execution/builtins.c \
 		./srcs/execution/redirect.c \
 		./srcs/execution/pipes.c \
-		./srcs/execution/execution_utils.c \
 		./srcs/parser/initialize.c \
 		./srcs/parser/syntax.c \
 		./srcs/parser/parser.c \

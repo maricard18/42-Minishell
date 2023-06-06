@@ -11,6 +11,4 @@ void	cd_command(char **input)
 	else
 		if (chdir(getenv("HOME")))
 			perror("Home directory not found");
-	if (g_minishell.parent_pid != getpid())//não for o processo pai do minishell
-		exit(errno);//encerrado adequadamente e retorna o código erro
 }

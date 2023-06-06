@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 17:11:25 by mariohenriq       #+#    #+#             */
-/*   Updated: 2023/06/06 12:24:36 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/06 14:50:05 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // handle expansion in double quotes
 char	*double_quotes(char **env, char *input, int *i)
 {
-	char 	*char_str;
+	char	*char_str;
 	char	*new_str;
 	char	*var;
 
@@ -45,8 +45,8 @@ char	*double_quotes(char **env, char *input, int *i)
 // handle expansion in single quotes
 char	*single_quotes(char *input, int *i)
 {
-	char *new_str;
-	int j;
+	char	*new_str;
+	int		j;
 
 	(*i)++;
 	j = *i;

@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:01:27 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/03 11:18:51 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/06 15:16:28 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,10 @@ typedef struct s_minishell_state
 {
 	int						ignore;
 	int						opening_prompt;
-	int						parent_pid;
-	int						*child_pids;
-	int						child_pids_count;
 	int						in_file;
 	int						out_file;
 	int						n_tokens;
+	int						n_tokens2;
 	int						index;
 	int						commands;
 	int						flag;

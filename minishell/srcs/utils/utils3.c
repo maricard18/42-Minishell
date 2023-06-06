@@ -6,33 +6,34 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 16:09:10 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/03 10:55:57 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/06 19:45:12 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 // copy string
-char *ft_strcpy(char *dest, const char *src)
+char	*ft_strcpy(char *dest, const char *src)
 {
-    int i = 0;
-    
-    while (src[i] != '\0')
-    {
-        dest[i] = src[i];
-        i++;
-    }
-    dest[i] = '\0';
-    return dest;
+	int	i;
+
+	i = 0;
+	while (src[i] != '\0')
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }
 
 // token counter
 int	token_counter(char **str)
 {
-	int i;
-	int a;
+	int	i;
+	int	a;
 
-	i = 0;
+	i = 1;
 	a = 0;
 	while (str[i])
 	{
@@ -40,20 +41,27 @@ int	token_counter(char **str)
 			a++;
 		i++;
 	}
-	return (i - a);
+	if (a == 0)
+	{
+		g_minishell.n_tokens2 = 1;
+		return (1);
+	}
+	else
+		g_minishell.n_tokens2 = a + 1;
+	return (g_minishell.n_tokens2);
 }
 
 // modify string
 void	modify_string(char **str, char *new_str)
 {
 	free(*str);
-    *str = ft_strdup(new_str);
+	*str = ft_strdup(new_str);
 }
 
 // one char string
 char	*ft_char_string(char c)
 {
-	char *str;
+	char	*str;
 
 	str = malloc(sizeof(char) * 2);
 	str[0] = c;

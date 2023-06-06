@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 23:00:53 by filipa            #+#    #+#             */
-/*   Updated: 2023/06/03 20:12:06 by mariohenriq      ###   ########.fr       */
+/*   Updated: 2023/06/06 18:53:53 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ int	main(int argc, char **argv, char **envp)
 	char	*str;
 
 	minishell_init(envp);
+	signal(SIGINT, &ctrl_c);
+	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
-		signal(SIGINT, &ctrl_c);
-        signal(SIGQUIT, SIG_IGN);
 		str = readline(PROMPT);
 		g_minishell.str = str;
 		ctrl_d(str);
@@ -48,5 +48,6 @@ int	main(int argc, char **argv, char **envp)
 		initialize_shell(str);
 		clean_all(str);
 	}
+	rl_clear_history();
 	return(0);
 }

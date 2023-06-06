@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 20:34:12 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/30 17:35:52 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/06 14:57:14 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 # include <errno.h>
 # include <sys/ioctl.h>
 # include <sys/wait.h>
-#include <sys/types.h>
-#include <sys/stat.h>
+# include <sys/types.h>
+# include <sys/stat.h>
 
 # define B "\033[1m\033[30m"
 # define R "\033[1m\033[31m"
@@ -41,6 +41,6 @@
 # define W "\033[1m"
 
 // # define PROMPT "\x1b[32m[\x1b[33mMinishell\x1b[32m]~>\x1b[0m "
-# define PROMPT ""W"[mini"R"shell]"RT" "
+# define PROMPT "\033[1m[mini\033[1m\033[31mshell]\033[0m "
 
 #endif

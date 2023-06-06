@@ -8,7 +8,7 @@ void	remove_env_var(char *data)//remove uma variável de ambiente
 
 	i = 0;
 	j = 0;
-	new_env = ft_calloc(sizeof(char *), number_args_env_Var() + 1);//aloca memória para um array de strings com o número de variáveis de ambiente + 1
+	new_env = ft_calloc(sizeof(char *), number_args_env_var() + 1);//aloca memória para um array de strings com o número de variáveis de ambiente + 1
 	while (g_minishell.ev[i])
 	{
 		if (ft_strncmp(g_minishell.ev[i], data, ft_strlen(data)))//se a variável de ambiente não for igual à variável a remover
@@ -36,6 +36,4 @@ void	unset_command(char **input)//emover variáveis de ambiente no shell
 	}
 	free(data);
 	update_path_directories();//atualiza os caminhos
-	if (g_minishell.parent_pid != getpid())//se o processo atual não for o processo pai
-		exit(1);
 }

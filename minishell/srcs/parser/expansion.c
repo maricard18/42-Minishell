@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 18:00:11 by mariohenriq       #+#    #+#             */
-/*   Updated: 2023/06/06 13:00:55 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/06 14:50:10 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*env_var(char *env, int i)
 }
 
 // check if $? was enetered
-char 	*check_if_exit_status(char *str, int *i)
+char	*check_if_exit_status(char *str, int *i)
 {
 	if (str[*i] == '?')
 	{

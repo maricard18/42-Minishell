@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipa <filipa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 22:16:59 by filipa            #+#    #+#             */
-/*   Updated: 2023/05/09 22:41:56 by filipa           ###   ########.fr       */
+/*   Updated: 2023/06/06 14:31:20 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,12 @@ static int	get_previous_input(int fd, char **line, char **saved_data)
 
 static int	free_and_exit(char *str)
 {
-	free (str);
+	free(str);
 	return (-1);
 }
 
-static int	handle_end_of_line(int fd, char **line, char **saved_data, char *end_of_current_line)
+static int	handle_end_of_line(int fd, char **line, char **saved_data,
+		char *end_of_current_line)
 {
 	if (**line == 0)
 	{
@@ -61,7 +62,7 @@ static int	handle_end_of_line(int fd, char **line, char **saved_data, char *end_
 
 int	get_next_line(int fd, char **line)
 {
-	static char	*saved_data[FD_SETSIZE] = {0};
+	static char	*saved_data[FD_SETSIZE];
 	char		buffer[BUFFER_SIZE + 1];
 	int			read_result;
 	char		*new_line;
@@ -93,10 +94,10 @@ int	get_next_line(int fd, char **line)
 #include <stdlib.h>
 #include <sys/select.h>
 
-int main()
+int	main(void)
 {
     printf("FD_SETSIZE=%d\n", FD_SETSIZE);
-    return 0;
+    return (0);
 }
 
 */

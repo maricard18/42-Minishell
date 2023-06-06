@@ -22,7 +22,7 @@ void	add_env_var(char *str)
 	char	**new_env;
 
 	i = -1;
-	new_env = ft_calloc(sizeof(char *), number_args_env_Var() + 2);//+ 2 para a nova variável e o NULL
+	new_env = ft_calloc(sizeof(char *), number_args_env_var() + 2);//+ 2 para a nova variável e o NULL
 	while (g_minishell.ev[++i])
 		new_env[i] = ft_strdup(g_minishell.ev[i]);//copia as variáveis de ambiente para a nova variável
 	new_env[i] = ft_strdup(str);//copia a nova variável
@@ -70,8 +70,6 @@ void	export_command(char **input)//exporta as variáveis de ambiente
 		input++;
 	}
 	update_path_directories();//atualiza os diretórios de busca de executáveis no shell
-	if (g_minishell.parent_pid != getpid())//se o processo atual não for o processo pai
-		exit(1);
 }
 /*
 Os diretórios de busca de executáveis no shell são 

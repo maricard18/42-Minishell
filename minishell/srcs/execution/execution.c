@@ -14,76 +14,52 @@
 
 extern t_minishell_state	g_minishell;
 
+# define READ_END 0
+# define WRITE_END 1
+
 // handler execuntion to pipes
-void	write_to_pipe(t_parsed **temp, int *pipe_fd, int i)
+void	write_to_pipe(t_parsed **temp, int **pipe_fd, int i)
 {
 	if (temp[i + 1] == NULL)
 	{
 		dup2(g_minishell.out_file, STDOUT_FILENO);
 		execute_commands(temp[i]);
 		close(g_minishell.out_file);
-		if (i % 2 == 1)
-			close(pipe_fd[0]);
-		else
-			close(pipe_fd[2]);
+		close(pipe_fd[i - 1][READ_END]);
+		return ;
 	}
-	else if (i % 2 == 1)
+	else
 	{
-		write_process(temp[i], pipe_fd[3]);
-		close(pipe_fd[0]);
+		dup2(pipe_fd[i][WRITE_END], STDOUT_FILENO);
+		execute_commands(temp[i]);
+		close(pipe_fd[i][WRITE_END]);
 	}
-	else if (i % 2 == 0)
-	{
-		write_process(temp[i], pipe_fd[1]);
-		if (i != 0)
-			close(pipe_fd[2]);
-	}
+	if (i > 0)
+		close(pipe_fd[i - 1][READ_END]);
 }
 
 // handler connection in pipes
-void	connect_pipes(t_parsed **temp, int *pipe_fd, int i)
+void	connect_pipes(t_parsed **temp, int **pipe_fd, int i)
 {
-	if (i % 2 == 1)
+	(void) temp;
+	if (temp[i] == NULL)
 	{
-		if (temp[i] == NULL)
-		{
-			dup2(g_minishell.in_file, STDIN_FILENO);
-			close(g_minishell.in_file);
-		}
-		else
-			dup2(pipe_fd[0], STDIN_FILENO);
+		dup2(g_minishell.in_file, STDIN_FILENO);
+		close(g_minishell.in_file);
+		return ;
 	}
-	else if (i % 2 == 0)
-	{
-		if (temp[i] == NULL)
-		{
-			dup2(g_minishell.in_file, STDIN_FILENO);
-			close(g_minishell.in_file);
-		}
-		else
-			dup2(pipe_fd[2], STDIN_FILENO);
-	}
+	if (i > 0)
+		dup2(pipe_fd[i - 1][READ_END], STDIN_FILENO);
 }
 
 // handler pipes
 void	pipe_handling(t_parsed **temp)
 {
 	int	i;
-	int	pipe_fd[4];
+	int **pipe_fd;
 
 	i = 0;
-	pipe(pipe_fd);
-	if (temp[i + 2] == NULL)
-	{
-		write_process(temp[i], pipe_fd[1]);
-		dup2(g_minishell.out_file, STDOUT_FILENO);
-		close(g_minishell.out_file);
-		read_process(temp[i + 1], pipe_fd[0]);
-		dup2(g_minishell.in_file, STDIN_FILENO);
-		close(g_minishell.in_file);
-		return ;
-	}
-	pipe(pipe_fd + 2);
+	pipe_fd = open_pipes();
 	while (temp[i])
 	{
 		write_to_pipe(temp, pipe_fd, i);
@@ -105,12 +81,12 @@ void	check_command(t_parsed **temp)
 		dup2(g_minishell.in_file, STDIN_FILENO);
 		close(g_minishell.in_file);
 	}
-	while (waitpid(-1, &g_minishell.exit_status, 0) > 0)
-	{
-		if (WIFEXITED(g_minishell.exit_status))
-			g_minishell.exit_status = WEXITSTATUS(g_minishell.exit_status);
+	while (waitpid(0, &g_minishell.exit_status, 0) > 0)
 		continue ;
-	}
+	if (WIFEXITED(g_minishell.exit_status))
+			g_minishell.exit_status = WEXITSTATUS(g_minishell.exit_status);
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, &ctrl_c);
 }
 
 // ! cat not working

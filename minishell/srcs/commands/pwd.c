@@ -11,6 +11,4 @@ void	pwd_command(void)
 	else
 		printf("%s\n", current_dir);//imprime o diretório atual
 	free(current_dir);//liberta a memória alocada para a string current_dir
-	if (g_minishell.parent_pid != getpid())//se o processo atual não for o processo pai
-		exit(errno);
 }

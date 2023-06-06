@@ -1,44 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   special_chars2.c                                    :+:      :+:    :+:   */
+/*   types2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/16 12:01:01 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/16 12:20:03 by maricard         ###   ########.fr       */
+/*   Created: 2023/06/06 14:46:32 by maricard          #+#    #+#             */
+/*   Updated: 2023/06/06 14:48:45 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern t_minishell_state g_minishell;
+extern t_minishell_state	g_minishell;
 
 // () checker
-void    check_for_parentheses(char *str, t_token *temp)
+void	check_for_parentheses(char *str, t_token *temp)
 {
-    if (ft_strchr3(str, '(', ')') == 1)
-        temp->type = OPEN_PAR;
-    else if (ft_strchr3(str, '(', ')') == 2)
-        temp->type = CLOSE_PAR;
-    else
-        return ;
+	if (ft_strchr3(str, '(', ')') == 1)
+		temp->type = OPEN_PAR;
+	else if (ft_strchr3(str, '(', ')') == 2)
+		temp->type = CLOSE_PAR;
+	else
+		return ;
 }
 
 // string checker
-void    check_for_string(char *str, t_token *temp)
+void	check_for_string(char *str, t_token *temp)
 {
-    if (is_string(str) == 1)
-        temp->type = STRING;
-    else
-        return ;
+	if (is_string(str) == 1)
+		temp->type = STRING;
+	else
+		return ;
 }
 
 // && checker
-void    check_for_and(char *str, t_token *temp)
-{   
-    if (ft_strchr2(str, '&') == 2)
-        temp->type = AND;
-    else
-        return ;
+void	check_for_and(char *str, t_token *temp)
+{
+	if (ft_strchr2(str, '&') == 2)
+		temp->type = AND;
+	else
+		return ;
 }

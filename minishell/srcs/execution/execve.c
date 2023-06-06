@@ -6,11 +6,17 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 10:35:27 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/06 13:08:50 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/06 19:01:40 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	sigint_handler(int signum)
+{
+	(void)signum;
+	printf("\n");
+}
 
 // runs trough the string until it finds a delimeter
 char	*ft_strtok(char *str, char delimeter)
@@ -43,15 +49,13 @@ char	*ft_strtok(char *str, char delimeter)
 }
 
 // search command path
-char	*search_path(char *arg)
+char	*search_path(char *arg, char *path)
 {
 	char	*full_path;
 	char	*command;
-	char	*path;
 	char	*tok;
 
 	command = ft_strjoin2("/", arg);
-	path = getenv("PATH");
 	tok = ft_strtok(path, ':');
 	while (tok != NULL)
 	{
@@ -78,17 +82,19 @@ void	execute_execve(char **args)
 {
 	int		pid;
 	char	*full_path;
+	char	*path;
 
+	path = getenv("PATH");
 	if (args[0][0] != '/')
-		full_path = search_path(args[0]);
+		full_path = search_path(args[0], path);
 	else
 		full_path = args[0];
 	if (full_path == NULL)
 		return ;
+	signal(SIGINT, sigint_handler);
 	pid = fork();
 	if (pid == 0)
-	{
-		//signal(SIGINT, SIG_IGN);
+	{		
 		execve(full_path, args, NULL);
 		exit(126);
 	}
