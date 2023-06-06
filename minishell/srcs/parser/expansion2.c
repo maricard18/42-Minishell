@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 17:11:25 by mariohenriq       #+#    #+#             */
-/*   Updated: 2023/06/03 10:55:42 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/06 12:24:36 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*double_quotes(char **env, char *input, int *i)
 			new_str = ft_strjoin(new_str, var);
 			free(var);
 		}
-		if (!input[*i])
+		if (!input[*i] || input[*i] == '"')
 			return (new_str);
 		char_str = ft_char_string(input[*i]);
 		new_str = ft_strjoin(new_str, char_str);

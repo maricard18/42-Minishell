@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 18:00:11 by mariohenriq       #+#    #+#             */
-/*   Updated: 2023/06/03 11:43:42 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/06 13:00:55 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,26 @@ char	*env_var(char *env, int i)
 	return (str);
 }
 
+// check if $? was enetered
+char 	*check_if_exit_status(char *str, int *i)
+{
+	if (str[*i] == '?')
+	{
+		(*i)++;
+		return (ft_itoa(g_minishell.exit_status));
+	}
+	else if (str[*i] == '\0')
+	{
+		*i = ft_strlen(str);
+		return (ft_strdup("$"));
+	}
+	else
+	{
+		*i = ft_strlen(str);
+		return (ft_strdup(""));
+	}
+}
+
 // handle env variables
 char	*handle_env_variables(char **env, char *str, int *i)
 {
@@ -54,7 +74,7 @@ char	*handle_env_variables(char **env, char *str, int *i)
 		a = 0;
 		while (str[k] == env[j][a])
 		{
-			if (ft_isalnum(str[k + 1]) == 0 || env[j][a + 1] == '=') // ! bad condition
+			if (ft_isalnum(str[k + 1]) == 0 && env[j][a + 1] == '=')
 			{
 				*i = k + 1;
 				return (env_var(env[j], a + 1));
@@ -64,8 +84,7 @@ char	*handle_env_variables(char **env, char *str, int *i)
 		}
 		j++;
 	}
-	new_str = ft_strdup("");
-	*i = ft_strlen(str);
+	new_str = check_if_exit_status(str, i);
 	return (new_str);
 }
 
@@ -78,11 +97,6 @@ char	*check_string(char *str, int *a)
 	env = g_minishell.ev;
 	if (str[*a] == '$')
 	{
-		if (str[*a + 1] == '?' && str[*a + 2] == '\0')
-		{
-			(*a)++;
-			return (ft_strdup("$"));
-		}
 		(*a)++;
 		return (handle_env_variables(env, str, a));
 	}
@@ -122,6 +136,8 @@ void	search_env_vars(void)
 		modify_string(&str[i], temp);
 		free(temp);
 		i++;
+		if (ft_strcmp(str[i - 1], "<<") == 0)
+			i++;
 	}
 	g_minishell.input = str;
 }

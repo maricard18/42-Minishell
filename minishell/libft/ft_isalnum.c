@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 00:58:37 by maricard          #+#    #+#             */
-/*   Updated: 2022/11/10 17:52:11 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/06 12:19:51 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	ft_isalnum(int x)
 	if (x >= '0' && x <= '9')
 		return (1);
 	if ((x >= 'a' && x <= 'z') || (x >= 'A' && x <= 'Z'))
+		return (1);
+	if (x == '_')
 		return (1);
 	return (0);
 }

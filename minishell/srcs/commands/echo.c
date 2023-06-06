@@ -1,40 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   echo.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/06 12:54:24 by maricard          #+#    #+#             */
+/*   Updated: 2023/06/06 12:54:27 by maricard         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 extern t_minishell_state	g_minishell;
-
-// handle double quotes
-void	handle_double_quotes(char *input, int *i)
-{
-	(*i)++;
-	while (input[*i] != '"')
-	{
-		if (input[*i] == '$')
-		{
-			while (input[*i] >= 'A' && input[*i] <= 'Z') // ! bad condition
-			{
-				write(1, &input[*i], 1);
-				(*i)++;
-			}
-		}
-		write(1, &input[*i], 1);
-		(*i)++;
-	}
-	if (input[*i] == '"')
-		(*i)++;
-}
-
-// handle single quotes
-void	handle_single_quotes(char *input, int *i)
-{
-	(*i)++;
-	while (input[*i] != '\'')
-	{
-		write(1, &input[*i], 1);
-		(*i)++;
-	}
-	if (input[*i] == '\'')
-		(*i)++;
-}
 
 // write character
 void	put_char(char *input)
@@ -44,16 +22,9 @@ void	put_char(char *input)
 	i = 0;
 	while (input[i])
 	{
-		if (input[i] == '"')
-			handle_double_quotes(input, &i);
-		else if (input[i] == '\'')
-			handle_single_quotes(input, &i);
-		else
-		{
-			g_minishell.flag = 1;
-			write(1, &input[i], 1);
-			i++;
-		}
+		g_minishell.flag = 1;
+		write(1, &input[i], 1);
+		i++;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 18:20:40 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/03 11:54:49 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/06 13:28:49 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,23 @@ void	execve_or_builtin(char **args)
 // handler for execution in pipes
 void	execute_commands(t_parsed *temp)
 {
-	if (temp->file == NULL)
+	t_file *file;
+
+	file = temp->file;
+	if (file == NULL)
+	{
 		execve_or_builtin(temp->args);
-	else if (temp->file->type == GREATER)
-		redirect_in(temp);
-	else if (temp->file->type == SMALLER)
-		redirect_out(temp);
-	else if (temp->file->type == APPEND)
-		append(temp);
-	else if (temp->file->type == HERE_DOC)
-		here_doc(temp);
+	}
+	while (file != NULL)
+	{
+		if (file->type == GREATER)
+			redirect_in(temp, file->name);
+		else if (file->type == SMALLER)
+			redirect_out(temp, file->name);
+		else if (file->type == APPEND)
+			append(temp, file->name);
+		else if (file->type == HERE_DOC)
+			here_doc(temp, file->name);
+		file = file->next;
+	}
 }

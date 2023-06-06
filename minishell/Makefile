@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+         #
+#    By: maricard <maricard@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 10:28:04 by maricard          #+#    #+#              #
-#    Updated: 2023/06/03 19:34:37 by mariohenriq      ###   ########.fr        #
+#    Updated: 2023/06/06 12:35:40 by maricard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ CYAN 	= \033[1;36m
 WHITE 	= \033[1;37m
 
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -g -fsanitize=address -fno-omit-frame-pointer
+CFLAGS = -Wall -Werror -Wextra -g #-fsanitize=address -fno-omit-frame-pointer
 RM = rm -rf
 
 NAME = minishell
@@ -40,6 +40,7 @@ SRC = 	./srcs/parser/lexer.c \
 		./srcs/utils/utils.c \
 		./srcs/utils/utils2.c \
 		./srcs/utils/utils3.c \
+		./srcs/utils/utils4.c \
 		./srcs/utils/types.c \
 		./srcs/utils/types2.c \
 		./srcs/utils/erro.c \

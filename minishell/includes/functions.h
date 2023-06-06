@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   functions.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 22:10:59 by mariohenriq       #+#    #+#             */
-/*   Updated: 2023/06/02 22:43:35 by mariohenriq      ###   ########.fr       */
+/*   Updated: 2023/06/06 13:29:34 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,10 @@ void		execute_execve(char **args);
 void		execute_builtin_command(char **arguments);
 int			get_builtin_type(char *command);
 char		*ft_strtok(char *str, char delimeter);
-void		redirect_in(t_parsed *temp);
-void		redirect_out(t_parsed *temp);
-void		append(t_parsed *temp);
-void		here_doc(t_parsed *temp);
+void		redirect_in(t_parsed *temp, char *name);
+void		redirect_out(t_parsed *temp, char *name);
+void		append(t_parsed *temp, char *name);
+void		here_doc(t_parsed *temp, char *name);
 void		write_to_pipe(t_parsed **temp, int *pipe_fd, int i);
 void		connect_pipes(t_parsed **temp, int *pipe_fd, int i);
 void		write_process(t_parsed *temp, int pipe_fd);
@@ -97,6 +97,7 @@ int			number_args_env_Var(void);
 void		free_array(char **arr);
 int			handle_error(int error_code, char *custom_message);
 char		*ft_strcpy(char *dest, const char *src);
+int 		ft_strclen(char *str, char c);
 
 //---------Tests-----------------//
 void		lexer_test(void);

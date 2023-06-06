@@ -22,11 +22,22 @@ void	write_to_pipe(t_parsed **temp, int *pipe_fd, int i)
 		dup2(g_minishell.out_file, STDOUT_FILENO);
 		execute_commands(temp[i]);
 		close(g_minishell.out_file);
+		if (i % 2 == 1)
+			close(pipe_fd[0]);
+		else
+			close(pipe_fd[2]);
 	}
 	else if (i % 2 == 1)
+	{
 		write_process(temp[i], pipe_fd[3]);
+		close(pipe_fd[0]);
+	}
 	else if (i % 2 == 0)
+	{
 		write_process(temp[i], pipe_fd[1]);
+		if (i != 0)
+			close(pipe_fd[2]);
+	}
 }
 
 // handler connection in pipes
@@ -88,21 +99,20 @@ void	check_command(t_parsed **temp)
 		pipe_handling(temp);
 	else
 	{
-		if (temp[0]->file == NULL)
-		{
-			execve_or_builtin(temp[0]->args);
-			return ;
-		}
-		else
-		{
-			execute_commands(temp[0]);
-			dup2(g_minishell.out_file, STDOUT_FILENO);
-			close(g_minishell.out_file);
-			dup2(g_minishell.in_file, STDIN_FILENO);
-			close(g_minishell.in_file);
-		}
+		execute_commands(temp[0]);
+		dup2(g_minishell.out_file, STDOUT_FILENO);
+		close(g_minishell.out_file);
+		dup2(g_minishell.in_file, STDIN_FILENO);
+		close(g_minishell.in_file);
+	}
+	while (waitpid(-1, &g_minishell.exit_status, 0) > 0)
+	{
+		if (WIFEXITED(g_minishell.exit_status))
+			g_minishell.exit_status = WEXITSTATUS(g_minishell.exit_status);
+		continue ;
 	}
 }
+
 // ! cat not working
 // ! here doc not working
 

@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 16:12:41 by maricard          #+#    #+#             */
-/*   Updated: 2023/05/30 17:37:49 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/06 13:12:33 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,10 @@ void	print_t_file(t_file *temp, int i)
 		}
 		printf("\n");
 		temp = g_minishell.parsed[i]->file;
+		printf("   t_file name  | ");
 		while (temp)
 		{
-			printf("   t_file name  | [" G "%s" RT "] ", temp->name);
+			printf("[" G "%s" RT "] ", temp->name);
 			temp = temp->next;
 		}
 		printf("\n");

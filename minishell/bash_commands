@@ -1,12 +1,20 @@
--------------------- BASH COMMAND LIST ------------------------------
-|                                                                   |
------------------------- [TESTS] ------------------------------------
-|                                       							|
 ------------------------ [ECHO] -------------------------------------
-| echo test 1> file         | cat file = test                       |
-| echo $?                   | prints exit status of last command    |
-| echo -nnnnnnna ola        | print -> -nnnnnnna ola                |
-| echo - ola                | printf -> - ola,                      |
+| echo -nnnnnnna ola        | prints -> -nnnnnnna ola               |
+| echo - ola                | prints -> - ola,                      |
+---------------------------------------------------------------------
+
+-------------------------- [$?] -------------------------------------
+| echo $HOME$?$HOME         | prints /home/user0/home/user          |
+| echo "$HOME $? $HOME"     | prints /home/user 0 /home/user        | 
+---------------------------------------------------------------------
+
+-------------------------- [VAR] ------------------------------------
+| echo $HOME                | prints /home/user                     |
+| echo $PWD^                | prints /home/user^                    |
+---------------------------------------------------------------------
+
+
+
 
 | << ola                    | open here_doc until <ola> is typed    |
 | exit | exit               | does nothing                          |

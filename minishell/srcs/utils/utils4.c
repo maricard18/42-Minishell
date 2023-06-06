@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipes.c                                            :+:      :+:    :+:   */
+/*   utils4.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/24 11:09:19 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/06 11:05:07 by maricard         ###   ########.fr       */
+/*   Created: 2023/06/06 12:34:57 by maricard          #+#    #+#             */
+/*   Updated: 2023/06/06 12:35:13 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// handler command before the pipe
-void	write_process(t_parsed *temp, int pipe_fd)
+// count the number of characters until the next character c
+int ft_strclen(char *str, char c)
 {
-	dup2(pipe_fd, STDOUT_FILENO);
-	execute_commands(temp);
-	close(pipe_fd);
-}
+	int i;
 
-// handler command after the pipe
-void	read_process(t_parsed *temp, int pipe_fd)
-{
-	dup2(pipe_fd, STDIN_FILENO);
-	execute_commands(temp);
-	close(pipe_fd);
+	i = 0;
+	while (str[i] != c && str[i])
+		i++;
+	return (i);
 }
