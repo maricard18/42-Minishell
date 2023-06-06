@@ -3,20 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 12:20:20 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/06 20:19:06 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/07 00:02:48 by mariohenriq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	exec_here_doc(t_parsed *temp, char *keyword)
+extern t_minishell_state	g_minishell;
+
+// here doc execution
+void	exec_here_doc(char *keyword, int pipe_fd)
 {
 	char	*str;
+	int		i;
 
-	(void)temp;
+	i = 0;
 	while (1)
 	{
 		str = readline("> ");
@@ -31,21 +35,22 @@ void	exec_here_doc(t_parsed *temp, char *keyword)
 			free(str);
 			break ;
 		}
-		free(str);
+		if (i > 0)
+			write(pipe_fd, "\n", 1);
+		write(pipe_fd, str, ft_strlen(str));
+		i++;
 	}
 }
 
 // here doc handler
 void	here_doc(t_parsed *temp, char *keyword)
-{
-	int	pipe_fd[2];
+{	int	pipe_fd[2];
 
 	pipe(pipe_fd);
-	dup2(pipe_fd[1], STDOUT_FILENO);
-	exec_here_doc(temp, keyword);
-	close(pipe_fd[1]);
+	exec_here_doc(keyword, pipe_fd[1]);
 	dup2(pipe_fd[0], STDIN_FILENO);
-	execve_or_builtin(temp->args);
+	if (temp->args[0])
+		execve_or_builtin(temp->args);
 	close(pipe_fd[0]);
 }
 

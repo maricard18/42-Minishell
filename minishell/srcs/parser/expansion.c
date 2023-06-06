@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 18:00:11 by mariohenriq       #+#    #+#             */
-/*   Updated: 2023/06/06 20:26:48 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/06 21:24:24 by mariohenriq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,6 @@ void	search_env_vars(char **str)
 	i = 0;
 	while (str[i])
 	{
-		printf("entrei\n");
 		a = 0;
 		temp = ft_calloc(1, sizeof(char));
 		while (str[i][a])

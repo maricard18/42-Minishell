@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 23:00:53 by filipa            #+#    #+#             */
-/*   Updated: 2023/06/06 18:53:53 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/07 00:01:01 by mariohenriq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ int	main(int argc, char **argv, char **envp)
 		if (check_if_empty(str) == 1)
 			continue ;
 		initialize_shell(str);
-		clean_all(str);
+		//clean_all(str);
 	}
-	rl_clear_history();
+	//rl_clear_history();
 	return(0);
 }
