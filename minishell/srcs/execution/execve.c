@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 10:35:27 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/06 19:01:40 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/06 20:21:35 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	execute_execve(char **args)
 	pid = fork();
 	if (pid == 0)
 	{		
-		execve(full_path, args, NULL);
+		execve(full_path, args, g_minishell.ev);
 		exit(126);
 	}
 	return ;

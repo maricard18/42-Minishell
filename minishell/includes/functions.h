@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 22:10:59 by mariohenriq       #+#    #+#             */
-/*   Updated: 2023/06/06 19:54:10 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/06 20:38:56 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,13 @@ void		lexer(char *str);
 int			skip_quotes(char *str, int i);
 int			count_tokens2(char *str, int i);
 int			store_values2(char *str, int i);
-void		search_env_vars(void);
+void		search_env_vars(char **str);
 char		*ft_char_string(char c);
 void		modify_string(char **str, char *new_str);
 char		*single_quotes(char *input, int *i);
 char		*double_quotes(char **env, char *input, int *i);
 char		*handle_env_variables(char **env, char *str, int *i);
+int			check_unfinished_quotes(char **str);
 
 //--------Tokeniser---------------//
 int			is_whitespace(char c);

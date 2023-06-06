@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 18:00:11 by mariohenriq       #+#    #+#             */
-/*   Updated: 2023/06/06 14:50:10 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/06 20:26:48 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,18 +113,17 @@ char	*check_string(char *str, int *a)
 }
 
 // search for env variables
-void	search_env_vars(void)
+void	search_env_vars(char **str)
 {
 	char	*new_str;
 	char	*temp;
-	char	**str;
 	int		i;
 	int		a;
 
-	str = g_minishell.input;
 	i = 0;
 	while (str[i])
 	{
+		printf("entrei\n");
 		a = 0;
 		temp = ft_calloc(1, sizeof(char));
 		while (str[i][a])
@@ -136,7 +135,7 @@ void	search_env_vars(void)
 		modify_string(&str[i], temp);
 		free(temp);
 		i++;
-		if (ft_strcmp(str[i - 1], "<<") == 0)
+		if (ft_strcmp(str[i - 1], "<<") == 0 && str[i] != NULL)
 			i++;
 	}
 	g_minishell.input = str;

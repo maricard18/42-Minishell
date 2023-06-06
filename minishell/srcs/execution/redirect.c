@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 12:20:20 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/06 14:33:06 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/06 20:19:06 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ void	append(t_parsed *temp, t_file *file)
 			perror("error on dup2()\n");
 			exit(1);
 		}
-		execve_or_builtin(temp->args);
+		if (temp->args[0])
+			execve_or_builtin(temp->args);
 	}
 	close(file_fd);
 }
@@ -94,7 +95,8 @@ void	redirect_out(t_parsed *temp, t_file *file)
 			perror("error on dup2()\n");
 			exit(1);
 		}
-		execve_or_builtin(temp->args);
+		if (temp->args[0])
+			execve_or_builtin(temp->args);
 	}
 	close(file_fd);
 }
@@ -119,7 +121,8 @@ void	redirect_in(t_parsed *temp, t_file *file)
 			perror("error on dup2()\n");
 			exit(1);
 		}
-		execve_or_builtin(temp->args);
+		if (temp->args[0])
+			execve_or_builtin(temp->args);
 	}
 	close(file_fd);
 }
