@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 18:20:40 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/07 13:10:11 by mariohenriq      ###   ########.fr       */
+/*   Updated: 2023/06/07 13:57:58 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,10 @@ char *search_expansions(char **env, char *str)
 	i = 0;
 	while (str[i])
 	{
-		printf("str[%d]: %c\n", i, str[i]);
 		if (str[i] == '$')
 		{
+			i++;
 			temp = ft_strjoin(temp, handle_env_variables(env, str, &i));
-			printf("temp: %s\n", temp);
 		}
 		new_str = ft_strjoin(temp, ft_char_string(str[i]));
 		temp = ft_strdup(new_str);
