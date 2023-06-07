@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 18:00:11 by mariohenriq       #+#    #+#             */
-/*   Updated: 2023/06/07 15:46:32 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/07 18:28:16 by mariohenriq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,6 @@ char	*env_var(char *env, int i)
 // check if $? was enetered
 char	*check_if_exit_status(char *str, int *i)
 {
-	int	a;
-
-	a = 0;
 	if (str[*i] == '?')
 	{
 		(*i)++;

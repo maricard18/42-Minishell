@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: maricard <maricard@student.42.fr>          +#+  +:+       +#+         #
+#    By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 10:28:04 by maricard          #+#    #+#              #
-#    Updated: 2023/06/07 15:01:34 by maricard         ###   ########.fr        #
+#    Updated: 2023/06/07 18:28:40 by mariohenriq      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,9 +63,9 @@ SRC = 	./srcs/parser/lexer.c \
 		./srcs/execution/pipes.c \
 		./srcs/parser/initialize.c \
 		./srcs/parser/pre_syntax.c \
-		./srcs/parser/syntax2.c \
-		./srcs/parser/parser2.c \
-		./srcs/parser/parser_utils2.c \
+		./srcs/parser/syntax.c \
+		./srcs/parser/parser.c \
+		./srcs/parser/parser_utils.c \
 		./srcs/utils/test_lex.c \
 		./srcs/utils/test_utils.c \
 		./srcs/utils/test_pars.c 
