@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   functions.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 22:10:59 by mariohenriq       #+#    #+#             */
-/*   Updated: 2023/06/07 11:38:35 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/07 13:09:02 by mariohenriq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ char		*single_quotes(char *input, int *i);
 char		*double_quotes(char **env, char *input, int *i);
 char		*handle_env_variables(char **env, char *str, int *i);
 int			check_unfinished_quotes(char **str);
+char 		*search_expansions(char **env, char *str);
 
 //--------Tokeniser---------------//
 int			is_whitespace(char c);
@@ -53,7 +54,7 @@ void		check_for_and(char *str, t_token *token);
 void		tokeniser(char **str);
 
 //---------Parser-----------------//
-t_parsed	**parse_commands(int in_file, int out_file, t_token *token);
+void		parse_commands(int in_file, int out_file, t_token *token);
 int			validate_syntax(t_token *my_tokens);
 void		handle_paranthesis(t_token **tokens_list, t_parsed **command);
 void		skip_to_matching_parenthesis(t_token **command_token_list);

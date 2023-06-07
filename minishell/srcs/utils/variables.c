@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   variables.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 10:26:56 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/06 14:38:30 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/07 12:22:05 by mariohenriq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,6 @@ void	minishell_init(char **ev)
 	g_minishell.ev = dup_env_var(ev);
 	g_minishell.paths = ft_split(getenv("PATH"), ':');
 	g_minishell.exit_status = 0;
+	g_minishell.token = NULL;
+	g_minishell.parsed = NULL;
 }

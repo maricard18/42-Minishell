@@ -6,7 +6,7 @@
 /*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 12:20:20 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/07 00:02:48 by mariohenriq      ###   ########.fr       */
+/*   Updated: 2023/06/07 13:08:41 by mariohenriq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,10 @@
 extern t_minishell_state	g_minishell;
 
 // here doc execution
-void	exec_here_doc(char *keyword, int pipe_fd)
+void	exec_here_doc(char **env, char *keyword, int pipe_fd)
 {
 	char	*str;
-	int		i;
 
-	i = 0;
 	while (1)
 	{
 		str = readline("> ");
@@ -35,19 +33,22 @@ void	exec_here_doc(char *keyword, int pipe_fd)
 			free(str);
 			break ;
 		}
-		if (i > 0)
-			write(pipe_fd, "\n", 1);
+		str = search_expansions(env, str);
 		write(pipe_fd, str, ft_strlen(str));
-		i++;
+		write(pipe_fd, "\n", 1);
 	}
 }
 
 // here doc handler
 void	here_doc(t_parsed *temp, char *keyword)
-{	int	pipe_fd[2];
+{	
+	int	pipe_fd[2];
+	char	**env;
 
+	env = g_minishell.ev;
 	pipe(pipe_fd);
-	exec_here_doc(keyword, pipe_fd[1]);
+	exec_here_doc(env, keyword, pipe_fd[1]);
+	close(pipe_fd[1]);
 	dup2(pipe_fd[0], STDIN_FILENO);
 	if (temp->args[0])
 		execve_or_builtin(temp->args);

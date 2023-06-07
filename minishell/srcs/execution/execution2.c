@@ -3,14 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   execution2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 18:20:40 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/06 19:08:18 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/07 13:10:11 by mariohenriq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern t_minishell_state	g_minishell;
+
+char *search_expansions(char **env, char *str)
+{
+	char 	*temp;
+	char	*new_str;
+	int		i;
+	
+	temp = ft_calloc(1, sizeof(char));
+	i = 0;
+	while (str[i])
+	{
+		printf("str[%d]: %c\n", i, str[i]);
+		if (str[i] == '$')
+		{
+			temp = ft_strjoin(temp, handle_env_variables(env, str, &i));
+			printf("temp: %s\n", temp);
+		}
+		new_str = ft_strjoin(temp, ft_char_string(str[i]));
+		temp = ft_strdup(new_str);
+		free(new_str);
+		i++;
+	}
+	return (temp);
+}
 
 // function to close pipes
 void	close_pipes(int *pipe_fd)

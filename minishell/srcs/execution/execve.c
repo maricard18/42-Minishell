@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 10:35:27 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/06 20:21:35 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/07 12:43:35 by mariohenriq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	execute_execve(char **args)
 	signal(SIGINT, sigint_handler);
 	pid = fork();
 	if (pid == 0)
-	{		
+	{
 		execve(full_path, args, g_minishell.ev);
 		exit(126);
 	}

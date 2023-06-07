@@ -89,9 +89,6 @@ void	check_command(t_parsed **temp)
 	signal(SIGINT, &ctrl_c);
 }
 
-// ! cat not working
-// ! here doc not working
-
 // execute the input given
 void	execution(void)
 {

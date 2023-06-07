@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 11:05:17 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/07 11:39:11 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/07 12:10:33 by mariohenriq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	add_argument(t_token **token, t_parsed **current)
 }
 
 // create command list
-t_parsed	**parse_commands(int in_file, int out_file, t_token *token)
+void	parse_commands(int in_file, int out_file, t_token *token)
 {
 	t_parsed	**list;
 	t_parsed	*current;
@@ -97,5 +97,4 @@ t_parsed	**parse_commands(int in_file, int out_file, t_token *token)
 		}
 	}
 	g_minishell.parsed = list;
-	return (list);
 }
