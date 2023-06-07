@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 22:10:59 by mariohenriq       #+#    #+#             */
-/*   Updated: 2023/06/06 20:38:56 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/07 11:38:35 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,13 @@ void		check_for_and(char *str, t_token *token);
 void		tokeniser(char **str);
 
 //---------Parser-----------------//
-t_parsed	**parse_commands(int in_file, int out_file,
-				t_token *token_sequence);
+t_parsed	**parse_commands(int in_file, int out_file, t_token *token);
 int			validate_syntax(t_token *my_tokens);
 void		handle_paranthesis(t_token **tokens_list, t_parsed **command);
 void		skip_to_matching_parenthesis(t_token **command_token_list);
 void		handle_paranthesis(t_token **tokens_list, t_parsed **command);
 void		add_cmd_to_list(t_parsed *current_command, t_parsed **command_list);
-t_parsed	*allocate_and_init_command(int in_file, int out_file);
+t_parsed	*init_command(int in_file, int out_file);
 int			count_and_or_tokens(t_token *command_token_list);
 void		get_next_token(t_token *command_table);
 int			token_counter(char **str);

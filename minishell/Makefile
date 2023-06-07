@@ -6,7 +6,7 @@
 #    By: maricard <maricard@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 10:28:04 by maricard          #+#    #+#              #
-#    Updated: 2023/06/06 20:34:22 by maricard         ###   ########.fr        #
+#    Updated: 2023/06/07 10:51:16 by maricard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,9 +63,9 @@ SRC = 	./srcs/parser/lexer.c \
 		./srcs/execution/pipes.c \
 		./srcs/parser/initialize.c \
 		./srcs/parser/pre_syntax.c \
-		./srcs/parser/syntax.c \
-		./srcs/parser/parser.c \
-		./srcs/parser/parser_utils.c \
+		./srcs/parser/syntax2.c \
+		./srcs/parser/parser2.c \
+		./srcs/parser/parser_utils2.c \
 		./srcs/utils/test_lex.c \
 		./srcs/utils/test_utils.c \
 		./srcs/utils/test_pars.c 
