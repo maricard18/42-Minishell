@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 10:45:38 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/07 12:29:00 by mariohenriq      ###   ########.fr       */
+/*   Updated: 2023/06/07 14:28:47 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,12 @@ extern t_minishell_state	g_minishell;
 // clean function for parser
 void	clean_parser(t_parsed **parsed)
 {
+	t_file *tmp;
 	int	i;
 	int	j;
 
 	i = 0;
-	while (parsed[i])
+	while (parsed && parsed[i])
 	{
 		j = 0;
 		if (parsed[i]->cmd)
@@ -32,16 +33,19 @@ void	clean_parser(t_parsed **parsed)
 			j++;
 		}
 		free(parsed[i]->args);
+		tmp = parsed[i]->file;
 		while (parsed[i]->file != NULL)
 		{
 			free(parsed[i]->file->name);
+			tmp = parsed[i]->file->next;
 			free(parsed[i]->file);
-			parsed[i]->file = parsed[i]->file->next;
+			parsed[i]->file = tmp;
 		}
 		free(parsed[i]);
 		i++;
 	}
 	free(parsed);
+	g_minishell.parsed = NULL;
 }
 
 // clean function for lexer and tokanizer
@@ -67,6 +71,7 @@ void	clean_lexer(t_token *token)
 		token = tmp;
 		i++;
 	}
+	g_minishell.token = NULL;
 }
 
 // main clean function

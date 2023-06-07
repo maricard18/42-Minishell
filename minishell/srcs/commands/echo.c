@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 12:54:24 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/06 14:36:02 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/07 15:51:18 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,6 @@ void	echo_command(char **input)
 			write(STDOUT_FILENO, " ", 1);
 		i++;
 	}
-	if (flag == 0 || g_minishell.flag == 0)
+	if (flag == 0 || g_minishell.flag == 0 || input[1] == NULL)
 		write(STDOUT_FILENO, "\n", 1);
 }

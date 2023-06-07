@@ -14,9 +14,6 @@
 
 extern t_minishell_state	g_minishell;
 
-# define READ_END 0
-# define WRITE_END 1
-
 // handler execuntion to pipes
 void	write_to_pipe(t_parsed **temp, int **pipe_fd, int i)
 {
@@ -25,6 +22,8 @@ void	write_to_pipe(t_parsed **temp, int **pipe_fd, int i)
 		dup2(g_minishell.out_file, STDOUT_FILENO);
 		execute_commands(temp[i]);
 		close(g_minishell.out_file);
+		dup2(g_minishell.out, STDOUT_FILENO);
+		close(g_minishell.out);
 		close(pipe_fd[i - 1][READ_END]);
 		return ;
 	}
@@ -97,6 +96,7 @@ void	execution(void)
 	temp = g_minishell.parsed;
 	g_minishell.in_file = dup(STDIN_FILENO);
 	g_minishell.out_file = dup(STDOUT_FILENO);
+	g_minishell.out = dup(STDOUT_FILENO);
 	if (ft_strlen(g_minishell.str) == 0)
 		return ;
 	check_command(temp);

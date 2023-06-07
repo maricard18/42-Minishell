@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 11:05:17 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/07 12:10:33 by mariohenriq      ###   ########.fr       */
+/*   Updated: 2023/06/07 14:05:12 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	process_redirection(t_token **token, t_parsed **current)
 	file->next = NULL;
 	file->type = (*token)->type;
 	(*token) = (*token)->next;
-	file->name = (*token)->value;
+	file->name = ft_strdup((*token)->value);
 	if (!tmp_list)
 		(*current)->file = file;
 	else

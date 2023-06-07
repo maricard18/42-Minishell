@@ -6,12 +6,15 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:01:27 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/06 15:16:28 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/07 15:31:02 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
+
+# define READ_END 0
+# define WRITE_END 1
 
 //--------enums--------//
 enum	tokens
@@ -96,6 +99,7 @@ typedef struct s_minishell_state
 	int						opening_prompt;
 	int						in_file;
 	int						out_file;
+	int						out;
 	int						n_tokens;
 	int						n_tokens2;
 	int						index;

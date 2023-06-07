@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 18:00:11 by mariohenriq       #+#    #+#             */
-/*   Updated: 2023/06/07 13:01:34 by mariohenriq      ###   ########.fr       */
+/*   Updated: 2023/06/07 15:46:32 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ char	*env_var(char *env, int i)
 // check if $? was enetered
 char	*check_if_exit_status(char *str, int *i)
 {
+	int	a;
+
+	a = 0;
 	if (str[*i] == '?')
 	{
 		(*i)++;
@@ -54,7 +57,12 @@ char	*check_if_exit_status(char *str, int *i)
 	}
 	else
 	{
-		*i = ft_strlen(str);
+		while (str[*i])
+		{
+			if (str[*i] == '$')
+				break;
+			(*i)++;
+		}
 		return (ft_strdup(""));
 	}
 }

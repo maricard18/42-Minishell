@@ -6,7 +6,7 @@
 #    By: maricard <maricard@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 10:28:04 by maricard          #+#    #+#              #
-#    Updated: 2023/06/07 10:51:16 by maricard         ###   ########.fr        #
+#    Updated: 2023/06/07 15:01:34 by maricard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,7 +76,7 @@ all: $(NAME)
 
 $(LIBFT):
 	@echo "[$(CYAN)Compiling$(RESET)] $(GREEN)libft$(RESET)"
-	@make -s -C ./libft
+	@$(MAKE) -s -C ./libft
 
 $(NAME): $(SRC-OBJ) $(LIBFT)
 	@echo "[$(CYAN)Linking$(RESET)] $(GREEN)all$(RESET)"

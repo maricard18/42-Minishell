@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 18:20:40 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/07 13:57:58 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/07 13:59:26 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 extern t_minishell_state	g_minishell;
 
+// function to handle env variables inside here doc
 char *search_expansions(char **env, char *str)
 {
 	char 	*temp;
