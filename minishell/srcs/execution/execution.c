@@ -20,7 +20,7 @@ void	write_to_pipe(t_parsed **temp, int **pipe_fd, int i)
 	if (temp[i + 1] == NULL)
 	{
 		dup2(g_minishell.out_file, STDOUT_FILENO);
-		execute_commands(temp[i]);
+		execute_commands(temp[i], temp[i]->file);
 		close(g_minishell.out_file);
 		dup2(g_minishell.out, STDOUT_FILENO);
 		close(g_minishell.out);
@@ -30,7 +30,7 @@ void	write_to_pipe(t_parsed **temp, int **pipe_fd, int i)
 	else
 	{
 		dup2(pipe_fd[i][WRITE_END], STDOUT_FILENO);
-		execute_commands(temp[i]);
+		execute_commands(temp[i], temp[i]->file);
 		close(pipe_fd[i][WRITE_END]);
 	}
 	if (i > 0)
@@ -71,19 +71,21 @@ void	pipe_handling(t_parsed **temp)
 void	check_command(t_parsed **temp)
 {
 	if (temp[1] != NULL)
+	{
 		pipe_handling(temp);
+	}
 	else
 	{
-		execute_commands(temp[0]);
-		dup2(g_minishell.out_file, STDOUT_FILENO);
-		close(g_minishell.out_file);
-		dup2(g_minishell.in_file, STDIN_FILENO);
-		close(g_minishell.in_file);
+		execute_commands(temp[0], temp[0]->file);
 	}
 	while (waitpid(0, &g_minishell.exit_status, 0) > 0)
+	{
 		continue ;
+	}
 	if (WIFEXITED(g_minishell.exit_status))
-			g_minishell.exit_status = WEXITSTATUS(g_minishell.exit_status);
+	{
+		g_minishell.exit_status = WEXITSTATUS(g_minishell.exit_status);
+	}
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, &ctrl_c);
 }

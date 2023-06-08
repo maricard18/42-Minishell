@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 18:20:40 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/07 13:59:26 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/08 16:10:06 by mariohenriq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,25 +86,25 @@ void	execve_or_builtin(char **args)
 }
 
 // handler for execution in pipes
-void	execute_commands(t_parsed *temp)
+void	execute_commands(t_parsed *temp, t_file *file)
 {
-	t_file	*file;
-
-	file = temp->file;
 	if (file == NULL)
 	{
 		execve_or_builtin(temp->args);
+		return_fds();
 	}
 	while (file != NULL)
 	{
 		if (file->type == GREATER)
-			redirect_in(temp, file);
+			redirect_in(temp, &file);
 		else if (file->type == SMALLER)
-			redirect_out(temp, file);
+			redirect_out(temp, &file);
 		else if (file->type == APPEND)
-			append(temp, file);
+			append(temp, &file);
 		else if (file->type == HERE_DOC)
-			here_doc(temp, file->name);
+			here_doc(temp, &file);
 		file = file->next;
+		if (file == NULL)
+			return_fds();
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 22:10:59 by mariohenriq       #+#    #+#             */
-/*   Updated: 2023/06/07 13:09:02 by mariohenriq      ###   ########.fr       */
+/*   Updated: 2023/06/08 16:10:18 by mariohenriq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,17 +71,20 @@ void		execute_execve(char **args);
 void		execute_builtin_command(char **arguments);
 int			get_builtin_type(char *command);
 char		*ft_strtok(char *str, char delimeter);
-void		redirect_in(t_parsed *temp, t_file *file);
-void		redirect_out(t_parsed *temp, t_file *file);
-void		append(t_parsed *temp, t_file *file);
-void		here_doc(t_parsed *temp, char *name);
+void		redirect_in(t_parsed *temp, t_file **file);
+void		redirect_out(t_parsed *temp, t_file **file);
+void		append(t_parsed *temp, t_file **file);
+void		here_doc(t_parsed *temp, t_file **file);
 void		write_process(t_parsed *temp, int pipe_fd);
 void		read_process(t_parsed *temp, int pipe_fd);
-void		execute_commands(t_parsed *temp);
+void		execute_commands(t_parsed *temp, t_file *file);
 void		execve_or_builtin(char **args);
 char		*ft_strjoin2(char const *s1, char const *s2);
 int			**open_pipes(void);
 void		close_pipes(int *pipe_fd);
+void		return_fds(void);
+int			check_next_node(t_file **file);
+void		write_here_doc(int pipe_fd, char *str);
 
 //--------Commands---------------//
 void		cd_command(char **input);
