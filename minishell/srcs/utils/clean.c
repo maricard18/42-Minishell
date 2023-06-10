@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 10:45:38 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/07 14:28:47 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/10 20:22:18 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,49 @@
 
 extern t_minishell_state	g_minishell;
 
+void	clean_g_minishell()
+{
+	int	i;
+	
+	i = 0;
+	while (g_minishell.input[i])
+	{
+		free(g_minishell.input[i]);
+		i++;
+	}
+	free(g_minishell.input);
+	g_minishell.input = NULL;
+}
+
+// free open pipes previous allocations
+void	free_open_pipes(int **pipe)
+{
+	int	i;
+
+	i = 0;
+	while (pipe[i])
+	{
+		free(pipe[i]);
+		i++;
+	}
+	free(pipe);
+}
+
 // clean function for parser
 void	clean_parser(t_parsed **parsed)
 {
-	t_file *tmp;
-	int	i;
-	int	j;
+	t_file	*tmp;
+	int		i;
+	int		j;
 
-	i = 0;
-	while (parsed && parsed[i])
+	i = -1;
+	while (parsed && parsed[++i])
 	{
-		j = 0;
+		j = -1;
 		if (parsed[i]->cmd)
 			free(parsed[i]->cmd);
-		while (parsed[i]->args[j])
-		{
+		while (parsed[i]->args[++j])
 			free(parsed[i]->args[j]);
-			j++;
-		}
 		free(parsed[i]->args);
 		tmp = parsed[i]->file;
 		while (parsed[i]->file != NULL)
@@ -42,7 +67,6 @@ void	clean_parser(t_parsed **parsed)
 			parsed[i]->file = tmp;
 		}
 		free(parsed[i]);
-		i++;
 	}
 	free(parsed);
 	g_minishell.parsed = NULL;
@@ -58,13 +82,6 @@ void	clean_lexer(t_token *token)
 	i = 0;
 	while (i < g_minishell.n_tokens)
 	{
-		free(g_minishell.input[i]);
-		i++;
-	}
-	free(g_minishell.input);
-	i = 0;
-	while (i < g_minishell.n_tokens)
-	{
 		free(token->value);
 		tmp = token->next;
 		free(token);
@@ -77,17 +94,12 @@ void	clean_lexer(t_token *token)
 // main clean function
 void	clean_all(char *str)
 {
-	char		**temp;
-	t_token		*token;
-	t_parsed	**parsed;
-
-	temp = g_minishell.input;
-	token = g_minishell.token;
-	parsed = g_minishell.parsed;
 	if (str)
 		free(str);
-	if (temp)
-		clean_lexer(token);
-	if (parsed)
-		clean_parser(parsed);
+	if (g_minishell.input)
+		clean_g_minishell();
+	if (g_minishell.token)
+		clean_lexer(g_minishell.token);
+	if (g_minishell.parsed)
+		clean_parser(g_minishell.parsed);
 }

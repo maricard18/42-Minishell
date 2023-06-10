@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 20:24:44 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/06 20:40:20 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/10 19:08:51 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	check_quotes(char *str, int *i, char c)
 	}
 	else
 	{
-		printf("error: unifinished quotes\n");
+		print_error("error: unifinished quotes\n", NULL, 127);
 		g_minishell.exit_status = 127;
 		return (1);
 	}
@@ -34,8 +34,8 @@ int	check_quotes(char *str, int *i, char c)
 // check if quotes are unfinished
 int	check_unfinished_quotes(char **str)
 {
-	int i;
-	int a;
+	int	i;
+	int	a;
 
 	i = 0;
 	while (str[i])
@@ -53,7 +53,8 @@ int	check_unfinished_quotes(char **str)
 				if (check_quotes(str[i], &a, '"') == 1)
 					return (1);
 			}
-			a++;
+			else
+				a++;
 		}
 		i++;
 	}

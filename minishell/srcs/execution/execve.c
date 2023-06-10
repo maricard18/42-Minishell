@@ -3,19 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 10:35:27 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/07 12:43:35 by mariohenriq      ###   ########.fr       */
+/*   Updated: 2023/06/10 19:45:13 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	sigint_handler(int signum)
+extern t_minishell_state	g_minishell;
+
+void	execute(char *full_path, char **args)
 {
-	(void)signum;
-	printf("\n");
+	int	pid;
+
+	pid = fork();
+	if (pid == 0)
+	{
+		execve(full_path, args, g_minishell.ev);
+		print_error(args[0], ": Permission denied\n", 126);
+		exit(126);
+	}
+	return ;
 }
 
 // runs trough the string until it finds a delimeter
@@ -72,31 +82,36 @@ char	*search_path(char *arg, char *path)
 		}
 	}
 	free(command);
-	printf("%s : command not found\n", arg);
-	g_minishell.exit_status = 127;
+	print_error(arg, ": No such file or directory\n", 127);
 	return (NULL);
 }
 
 // execve handler
 void	execute_execve(char **args)
 {
-	int		pid;
-	char	*full_path;
+	char	*full_path = NULL;
 	char	*path;
 
-	path = getenv("PATH");
-	if (args[0][0] != '/')
-		full_path = search_path(args[0], path);
-	else
-		full_path = args[0];
-	if (full_path == NULL)
-		return ;
-	signal(SIGINT, sigint_handler);
-	pid = fork();
-	if (pid == 0)
+	path = my_get_env(g_minishell.ev, "PATH");
+	if (path == NULL)
 	{
-		execve(full_path, args, g_minishell.ev);
-		exit(126);
+		print_error(args[0], ": No such file or directory\n", 127);
+		return ;
 	}
-	return ;
+	signal(SIGINT, sigint_handler);
+	if (check_if_path(args[0]) == 0)
+	{
+		full_path = search_path(args[0], path);
+		if (full_path == NULL)
+		{
+			free(path);
+			return ;
+		}
+		else
+			execute(full_path, args);
+		free(full_path);
+	}
+	else
+		execute(args[0], args);
+	free(path);
 }

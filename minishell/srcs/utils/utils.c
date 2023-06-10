@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:42:53 by filipa            #+#    #+#             */
-/*   Updated: 2023/06/06 14:43:26 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/10 20:24:00 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,18 @@ char	*get_env(char *var_name)
 
 	i = -1;
 	j = 0;
-	env_str = ft_strjoin(var_name, "=");
+	env_str = ft_strjoin2(var_name, "=");
 	while (g_minishell.ev[++i])
 	{
 		if (!ft_strncmp(g_minishell.ev[i], env_str, ft_strlen(env_str)))
 		{
 			while (g_minishell.ev[i][j] != '=')
 				j++;
+			free(env_str);
 			return (ft_strdup(&g_minishell.ev[i][j + 1]));
 		}
 	}
+	free(env_str);
 	return (ft_calloc(sizeof(char *), 1));
 }
 

@@ -3,25 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   functions.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 22:10:59 by mariohenriq       #+#    #+#             */
-/*   Updated: 2023/06/08 16:10:18 by mariohenriq      ###   ########.fr       */
+/*   Updated: 2023/06/10 19:59:02 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FUNCTIONS_H
 # define FUNCTIONS_H
 
+# include "structs.h"
+
 //------------Main----------------//
 void		minishell_init(char **env);
 void		initialize_shell(char *str);
 void		clean_all(char *str);
+void		clean_the_mess();
+void		free_open_pipes(int **pipe);
 
 //----------Signals---------------//
 void		ctrl_c(int signal);
 void		ctrl_d(char *str);
-//void		rl_replace_line(const char *text, int clear_undo);
 
 //-----------Lexer----------------//
 void		lexer(char *str);
@@ -35,7 +38,7 @@ char		*single_quotes(char *input, int *i);
 char		*double_quotes(char **env, char *input, int *i);
 char		*handle_env_variables(char **env, char *str, int *i);
 int			check_unfinished_quotes(char **str);
-char 		*search_expansions(char **env, char *str);
+char		*search_expansions(char **env, char *str);
 
 //--------Tokeniser---------------//
 int			is_whitespace(char c);
@@ -81,10 +84,13 @@ void		execute_commands(t_parsed *temp, t_file *file);
 void		execve_or_builtin(char **args);
 char		*ft_strjoin2(char const *s1, char const *s2);
 int			**open_pipes(void);
-void		close_pipes(int *pipe_fd);
 void		return_fds(void);
 int			check_next_node(t_file **file);
 void		write_here_doc(int pipe_fd, char *str);
+char		*env_var(char *env, int i);
+char		*my_get_env(char **env, char *str);
+int			check_if_path(char *str);
+void		sigint_handler(int signum);
 
 //--------Commands---------------//
 void		cd_command(char **input);
@@ -101,7 +107,8 @@ int			number_args_env_var(void);
 void		free_array(char **arr);
 int			handle_error(int error_code, char *custom_message);
 char		*ft_strcpy(char *dest, const char *src);
-int 		ft_strclen(char *str, char c);
+int			ft_strclen(char *str, char c);
+void		print_error(char *arg, char *message, int exit_status);
 
 //---------Tests-----------------//
 void		lexer_test(void);

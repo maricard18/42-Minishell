@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 11:51:04 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/06 14:49:30 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/10 17:13:36 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ int	is_string(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '|' || str[i] == '>' || str[i] == '<'
-			|| str[i] == '(' || str[i] == ')' || str[i] == '&')
+		if (str[i] == '|' || str[i] == '>' || str[i] == '<' || str[i] == '('
+			|| str[i] == ')' || str[i] == '&')
 		{
 			if (str[i] == '&' && str[i + 1] != '&')
 				return (1);

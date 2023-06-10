@@ -40,7 +40,7 @@ void	write_to_pipe(t_parsed **temp, int **pipe_fd, int i)
 // handler connection in pipes
 void	connect_pipes(t_parsed **temp, int **pipe_fd, int i)
 {
-	(void) temp;
+	(void)temp;
 	if (temp[i] == NULL)
 	{
 		dup2(g_minishell.in_file, STDIN_FILENO);
@@ -55,7 +55,7 @@ void	connect_pipes(t_parsed **temp, int **pipe_fd, int i)
 void	pipe_handling(t_parsed **temp)
 {
 	int	i;
-	int **pipe_fd;
+	int	**pipe_fd;
 
 	i = 0;
 	pipe_fd = open_pipes();
@@ -65,13 +65,16 @@ void	pipe_handling(t_parsed **temp)
 		i++;
 		connect_pipes(temp, pipe_fd, i);
 	}
+	free_open_pipes(pipe_fd);
 }
 
 // check what function to execute
 void	check_command(t_parsed **temp)
 {
+	g_minishell.pipe_flag = 0;
 	if (temp[1] != NULL)
 	{
+		g_minishell.pipe_flag = 1;
 		pipe_handling(temp);
 	}
 	else

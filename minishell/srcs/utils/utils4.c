@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   utils4.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 12:34:57 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/08 15:23:55 by mariohenriq      ###   ########.fr       */
+/*   Updated: 2023/06/10 17:13:28 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// signal handler inside execve
+void	sigint_handler(int signum)
+{
+	(void)signum;
+	printf("\n");
+}
 
 // write to pipe in here doc
 void	write_here_doc(int pipe_fd, char *str)
@@ -20,7 +27,7 @@ void	write_here_doc(int pipe_fd, char *str)
 }
 
 // check if the next node is a here doc
-int		check_next_node(t_file **file)
+int	check_next_node(t_file **file)
 {
 	if ((*file)->next == NULL || (*file)->next->type != HERE_DOC)
 	{
@@ -34,7 +41,7 @@ int		check_next_node(t_file **file)
 }
 
 // count the number of characters until the next character c
-int		ft_strclen(char *str, char c)
+int	ft_strclen(char *str, char c)
 {
 	int	i;
 

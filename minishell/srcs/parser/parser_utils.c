@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/10 17:37:25 by maricard          #+#    #+#             */
+/*   Updated: 2023/06/10 19:11:00 by maricard         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 // alocate and initialize command
-t_parsed *init_command(int in_file, int out_file)
+t_parsed	*init_command(int in_file, int out_file)
 {
 	t_parsed	*command;
 
@@ -14,17 +26,16 @@ t_parsed *init_command(int in_file, int out_file)
 	command->next = NULL;
 	command->file = NULL;
 	command->args = ft_calloc(2, sizeof(char *));
-	command->paranthesis = NULL;
 	return (command);
 }
 
-// create a new array in case of pipe 
-void add_cmd_to_list(t_parsed *current_command, t_parsed **list)
+// create a new array in case of pipe
+void	add_cmd_to_list(t_parsed *current_command, t_parsed **list)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while (list[i])	
+	while (list[i])
 		i++;
 	list[i] = current_command;
 	list[i + 1] = NULL;

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+         #
+#    By: maricard <maricard@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 10:28:04 by maricard          #+#    #+#              #
-#    Updated: 2023/06/07 18:28:40 by mariohenriq      ###   ########.fr        #
+#    Updated: 2023/06/10 20:16:26 by maricard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ CFLAGS = -Wall -Werror -Wextra
 RM = rm -rf
 
 ifdef DEBUG
-	CFLAGS += -g -fsanitize=address -fno-omit-frame-pointer
+	CFLAGS += -g -fsanitize=address
 endif
 
 NAME = minishell
@@ -39,12 +39,14 @@ SRC = 	./srcs/parser/lexer.c \
 		./srcs/parser/expansion2.c \
 		./srcs/parser/tokeniser.c \
 		./srcs/utils/clean.c \
+		./srcs/utils/clean2.c \
 		./srcs/utils/signal.c \
 		./srcs/utils/variables.c \
 		./srcs/utils/utils.c \
 		./srcs/utils/utils2.c \
 		./srcs/utils/utils3.c \
 		./srcs/utils/utils4.c \
+		./srcs/utils/utils5.c \
 		./srcs/utils/types.c \
 		./srcs/utils/types2.c \
 		./srcs/utils/erro.c \

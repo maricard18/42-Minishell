@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   syntax2.c                                          :+:      :+:    :+:   */
+/*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:09:49 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/07 10:57:01 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/10 17:38:01 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	validate_redirection_syntax(t_token *my_tokens)
 		{
 			if (!tmp_tokens->next || tmp_tokens->next->type != STRING)
 				return (handle_error(SYNTAX_ERROR,
-						"Missing filename after redirection"));
+										"Missing filename after redirection"));
 		}
 		tmp_tokens = tmp_tokens->next;
 	}
@@ -44,7 +44,7 @@ int	validate_pipe_syntax(t_token *my_tokens)
 				return (handle_error(SYNTAX_ERROR, tmp_tokens->value));
 			else if (!tmp_tokens->next)
 				return (handle_error(SYNTAX_ERROR,
-						"Incomplete command after operator"));
+										"Incomplete command after operator"));
 		}
 		tmp_tokens = tmp_tokens->next;
 	}
@@ -93,6 +93,6 @@ int	validate_syntax(t_token *my_tokens)
 		handle_error(SYNTAX_ERROR, "Syntax error");
 	}
 	if (syntax_error)
-		return (-1); // Retorna um valor indicando erro de sintaxe
+		return (-1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 14:32:36 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/06 20:10:25 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/10 12:08:21 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,5 @@ void	execute_builtin_command(char **arguments)
 	if (type == UNSET)
 		unset_command(arguments);
 	if (type == EXPORT)
-		exit_command(arguments);
+		export_command(arguments);
 }

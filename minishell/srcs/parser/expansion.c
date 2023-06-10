@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 18:00:11 by mariohenriq       #+#    #+#             */
-/*   Updated: 2023/06/07 18:28:16 by mariohenriq      ###   ########.fr       */
+/*   Updated: 2023/06/10 17:14:29 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,9 @@ char	*check_if_exit_status(char *str, int *i)
 		while (str[*i])
 		{
 			if (str[*i] == '$')
-				break;
+				break ;
+			else if (str[*i] == '"' || str[*i] == '\'')
+				break ;
 			(*i)++;
 		}
 		return (ft_strdup(""));
@@ -122,6 +124,7 @@ void	search_env_vars(char **str)
 {
 	char	*new_str;
 	char	*temp;
+	char	*check_str;
 	int		i;
 	int		a;
 
@@ -132,8 +135,10 @@ void	search_env_vars(char **str)
 		temp = ft_calloc(1, sizeof(char));
 		while (str[i][a])
 		{
-			new_str = ft_strjoin(temp, check_string(str[i], &a));
+			check_str = check_string(str[i], &a);
+			new_str = ft_strjoin(temp, check_str);
 			temp = ft_strdup(new_str);
+			free(check_str);
 			free(new_str);
 		}
 		modify_string(&str[i], temp);

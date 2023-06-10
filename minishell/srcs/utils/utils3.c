@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 16:09:10 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/06 19:45:12 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/10 19:16:58 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ char	*ft_strjoin2(char const *s1, char const *s2)
 	char	*str;
 
 	if (!s1)
-		return (0);
+		return (ft_strdup(s2));
 	i = ft_strlen(s1);
 	a = ft_strlen(s2);
 	str = malloc((a + i) * sizeof(char) + 1);
@@ -93,18 +93,3 @@ char	*ft_strjoin2(char const *s1, char const *s2)
 	str[a] = '\0';
 	return (str);
 }
-
-// void get_next_token(t_token *command_table)
-// {
-//     t_token *tmp_command_table;
-//     t_token *new_tokens;
-//     char *input;
-
-//     tmp_command_table = command_table;
-//     while (tmp_command_table->next)
-//         tmp_command_table = tmp_command_table->next;
-//     input = readline("> ");
-//     new_tokens = identificar_agrupar_tokens(input);
-//     new_tokens->prev = tmp_command_table;
-//     tmp_command_table->next = new_tokens;
-// }

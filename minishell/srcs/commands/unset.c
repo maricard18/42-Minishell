@@ -1,6 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   unset.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/10 17:35:48 by maricard          #+#    #+#             */
+/*   Updated: 2023/06/10 17:36:55 by maricard         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-void	remove_env_var(char *data)//remove uma variável de ambiente
+// remove env var
+void	remove_env_var(char *data)
 {
 	int		i;
 	int		j;
@@ -8,32 +21,33 @@ void	remove_env_var(char *data)//remove uma variável de ambiente
 
 	i = 0;
 	j = 0;
-	new_env = ft_calloc(sizeof(char *), number_args_env_var() + 1);//aloca memória para um array de strings com o número de variáveis de ambiente + 1
+	new_env = ft_calloc(sizeof(char *), number_args_env_var() + 1);
 	while (g_minishell.ev[i])
 	{
-		if (ft_strncmp(g_minishell.ev[i], data, ft_strlen(data)))//se a variável de ambiente não for igual à variável a remover
+		if (ft_strncmp(g_minishell.ev[i], data, ft_strlen(data)))
 		{
-			new_env[j] = ft_strdup(g_minishell.ev[i]);//copia a variável de ambiente para o novo array
+			new_env[j] = ft_strdup(g_minishell.ev[i]);
 			j++;
 		}
 		i++;
 	}
-	new_env[j] = 0;//termina o array com NULL
-	free_array(g_minishell.ev);//liberta a memória alocada para o array de variáveis de ambiente
-	g_minishell.ev = new_env;//atualiza o array de variáveis de ambiente
+	new_env[j] = 0;
+	free_array(g_minishell.ev);
+	g_minishell.ev = new_env;
 }
 
-void	unset_command(char **input)//emover variáveis de ambiente no shell
+// remove env vars
+void	unset_command(char **input)
 {
-	char	*data;
+	char    *data;
 
-	input++;//avança para o primeiro argumento
+	input++;
 	while (*input)
 	{
-		data = ft_strjoin(*input, "=");//cria uma string com o argumento e o =
-		remove_env_var(data);//remove a variável de ambiente
+		data = ft_strjoin2(*input, "=");
+		remove_env_var(data);
 		input++;
 	}
 	free(data);
-	update_path_directories();//atualiza os caminhos
+	update_path_directories();
 }

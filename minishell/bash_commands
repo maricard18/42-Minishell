@@ -1,25 +1,38 @@
 ------------------------ [ECHO] -------------------------------------
-| echo -nnnnnnna ola        | prints -> -nnnnnnna ola               |
-| echo - ola                | prints -> - ola,                      |
+| echo -nnnnnnna ola        | prints -nnnnnnna ola                  |
+| echo - ola                | prints - ola,                         |
 ---------------------------------------------------------------------
 
--------------------------- [$?] -------------------------------------
+------------------------- [$?] --------------------------------------
 | echo $HOME$?$HOME         | prints /home/user0/home/user          |
 | echo "$HOME $? $HOME"     | prints /home/user 0 /home/user        | 
+| echo $HOME$?$HOMA         | prints /home/user0                    |
 ---------------------------------------------------------------------
 
 -------------------------- [VAR] ------------------------------------
 | echo $HOME                | prints /home/user                     |
 | echo $PWD^                | prints /home/user^                    |
+| echo $PWD$HOME            | prints the 2 env vars 			    |
 ---------------------------------------------------------------------
 
+---------------------- [<HERE DOC] -----------------------------------
+| $PWD as a keyword         | should not expand                     |
+| $PWD inside here_doc      | should expand                         |
+|                  same tests as VAR & $? 			                |
+|		 try quotes and double quotes too with env vars             |
+---------------------------------------------------------------------
 
+------------- [<COMMAND NOT FOUND] ---------------------------------------
+| ca                 | prints ca: not found                             |
+| ca | ca            | prints ca: not found 2 times                     |
+| ca > 1             | file 1 empty, prints ca: not found               |
+| ca > 1 | ca > 2    | file 1 and 2 empty, prints ca: not found 2 times |
+-------------------------------------------------------------------------
 
-
-| << ola                    | open here_doc until <ola> is typed    |
-| exit | exit               | does nothing                          |
-| echo $?                   | prints exit status of last command    |
-| echo -nnnnnnna ola        | print -nnnnnnna ola                   |
-| cat << end                | try env vars, must display them !     |
-| echo ola$O$PWD^ola        | printf ola, $PWD^ola                  |
-|___________________________________________________________________|
+---------------------- [REDIRECTION] -----------------------------------------------
+| ls > 1 > 2 > 3 > 4     | should create 4 files and only print ls on the last one |
+| ls >> 1 >> 2 >> 3      | should create 3 files and only print ls on the last one |
+| cat << 1 << 2          | should only stop afater 1 and 2 are typed               |
+| cat << 1 << 2 > 3      | should only stop afater 1 and 2 are typed and create 3  |
+| cat < Makefile > 1     | should create 1 and print Makefile on it                |
+------------------------------------------------------------------------------------

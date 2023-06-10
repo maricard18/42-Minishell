@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 12:20:20 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/08 16:19:56 by mariohenriq      ###   ########.fr       */
+/*   Updated: 2023/06/10 19:35:36 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	exec_here_doc(char **env, int pipe_fd, t_file **file)
 		str = readline("> ");
 		if (!str)
 		{
-			printf("%s : not found\n", (*file)->name);
+			print_error((*file)->name, ": Not found\n", 1);
 			free(str);
 			break ;
 		}
@@ -36,7 +36,7 @@ void	exec_here_doc(char **env, int pipe_fd, t_file **file)
 				break ;
 			}
 			else
-				continue;
+				continue ;
 		}
 		str = search_expansions(env, str);
 		if ((*file)->next == NULL || (*file)->next->type != HERE_DOC)
@@ -64,8 +64,8 @@ void	here_doc(t_parsed *temp, t_file **file)
 void	append(t_parsed *temp, t_file **file)
 {
 	int	file_fd;
-	
-	file_fd = open((*file)->name, O_CREAT | O_WRONLY | O_APPEND, 0777);
+
+	file_fd = open((*file)->name, O_CREAT | O_WRONLY | O_APPEND, 0644);
 	if (file_fd == -1)
 	{
 		perror("error opening file\n");
@@ -91,12 +91,11 @@ void	append(t_parsed *temp, t_file **file)
 void	redirect_out(t_parsed *temp, t_file **file)
 {
 	int	file_fd;
-	
-	file_fd = open((*file)->name, O_RDONLY, 0777);
+
+	file_fd = open((*file)->name, O_RDONLY, 0644);
 	if (file_fd == -1)
 	{
-		perror("file does not exist\n");
-		exit(1);
+		print_error((*file)->name, ": Not found\n", 1);
 	}
 	if ((*file)->next == NULL || (*file)->next->type != SMALLER)
 	{
@@ -118,8 +117,8 @@ void	redirect_out(t_parsed *temp, t_file **file)
 void	redirect_in(t_parsed *temp, t_file **file)
 {
 	int	file_fd;
-	
-	file_fd = open((*file)->name, O_CREAT | O_WRONLY | O_TRUNC, 0777);
+
+	file_fd = open((*file)->name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (file_fd == -1)
 	{
 		perror("error opening file\n");

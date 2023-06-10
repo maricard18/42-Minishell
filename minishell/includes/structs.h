@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:01:27 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/07 15:31:02 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/10 19:11:23 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # define WRITE_END 1
 
 //--------enums--------//
-enum	tokens
+enum						e_tokens
 {
 	PIPE,
 	OR,
@@ -31,7 +31,7 @@ enum	tokens
 	STRING,
 };
 
-enum	errors
+enum						e_errors
 {
 	FILE_NOT_FOUND = 1,
 	SYNTAX_ERROR = 2,
@@ -53,7 +53,7 @@ typedef enum e_builtin_types
 	EXIT,
 	UNSET,
 	EXPORT
-}			t_builtin_types;
+}							t_builtin_types;
 
 //------------Structs------------//
 typedef struct s_token
@@ -61,14 +61,14 @@ typedef struct s_token
 	int						n_tokens;
 	char					*value;
 	int						index;
-	enum tokens				type;
+	enum e_tokens			type;
 	struct s_token			*prev;
 	struct s_token			*next;
 }							t_token;
 
 typedef struct s_file
 {
-	enum tokens				type;
+	enum e_tokens			type;
 	char					*name;
 	struct s_file			*next;
 }							t_file;
@@ -81,8 +81,6 @@ typedef struct s_parsed
 	char					*cmd;
 	char					**args;
 	t_file					*file;
-	t_token					*paranthesis;
-	struct s_parsed			**parantheses_and_or;
 	struct s_parsed			*prev;
 	struct s_parsed			*next;
 }							t_parsed;
@@ -105,6 +103,7 @@ typedef struct s_minishell_state
 	int						index;
 	int						commands;
 	int						flag;
+	int						pipe_flag;
 	int						exit_status;
 	char					*str;
 	char					**ev;

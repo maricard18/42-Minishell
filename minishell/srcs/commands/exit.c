@@ -1,6 +1,16 @@
 #include "minishell.h"
 
-int	number_args(char **input)//conta o numero de argumentos
+// exit the shell
+void	exit_the_shell()
+{
+	printf("exit\n");
+	clean_all(g_minishell.str);
+	clean_the_mess();
+	exit(g_minishell.exit_status);
+}
+
+// count the number of arguments
+int	number_args(char **input)
 {
 	int	i;
 
@@ -10,7 +20,8 @@ int	number_args(char **input)//conta o numero de argumentos
 	return (i);
 }
 
-int	number_signal(char *arg)//verifica se o argumento é um numero com sinal
+// check if argument has a option
+int	number_signal(char *arg)
 {
 	while (*arg)
 	{
@@ -22,30 +33,31 @@ int	number_signal(char *arg)//verifica se o argumento é um numero com sinal
 	return (1);
 }
 
-//termina imediatamente a execução do programa e retorna o controle para o sistema operacional.
-void	exit_command(char **input)//encerra o programa
+// exits the program immediately
+void	exit_command(char **input)
 {
-	if (number_args(input) == 1)//se for só exit
+	if (number_args(input) == 1)
 	{
-		printf("exit\n");
-		clean_all(g_minishell.str);
-		exit(errno);
+		exit_the_shell();
 	}
 	else
 	{
-		if (number_signal(input[1]))//
+		if (number_signal(input[1]))
 		{
-			if (number_args(input) > 2)//se for exit + numero + argumento
+			if (number_args(input) > 2)
 			{
-				write(2, "exit\nEXIT: too many arguments\n", 41);
-				errno = 1;
-				return ;
+				print_error(NULL, "exit\nexit: too many arguments\n", 1);
+				clean_all(g_minishell.str);
+				clean_the_mess();
+				exit(1);
 			}
-			exit(ft_atoi(input[1]) % 256);//valor no intervalo de 0 a 255 para garantir a compatibilidade e consistência com outros programas e scripts
+			clean_all(g_minishell.str);
+			clean_the_mess();
+			exit(ft_atoi(input[1]) % 256);
 		}
-		write(2, "exit\nminishell: exit: numeric argument required\n", 48);
-        exit(-1);//valor no intervalo de 0 a 255 para garantir a compatibilidade e consistência com outros programas e scripts
-		//exit(-1 % 256);//Ao aplicar a operação de módulo (%) por 256 ao valor -1, garante que o resultado esteja dentro do intervalo válido
+		print_error(NULL, "exit\nexit: numeric argument required\n", 2);
+		clean_all(g_minishell.str);
+		clean_the_mess();
+        exit(2);
 	}
 }
-//retornar um código de saída que indica o status de encerramento do programa 

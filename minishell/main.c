@@ -6,14 +6,17 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 23:00:53 by filipa            #+#    #+#             */
-/*   Updated: 2023/06/07 14:03:30 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/10 20:01:24 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_minishell_state g_minishell;
+t_minishell_state	g_minishell;
 
+
+
+// check it it is a empty string
 int	check_if_empty(char *str)
 {
 	int	i;
@@ -31,10 +34,10 @@ int	check_if_empty(char *str)
 // main program
 int	main(int argc, char **argv, char **envp)
 {
-	(void)	argc;
-	(void)	argv;
 	char	*str;
 
+	(void)argc;
+	(void)argv;
 	minishell_init(envp);
 	signal(SIGINT, &ctrl_c);
 	signal(SIGQUIT, SIG_IGN);
@@ -48,6 +51,4 @@ int	main(int argc, char **argv, char **envp)
 		initialize_shell(str);
 		clean_all(str);
 	}
-	//rl_clear_history();
-	return(0);
 }
