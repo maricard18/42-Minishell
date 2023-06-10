@@ -109,3 +109,5 @@ printf "$BOLDMAGENTA  -----------\n"
 printf "$BOLDMAGENTA  |$BOLDWHITE THE END $BOLDMAGENTA|\n"
 printf "$BOLDMAGENTA  -----------\n"
 printf "$RESET\n"
+
+make fclean
