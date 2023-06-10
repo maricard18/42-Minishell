@@ -6,14 +6,14 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 19:56:00 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/10 20:22:38 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/10 20:48:53 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 // clean all the stuff
-void	clean_the_mess()
+void	clean_the_mess(void)
 {
 	int	i;
 

@@ -6,15 +6,13 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 23:00:53 by filipa            #+#    #+#             */
-/*   Updated: 2023/06/10 20:01:24 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/10 20:45:14 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 t_minishell_state	g_minishell;
-
-
 
 // check it it is a empty string
 int	check_if_empty(char *str)

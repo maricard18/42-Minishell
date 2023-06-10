@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 10:45:38 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/10 20:22:18 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/10 20:48:40 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 extern t_minishell_state	g_minishell;
 
-void	clean_g_minishell()
+void	clean_g_minishell(void)
 {
 	int	i;
-	
+
 	i = 0;
 	while (g_minishell.input[i])
 	{

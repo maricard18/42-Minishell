@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 22:10:59 by mariohenriq       #+#    #+#             */
-/*   Updated: 2023/06/10 19:59:02 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/10 20:45:37 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 void		minishell_init(char **env);
 void		initialize_shell(char *str);
 void		clean_all(char *str);
-void		clean_the_mess();
+void		clean_the_mess(void);
 void		free_open_pipes(int **pipe);
 
 //----------Signals---------------//

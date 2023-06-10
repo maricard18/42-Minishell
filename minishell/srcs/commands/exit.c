@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exit.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/10 20:48:22 by maricard          #+#    #+#             */
+/*   Updated: 2023/06/10 20:48:24 by maricard         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 // exit the shell
-void	exit_the_shell()
+void	exit_the_shell(void)
 {
 	printf("exit\n");
 	clean_all(g_minishell.str);
@@ -58,6 +70,6 @@ void	exit_command(char **input)
 		print_error(NULL, "exit\nexit: numeric argument required\n", 2);
 		clean_all(g_minishell.str);
 		clean_the_mess();
-        exit(2);
+		exit(2);
 	}
 }

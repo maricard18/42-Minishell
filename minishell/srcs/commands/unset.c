@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 17:35:48 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/10 17:36:55 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/10 20:47:52 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	remove_env_var(char *data)
 // remove env vars
 void	unset_command(char **input)
 {
-	char    *data;
+	char	*data;
 
 	input++;
 	while (*input)
