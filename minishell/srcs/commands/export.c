@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 17:35:27 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/10 20:25:56 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/10 22:27:12 by mariohenriq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,23 +67,40 @@ int	is_include(char *str)
 	return (-1);
 }
 
-// export env vars
-void	export_command(char **input)
+// prints export without arguments
+void export_print_all(void)
 {
-	int	index;
+    int i;
+	
+	i = 0;
+    while (g_minishell.ev[i] != NULL)
+    {
+        printf("declare -x %s\n", g_minishell.ev[i]);
+        i++;
+    }
+}
 
-	input++;
-	while (*input)
-	{
-		if (check_env_var(*input))
-		{
-			index = is_include(*input);
-			if (index != -1)
-				g_minishell.ev[index] = ft_strdup(*input);
-			else
-				add_env_var(*input);
-		}
-		input++;
-	}
-	update_path_directories();
+// export env vars
+void export_command(char **input)
+{
+	int index;
+	
+    if (*++input == NULL)
+    {
+        export_print_all();
+        return;
+    }
+    while (*input)
+    {
+        if (check_env_var(*input))
+        {
+            index = is_include(*input);
+            if (index != -1)
+                g_minishell.ev[index] = ft_strdup(*input);
+            else
+                add_env_var(*input);
+        }
+        input++;
+    }
+    update_path_directories();
 }
