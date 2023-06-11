@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 20:48:22 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/10 20:48:24 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/11 12:31:40 by mariohenriq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,7 @@ int	number_signal(char *arg)
 void	exit_command(char **input)
 {
 	if (number_args(input) == 1)
-	{
 		exit_the_shell();
-	}
 	else
 	{
 		if (number_signal(input[1]))
@@ -63,9 +61,10 @@ void	exit_command(char **input)
 				clean_the_mess();
 				exit(1);
 			}
+			g_minishell.exit_status = ft_atoi(input[1]) % 256;
 			clean_all(g_minishell.str);
 			clean_the_mess();
-			exit(ft_atoi(input[1]) % 256);
+			exit(g_minishell.exit_status);
 		}
 		print_error(NULL, "exit\nexit: numeric argument required\n", 2);
 		clean_all(g_minishell.str);

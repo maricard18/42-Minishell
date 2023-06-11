@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 18:20:40 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/10 18:40:02 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/11 12:45:06 by mariohenriq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,13 @@ int	**open_pipes(void)
 void	execve_or_builtin(char **args)
 {
 	if (get_builtin_type(args[0]) != 0)
-		execute_builtin_command(args);
-	else if (ft_strcmp(args[0], "$?") == 0)
 	{
-		printf("%d: command not found\n", g_minishell.exit_status);
+		execute_builtin_command(args);
 	}
 	else
+	{
 		execute_execve(args);
+	}
 }
 
 // handler for execution in pipes

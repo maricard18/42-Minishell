@@ -6,7 +6,7 @@
 /*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 17:35:27 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/10 22:27:12 by mariohenriq      ###   ########.fr       */
+/*   Updated: 2023/06/11 11:49:21 by mariohenriq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,40 +67,40 @@ int	is_include(char *str)
 	return (-1);
 }
 
-// prints export without arguments
-void export_print_all(void)
+void	export_print_all(void)
 {
-    int i;
-	
-	i = 0;
-    while (g_minishell.ev[i] != NULL)
-    {
-        printf("declare -x %s\n", g_minishell.ev[i]);
-        i++;
-    }
-}
+	int	i;
 
-// export env vars
-void export_command(char **input)
+	i = 0;
+	while (g_minishell.ev[i] != NULL)
+	{
+		printf("declare -x %s\n", g_minishell.ev[i]);
+		i++;
+	}
+}
+void	export_command(char **input)
 {
-	int index;
-	
-    if (*++input == NULL)
-    {
-        export_print_all();
-        return;
-    }
-    while (*input)
-    {
-        if (check_env_var(*input))
-        {
-            index = is_include(*input);
-            if (index != -1)
-                g_minishell.ev[index] = ft_strdup(*input);
-            else
-                add_env_var(*input);
-        }
-        input++;
-    }
-    update_path_directories();
+	int	index;
+
+	if (*++input == NULL)
+	// Verifica se não há argumentos após o comando "export"
+	{
+		sort_env_variables(g_minishell.ev);
+		export_print_all();
+		return ;
+	}
+	while (*input)
+	{
+		if (check_env_var(*input))
+		{
+			index = is_include(*input);
+			if (index != -1)
+				g_minishell.ev[index] = ft_strdup(*input);
+			else
+				add_env_var(*input);
+		}
+		input++;
+	}
+	sort_env_variables(g_minishell.ev);
+	update_path_directories();
 }

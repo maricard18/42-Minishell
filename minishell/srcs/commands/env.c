@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: filipa <filipa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 11:45:11 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/06 19:49:30 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/11 09:30:08 by filipa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	env_command(char **arguments)
 		g_minishell.exit_status = 127;
 		return ;
 	}
+	sort_env_variables(env);
 	while (*env)
 	{
 		printf("%s\n", *env);

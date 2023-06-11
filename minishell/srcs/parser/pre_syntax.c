@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pre_syntax.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 20:24:44 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/10 19:08:51 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/11 12:22:23 by mariohenriq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ int	check_quotes(char *str, int *i, char c)
 	}
 	else
 	{
-		print_error("error: unifinished quotes\n", NULL, 127);
-		g_minishell.exit_status = 127;
+		print_error(NULL, "error: unifinished quotes\n", 2);
 		return (1);
 	}
 }

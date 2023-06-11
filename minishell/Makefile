@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: maricard <maricard@student.42.fr>          +#+  +:+       +#+         #
+#    By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 10:28:04 by maricard          #+#    #+#              #
-#    Updated: 2023/06/10 20:16:26 by maricard         ###   ########.fr        #
+#    Updated: 2023/06/11 11:44:29 by mariohenriq      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,7 +70,8 @@ SRC = 	./srcs/parser/lexer.c \
 		./srcs/parser/parser_utils.c \
 		./srcs/utils/test_lex.c \
 		./srcs/utils/test_utils.c \
-		./srcs/utils/test_pars.c 
+		./srcs/utils/test_pars.c \
+		./srcs/utils/sort_vars.c
 
 SRC-OBJ = $(SRC:.c=.o)
 

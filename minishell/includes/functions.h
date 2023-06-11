@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   functions.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 22:10:59 by mariohenriq       #+#    #+#             */
-/*   Updated: 2023/06/10 20:45:37 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/11 11:45:57 by mariohenriq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void		exit_command(char **input);
 void		pwd_command(void);
 void		unset_command(char **input);
 void		export_command(char **input);
+void		sort_env_variables(char **env);
 
 //---------Utils-----------------//
 void		update_path_directories(void);
