@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 12:20:20 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/10 19:35:36 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/12 20:16:48 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 extern t_minishell_state	g_minishell;
 
 // here doc execution
-void	exec_here_doc(char **env, int pipe_fd, t_file **file)
+void	exec_here_doc(char **env, int pipe_fd, t_file **file, char *str)
 {
-	char	*str;
-
 	while (1)
 	{
 		str = readline("> ");
@@ -41,27 +39,42 @@ void	exec_here_doc(char **env, int pipe_fd, t_file **file)
 		str = search_expansions(env, str);
 		if ((*file)->next == NULL || (*file)->next->type != HERE_DOC)
 			write_here_doc(pipe_fd, str);
+		free(str);
 	}
 }
 
 // here doc handler
-void	here_doc(t_parsed *temp, t_file **file)
+void	here_doc(t_parsed *temp, t_file **file, int out)
 {
 	int		pipe_fd[2];
 	char	**env;
+	char 	*str;
 
+	str = NULL;
+	dup2(g_minishell.out2, STDOUT_FILENO);
 	env = g_minishell.ev;
 	pipe(pipe_fd);
-	exec_here_doc(env, pipe_fd[1], file);
+	exec_here_doc(env, pipe_fd[1], file, str);
 	close(pipe_fd[1]);
+	close(g_minishell.out2);
+	dup2(out, STDOUT_FILENO);
 	dup2(pipe_fd[0], STDIN_FILENO);
-	if (temp->args[0] && (*file)->next == NULL)
+	if (temp->args[0])
+	{
+		if ((*file)->next != NULL)
+		{
+			*file = (*file)->next;
+			execute_commands(temp, *file, out);
+			return ;
+		}
 		execve_or_builtin(temp->args);
+	}
 	close(pipe_fd[0]);
+	close(out);
 }
 
 // append handler
-void	append(t_parsed *temp, t_file **file)
+void	append(t_parsed *temp, t_file **file, int fd)
 {
 	int	file_fd;
 
@@ -77,7 +90,7 @@ void	append(t_parsed *temp, t_file **file)
 		if ((*file)->next != NULL)
 		{
 			*file = (*file)->next;
-			execute_commands(temp, *file);
+			execute_commands(temp, *file, fd);
 			close(file_fd);
 			return ;
 		}
@@ -88,7 +101,7 @@ void	append(t_parsed *temp, t_file **file)
 }
 
 // redirect_out handler
-void	redirect_out(t_parsed *temp, t_file **file)
+void	redirect_out(t_parsed *temp, t_file **file, int fd)
 {
 	int	file_fd;
 
@@ -103,7 +116,7 @@ void	redirect_out(t_parsed *temp, t_file **file)
 		if ((*file)->next != NULL)
 		{
 			*file = (*file)->next;
-			execute_commands(temp, *file);
+			execute_commands(temp, *file, fd);
 			close(file_fd);
 			return ;
 		}
@@ -114,7 +127,7 @@ void	redirect_out(t_parsed *temp, t_file **file)
 }
 
 // redirect_in handler
-void	redirect_in(t_parsed *temp, t_file **file)
+void	redirect_in(t_parsed *temp, t_file **file, int fd)
 {
 	int	file_fd;
 
@@ -130,7 +143,7 @@ void	redirect_in(t_parsed *temp, t_file **file)
 		if ((*file)->next != NULL)
 		{
 			*file = (*file)->next;
-			execute_commands(temp, *file);
+			execute_commands(temp, *file, fd);
 			close(file_fd);
 			return ;
 		}

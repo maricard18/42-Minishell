@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 19:07:47 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/11 12:41:25 by mariohenriq      ###   ########.fr       */
+/*   Updated: 2023/06/12 20:24:07 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	initialize_shell(char *str)
 	char	**temp;
 	t_token	*token;
 
+	add_history(str);
 	lexer(str);
 	temp = g_minishell.input;
 	if (check_unfinished_quotes(temp) == 1)
@@ -32,5 +33,4 @@ void	initialize_shell(char *str)
 	parse_commands(0, 1, token);
 	//parser_test();
 	execution();
-	add_history(str);
 }

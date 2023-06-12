@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 10:45:38 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/10 20:48:40 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/12 14:53:12 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,4 +102,5 @@ void	clean_all(char *str)
 		clean_lexer(g_minishell.token);
 	if (g_minishell.parsed)
 		clean_parser(g_minishell.parsed);
+	g_minishell.n_tokens2 = 0;
 }

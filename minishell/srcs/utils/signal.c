@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 23:36:29 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/10 21:28:02 by mariohenriq      ###   ########.fr       */
+/*   Updated: 2023/06/12 17:03:04 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ extern t_minishell_state	g_minishell;
 void	ctrl_c(int signal)
 {
 	(void)signal;
-	//rl_replace_line("", 0);
+	rl_replace_line("", 0);
 	ft_putchar_fd('\n', STDOUT_FILENO);
 	rl_on_new_line();
 	rl_redisplay();

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 10:35:27 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/11 12:38:33 by mariohenriq      ###   ########.fr       */
+/*   Updated: 2023/06/12 15:50:07 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,9 @@ extern t_minishell_state	g_minishell;
 
 void	execute(char *full_path, char **args)
 {
-	int	pid;
-
-	pid = fork();
-	if (pid == 0)
-	{
-		execve(full_path, args, g_minishell.ev);
-		print_error(args[0], ": Permission denied\n", 126);
-		exit(126);
-	}
+	execve(full_path, args, g_minishell.ev);
+	print_error(args[0], ": Permission denied\n", 126);
+	exit(126);
 	return ;
 }
 
@@ -82,7 +76,7 @@ char	*search_path(char *arg, char *path)
 		}
 	}
 	free(command);
-	print_error(arg, ": No such file or directory\n", 127);
+	print_error(arg, ": command not found\n", 127);
 	return (NULL);
 }
 
@@ -97,16 +91,15 @@ void	execute_execve(char **args)
 	if (path == NULL)
 	{
 		print_error(args[0], ": No such file or directory\n", 127);
-		return ;
+		exit(g_minishell.exit_status);	
 	}
-	signal(SIGINT, sigint_handler);
 	if (check_if_path(args[0]) == 0)
 	{
 		full_path = search_path(args[0], path);
 		if (full_path == NULL)
 		{
 			free(path);
-			return ;
+			exit(g_minishell.exit_status);
 		}
 		else
 			execute(full_path, args);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   functions.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 22:10:59 by mariohenriq       #+#    #+#             */
-/*   Updated: 2023/06/11 11:45:57 by mariohenriq      ###   ########.fr       */
+/*   Updated: 2023/06/12 19:48:22 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ char		*double_quotes(char **env, char *input, int *i);
 char		*handle_env_variables(char **env, char *str, int *i);
 int			check_unfinished_quotes(char **str);
 char		*search_expansions(char **env, char *str);
+int			ft_strlen_special(char *str);
 
 //--------Tokeniser---------------//
 int			is_whitespace(char c);
@@ -74,23 +75,23 @@ void		execute_execve(char **args);
 void		execute_builtin_command(char **arguments);
 int			get_builtin_type(char *command);
 char		*ft_strtok(char *str, char delimeter);
-void		redirect_in(t_parsed *temp, t_file **file);
-void		redirect_out(t_parsed *temp, t_file **file);
-void		append(t_parsed *temp, t_file **file);
-void		here_doc(t_parsed *temp, t_file **file);
+void		redirect_in(t_parsed *temp, t_file **file, int fd);
+void		redirect_out(t_parsed *temp, t_file **file, int fd);
+void		append(t_parsed *temp, t_file **file, int fd);
+void		here_doc(t_parsed *temp, t_file **file, int fd);
 void		write_process(t_parsed *temp, int pipe_fd);
 void		read_process(t_parsed *temp, int pipe_fd);
-void		execute_commands(t_parsed *temp, t_file *file);
+void		execute_commands(t_parsed *temp, t_file *file, int fd);
 void		execve_or_builtin(char **args);
 char		*ft_strjoin2(char const *s1, char const *s2);
 int			**open_pipes(void);
-void		return_fds(void);
 int			check_next_node(t_file **file);
 void		write_here_doc(int pipe_fd, char *str);
 char		*env_var(char *env, int i);
 char		*my_get_env(char **env, char *str);
 int			check_if_path(char *str);
 void		sigint_handler(int signum);
+void		duplicate_fds(void);
 
 //--------Commands---------------//
 void		cd_command(char **input);

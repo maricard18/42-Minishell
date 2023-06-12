@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 18:00:11 by mariohenriq       #+#    #+#             */
-/*   Updated: 2023/06/10 17:14:29 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/12 15:15:52 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,16 @@ char	*check_if_exit_status(char *str, int *i)
 	}
 	else
 	{
-		while (str[*i])
+		if (str[*i] == '"' || str[*i] == '\'' || str[*i] == ' ')
 		{
-			if (str[*i] == '$')
-				break ;
-			else if (str[*i] == '"' || str[*i] == '\'')
-				break ;
-			(*i)++;
+			return (ft_strdup("$"));
 		}
-		return (ft_strdup(""));
+		else
+		{
+			while (ft_isalnum(str[*i]) == 1)
+				(*i)++;
+			return (ft_strdup(""));
+		}
 	}
 }
 

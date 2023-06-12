@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+         #
+#    By: maricard <maricard@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 10:28:04 by maricard          #+#    #+#              #
-#    Updated: 2023/06/11 11:44:29 by mariohenriq      ###   ########.fr        #
+#    Updated: 2023/06/12 19:50:26 by maricard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,6 @@ SRC = 	./srcs/parser/lexer.c \
 		./srcs/execution/execve.c \
 		./srcs/execution/builtins.c \
 		./srcs/execution/redirect.c \
-		./srcs/execution/pipes.c \
 		./srcs/parser/initialize.c \
 		./srcs/parser/pre_syntax.c \
 		./srcs/parser/syntax.c \
@@ -112,4 +111,4 @@ valgrind: re
 	@clear
 	@echo "[$(RED)looking for valgrind leaks$(RESET)] $(GREEN)$(RESET)"
 	@sleep 1
-	@valgrind -s --leak-check=full ./minishell
+	@valgrind -s --leak-check=full --show-leak-kinds=all ./minishell

@@ -20,9 +20,7 @@ void	write_to_pipe(t_parsed **temp, int **pipe_fd, int i)
 	if (temp[i + 1] == NULL)
 	{
 		dup2(g_minishell.out_file, STDOUT_FILENO);
-		execute_commands(temp[i], temp[i]->file);
-		close(g_minishell.out_file);
-		dup2(g_minishell.out, STDOUT_FILENO);
+		execute_commands(temp[i], temp[i]->file, g_minishell.out_file);
 		close(g_minishell.out);
 		close(pipe_fd[i - 1][READ_END]);
 		return ;
@@ -30,7 +28,7 @@ void	write_to_pipe(t_parsed **temp, int **pipe_fd, int i)
 	else
 	{
 		dup2(pipe_fd[i][WRITE_END], STDOUT_FILENO);
-		execute_commands(temp[i], temp[i]->file);
+		execute_commands(temp[i], temp[i]->file, pipe_fd[i][WRITE_END]);
 		close(pipe_fd[i][WRITE_END]);
 	}
 	if (i > 0)
@@ -79,7 +77,7 @@ void	check_command(t_parsed **temp)
 	}
 	else
 	{
-		execute_commands(temp[0], temp[0]->file);
+		execute_commands(temp[0], temp[0]->file, g_minishell.out);
 	}
 	while (waitpid(0, &g_minishell.exit_status, 0) > 0)
 	{
@@ -99,9 +97,7 @@ void	execution(void)
 	t_parsed	**temp;
 
 	temp = g_minishell.parsed;
-	g_minishell.in_file = dup(STDIN_FILENO);
-	g_minishell.out_file = dup(STDOUT_FILENO);
-	g_minishell.out = dup(STDOUT_FILENO);
+	duplicate_fds();
 	if (ft_strlen(g_minishell.str) == 0)
 		return ;
 	check_command(temp);
