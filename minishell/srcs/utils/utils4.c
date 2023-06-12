@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 12:34:57 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/10 17:13:28 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/12 20:36:55 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	sigint_handler(int signum)
 {
 	(void)signum;
 	printf("\n");
+	g_minishell.exit_status = 130;
 }
 
 // write to pipe in here doc
