@@ -15,12 +15,13 @@
 extern t_minishell_state	g_minishell;
 
 // handler execuntion to pipes
-void	write_to_pipe(t_parsed **temp, int **pipe_fd, int i)
+void	write_to_pipe(t_parsed **temp, int **pipe_fd, int i, t_fd **fd)
 {
 	if (temp[i + 1] == NULL)
 	{
-		dup2(g_minishell.out_file, STDOUT_FILENO);
-		execute_commands(temp[i], temp[i]->file, g_minishell.out_file);
+		dup2(g_minishell.out, STDOUT_FILENO);
+		temp[i]->out_file = g_minishell.out;
+		execute_commands(temp[i], temp[i]->file, fd);
 		close(g_minishell.out);
 		close(pipe_fd[i - 1][READ_END]);
 		return ;
@@ -28,7 +29,8 @@ void	write_to_pipe(t_parsed **temp, int **pipe_fd, int i)
 	else
 	{
 		dup2(pipe_fd[i][WRITE_END], STDOUT_FILENO);
-		execute_commands(temp[i], temp[i]->file, pipe_fd[i][WRITE_END]);
+		temp[i]->out_file = pipe_fd[i][WRITE_END];
+		execute_commands(temp[i], temp[i]->file, fd);
 		close(pipe_fd[i][WRITE_END]);
 	}
 	if (i > 0)
@@ -41,16 +43,19 @@ void	connect_pipes(t_parsed **temp, int **pipe_fd, int i)
 	(void)temp;
 	if (temp[i] == NULL)
 	{
-		dup2(g_minishell.in_file, STDIN_FILENO);
-		close(g_minishell.in_file);
+		dup2(g_minishell.in, STDIN_FILENO);
+		close(g_minishell.in);
 		return ;
 	}
 	if (i > 0)
+	{
 		dup2(pipe_fd[i - 1][READ_END], STDIN_FILENO);
+		temp[i]->in_file = pipe_fd[i - 1][READ_END];
+	}
 }
 
 // handler pipes
-void	pipe_handling(t_parsed **temp)
+void	pipe_handling(t_parsed **temp, t_fd **fd)
 {
 	int	i;
 	int	**pipe_fd;
@@ -59,7 +64,7 @@ void	pipe_handling(t_parsed **temp)
 	pipe_fd = open_pipes();
 	while (temp[i])
 	{
-		write_to_pipe(temp, pipe_fd, i);
+		write_to_pipe(temp, pipe_fd, i, fd);
 		i++;
 		connect_pipes(temp, pipe_fd, i);
 	}
@@ -67,17 +72,17 @@ void	pipe_handling(t_parsed **temp)
 }
 
 // check what function to execute
-void	check_command(t_parsed **temp)
+void	check_command(t_parsed **temp, t_fd **fd)
 {
 	g_minishell.pipe_flag = 0;
 	if (temp[1] != NULL)
 	{
 		g_minishell.pipe_flag = 1;
-		pipe_handling(temp);
+		pipe_handling(temp, fd);
 	}
 	else
 	{
-		execute_commands(temp[0], temp[0]->file, g_minishell.out);
+		execute_commands(temp[0], temp[0]->file, fd);
 	}
 	while (waitpid(0, &g_minishell.exit_status, 0) > 0)
 	{
@@ -95,10 +100,12 @@ void	check_command(t_parsed **temp)
 void	execution(void)
 {
 	t_parsed	**temp;
+	t_fd		*fd;
 
 	temp = g_minishell.parsed;
+	fd = g_minishell.fd;
 	duplicate_fds();
 	if (ft_strlen(g_minishell.str) == 0)
 		return ;
-	check_command(temp);
+	check_command(temp, &fd);
 }

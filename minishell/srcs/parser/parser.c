@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 11:05:17 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/12 21:24:03 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/12 23:39:27 by mariohenriq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,18 @@ extern t_minishell_state	g_minishell;
 // create a list with n str out dups
 void	create_out_dup_list(void)
 {
-	t_fd_out	*fd;
-	int			i;
+	t_fd	*fd;
+	int		i;
 
-	fd = (t_fd_out *)malloc(sizeof(t_fd_out));
-	fd->next = NULL;
-	g_minihsell.fd_out = fd;
+	fd = (t_fd *)malloc(sizeof(t_fd));
+	g_minishell.fd = fd;
 	i = 0;
 	while (i < g_minishell.n_tokens2)
 	{
 		fd->out = dup(STDOUT_FILENO);
+		fd->in = dup(STDIN_FILENO);
 		if (i + 1 < g_minishell.n_tokens2)
-			fd->next = (t_fd_out *)malloc(sizeof(t_fd_out));
+			fd->next = (t_fd *)malloc(sizeof(t_fd));
 		else
 			fd->next = NULL;
 		fd = fd->next;
@@ -80,8 +80,8 @@ void	add_argument(t_token **token, t_parsed **current)
 	i = 0;
 	if (!((*current)->cmd))
 	{
-		(*current)->cmd = ft_calloc(ft_strlen((*token)->value) + 2, \
-							sizeof(char));
+		(*current)->cmd = ft_calloc(ft_strlen((*token)->value) + 2,
+									sizeof(char));
 		ft_strcpy((*current)->cmd, (*token)->value);
 	}
 	while ((*current)->args[i])

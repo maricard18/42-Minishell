@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 12:20:20 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/12 21:15:17 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/12 23:48:50 by mariohenriq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 extern t_minishell_state	g_minishell;
 
 // append handler
-void	append(t_parsed *temp, t_file **file, int fd)
+void	append(t_parsed *temp, t_file **file, t_fd **fd)
 {
 	int	file_fd;
 
@@ -42,7 +42,7 @@ void	append(t_parsed *temp, t_file **file, int fd)
 }
 
 // redirect_out handler
-void	redirect_out(t_parsed *temp, t_file **file, int fd)
+void	redirect_out(t_parsed *temp, t_file **file, t_fd **fd)
 {
 	int	file_fd;
 
@@ -68,7 +68,7 @@ void	redirect_out(t_parsed *temp, t_file **file, int fd)
 }
 
 // redirect_in handler
-void	redirect_in(t_parsed *temp, t_file **file, int fd)
+void	redirect_in(t_parsed *temp, t_file **file, t_fd **fd)
 {
 	int	file_fd;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 18:20:40 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/12 20:49:53 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/12 23:52:05 by mariohenriq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ extern t_minishell_state	g_minishell;
 // return the value of the mains file descriptors
 void	return_fds(void)
 {
-	dup2(g_minishell.out, STDOUT_FILENO);
-	close(g_minishell.out);
-	dup2(g_minishell.in, STDIN_FILENO);
-	close(g_minishell.in);
+	dup2(g_minishell.out2, STDOUT_FILENO);
+	close(g_minishell.out2);
+	dup2(g_minishell.in2, STDIN_FILENO);
+	close(g_minishell.in2);
 }
 
 // function to handle env variables inside here doc
@@ -38,7 +38,7 @@ char	*search_expansions(char **env, char *str)
 		if (str[i] == '$')
 		{
 			i++;
-			temp = ft_strjoin(temp, handle_env_variables(env, str, &i)); // ! leak here ??
+			temp = ft_strjoin(temp, handle_env_variables(env, str, &i));
 		}
 		if (str[i] == '\0')
 			break ;
@@ -74,8 +74,8 @@ int	**open_pipes(void)
 // check if its a builtin command or not
 void	execve_or_builtin(char **args)
 {
-	int	 pid;
-	int	 status;
+	int	pid;
+	int	status;
 
 	status = get_builtin_type(args[0]);
 	if (g_minishell.n_tokens2 > 0 && status != 0)
@@ -99,7 +99,7 @@ void	execve_or_builtin(char **args)
 }
 
 // handler for execution in pipes
-void	execute_commands(t_parsed *temp, t_file *file, int fd)
+void	execute_commands(t_parsed *temp, t_file *file, t_fd **fd)
 {
 	if (file == NULL)
 	{

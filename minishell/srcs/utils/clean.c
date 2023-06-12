@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 10:45:38 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/12 14:53:12 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/12 23:56:08 by mariohenriq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,7 @@ void	clean_all(char *str)
 		clean_lexer(g_minishell.token);
 	if (g_minishell.parsed)
 		clean_parser(g_minishell.parsed);
+	if (g_minishell.fd)
+		clean_fd_list(g_minishell.fd);
 	g_minishell.n_tokens2 = 0;
 }

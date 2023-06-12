@@ -3,14 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   clean2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 19:56:00 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/10 20:48:53 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/12 23:59:17 by mariohenriq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+//clean list fd
+void	clean_fd_list(t_fd *fd)
+{
+	t_fd	*tmp;
+	int		i;
+
+	i = 0;
+	while (i < g_minishell.n_tokens2)
+	{
+		tmp = fd->next;
+		free(fd);
+		fd = tmp;
+		i++;
+	}
+	g_minishell.fd = NULL;
+}
 
 // clean all the stuff
 void	clean_the_mess(void)

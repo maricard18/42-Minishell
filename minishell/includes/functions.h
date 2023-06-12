@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   functions.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 22:10:59 by mariohenriq       #+#    #+#             */
-/*   Updated: 2023/06/12 19:48:22 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/12 23:59:58 by mariohenriq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,6 @@
 //------------Main----------------//
 void		minishell_init(char **env);
 void		initialize_shell(char *str);
-void		clean_all(char *str);
-void		clean_the_mess(void);
-void		free_open_pipes(int **pipe);
 
 //----------Signals---------------//
 void		ctrl_c(int signal);
@@ -75,13 +72,13 @@ void		execute_execve(char **args);
 void		execute_builtin_command(char **arguments);
 int			get_builtin_type(char *command);
 char		*ft_strtok(char *str, char delimeter);
-void		redirect_in(t_parsed *temp, t_file **file, int fd);
-void		redirect_out(t_parsed *temp, t_file **file, int fd);
-void		append(t_parsed *temp, t_file **file, int fd);
-void		here_doc(t_parsed *temp, t_file **file, int fd);
+void		redirect_in(t_parsed *temp, t_file **file, t_fd **fd);
+void		redirect_out(t_parsed *temp, t_file **file, t_fd **fd);
+void		append(t_parsed *temp, t_file **file, t_fd **fd);
+void		here_doc(t_parsed *temp, t_file **file, t_fd **fd);
 void		write_process(t_parsed *temp, int pipe_fd);
 void		read_process(t_parsed *temp, int pipe_fd);
-void		execute_commands(t_parsed *temp, t_file *file, int fd);
+void		execute_commands(t_parsed *temp, t_file *file, t_fd **fd);
 void		execve_or_builtin(char **args);
 char		*ft_strjoin2(char const *s1, char const *s2);
 int			**open_pipes(void);
@@ -111,6 +108,12 @@ int			handle_error(int error_code, char *custom_message);
 char		*ft_strcpy(char *dest, const char *src);
 int			ft_strclen(char *str, char c);
 void		print_error(char *arg, char *message, int exit_status);
+
+//---------Clean----------------//
+void		clean_fd_list(t_fd *fd);
+void		clean_all(char *str);
+void		clean_the_mess(void);
+void		free_open_pipes(int **pipe);
 
 //---------Tests-----------------//
 void		lexer_test(void);
