@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 18:20:40 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/12 20:26:25 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/12 20:49:53 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,13 @@ void	execve_or_builtin(char **args)
 	int	 pid;
 	int	 status;
 
-	signal(SIGINT, sigint_handler);
 	status = get_builtin_type(args[0]);
 	if (g_minishell.n_tokens2 > 0 && status != 0)
 	{
 		execute_builtin_command(args);
 		return ;
 	}
+	signal(SIGINT, sigint_handler);
 	pid = fork();
 	if (pid == 0)
 	{

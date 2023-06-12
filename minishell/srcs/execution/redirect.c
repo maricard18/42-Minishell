@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 12:20:20 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/12 20:16:48 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/12 21:11:08 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,12 @@ void	here_doc(t_parsed *temp, t_file **file, int out)
 	char 	*str;
 
 	str = NULL;
-	dup2(g_minishell.out2, STDOUT_FILENO);
+	dup2(g_minishell.out2, STDOUT_FILENO); // ! problem here
 	env = g_minishell.ev;
 	pipe(pipe_fd);
 	exec_here_doc(env, pipe_fd[1], file, str);
 	close(pipe_fd[1]);
-	close(g_minishell.out2);
+	close(g_minishell.out2); // ! problem here
 	dup2(out, STDOUT_FILENO);
 	dup2(pipe_fd[0], STDIN_FILENO);
 	if (temp->args[0])
