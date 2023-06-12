@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:01:27 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/12 18:31:37 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/12 21:21:49 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,12 @@ typedef enum e_builtin_types
 }							t_builtin_types;
 
 //------------Structs------------//
+typedef struct s_fd_out
+{
+	int						out;
+	struct s_fd_out			*next;
+}							t_fd_out;
+
 typedef struct s_token
 {
 	int						n_tokens;
@@ -112,6 +118,7 @@ typedef struct s_minishell_state
 	char					**ev;
 	char					**paths;
 	char					**input;
+	t_fd_out				*fd_out;
 	t_token					*token;
 	t_parsed				**parsed;
 }							t_minishell_state;

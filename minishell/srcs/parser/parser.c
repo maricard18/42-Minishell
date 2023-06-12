@@ -6,11 +6,35 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 11:05:17 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/10 17:39:20 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/12 21:24:03 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern t_minishell_state	g_minishell;
+
+// create a list with n str out dups
+void	create_out_dup_list(void)
+{
+	t_fd_out	*fd;
+	int			i;
+
+	fd = (t_fd_out *)malloc(sizeof(t_fd_out));
+	fd->next = NULL;
+	g_minihsell.fd_out = fd;
+	i = 0;
+	while (i < g_minishell.n_tokens2)
+	{
+		fd->out = dup(STDOUT_FILENO);
+		if (i + 1 < g_minishell.n_tokens2)
+			fd->next = (t_fd_out *)malloc(sizeof(t_fd_out));
+		else
+			fd->next = NULL;
+		fd = fd->next;
+		i++;
+	}
+}
 
 // handle redirections
 void	process_redirection(t_token **token, t_parsed **current)
@@ -96,5 +120,6 @@ void	parse_commands(int in_file, int out_file, t_token *token)
 			}
 		}
 	}
+	create_out_dup_list();
 	g_minishell.parsed = list;
 }

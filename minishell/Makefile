@@ -6,7 +6,7 @@
 #    By: maricard <maricard@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 10:28:04 by maricard          #+#    #+#              #
-#    Updated: 2023/06/12 19:50:26 by maricard         ###   ########.fr        #
+#    Updated: 2023/06/12 21:15:45 by maricard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,7 @@ SRC = 	./srcs/parser/lexer.c \
 		./srcs/execution/execve.c \
 		./srcs/execution/builtins.c \
 		./srcs/execution/redirect.c \
+		./srcs/execution/here_doc.c \
 		./srcs/parser/initialize.c \
 		./srcs/parser/pre_syntax.c \
 		./srcs/parser/syntax.c \
