@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 14:32:36 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/13 19:23:32 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/13 22:03:14 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 // buitlin commands checker
 int	get_builtin_type(char *command)
 {
+	if (!command)
+		return (0);
 	if (!ft_strcmp(command, "cd"))
 		return (CD);
 	if (!ft_strcmp(command, "env"))

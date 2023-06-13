@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils6.c                                           :+:      :+:    :+:   */
+/*   here_doc2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 20:10:44 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/13 20:33:46 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/13 22:00:58 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	here_doc_sigint(int sig)
 		return ;
 	printf("\n");
 	g_minishell.exit_status = 130;
+	exit(g_minishell.exit_status);
 }
 
 // handler for here doc
