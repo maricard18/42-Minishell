@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:09:49 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/10 21:27:40 by mariohenriq      ###   ########.fr       */
+/*   Updated: 2023/06/13 12:44:20 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,7 @@ int	validate_syntax(t_token *my_tokens)
 	if (validate_pipe_syntax(my_tokens) == 1)
 	{
 		print_error(NULL, \
-					"minishell: syntax error near unexpected token '|'\n", \
-					2);
+					"minishell: syntax error near unexpected token \n", 2);
 		return (1);
 	}
 	return (0);

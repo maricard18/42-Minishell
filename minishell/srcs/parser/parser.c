@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 11:05:17 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/13 11:42:40 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/13 12:47:06 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ void	add_argument(t_token **token, t_parsed **current)
 	i = 0;
 	if (!((*current)->cmd))
 	{
-		(*current)->cmd = ft_calloc(ft_strlen((*token)->value) + 2,
-									sizeof(char));
+		(*current)->cmd = ft_calloc(ft_strlen((*token)->value) + 2, \
+							sizeof(char));
 		ft_strcpy((*current)->cmd, (*token)->value);
 	}
 	while ((*current)->args[i])

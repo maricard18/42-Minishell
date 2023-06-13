@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:01:27 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/13 11:42:19 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/13 12:57:11 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,11 +97,8 @@ typedef struct s_sig
 typedef struct s_minishell_state
 {
 	int						ignore;
-	int						opening_prompt;
-	int						in_file;
 	int						in;
 	int						in2;
-	int						out_file;
 	int						out;
 	int						out2;
 	int						n_tokens;

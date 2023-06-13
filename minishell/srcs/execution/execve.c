@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 10:35:27 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/12 15:50:07 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/13 12:45:22 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	execute_execve(char **args)
 	if (path == NULL)
 	{
 		print_error(args[0], ": No such file or directory\n", 127);
-		exit(g_minishell.exit_status);	
+		exit(g_minishell.exit_status);
 	}
 	if (check_if_path(args[0]) == 0)
 	{

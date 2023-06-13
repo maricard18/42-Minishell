@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 18:00:11 by mariohenriq       #+#    #+#             */
-/*   Updated: 2023/06/13 09:59:47 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/13 13:45:25 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ char	*handle_env_variables(char **env, char *str, int *i)
 	int		a;
 	int		k;
 
-	j = 0;
-	while (env[j])
+	j = -1;
+	while (env[++j])
 	{
 		k = *i;
 		a = 0;
@@ -90,7 +90,6 @@ char	*handle_env_variables(char **env, char *str, int *i)
 			a++;
 			k++;
 		}
-		j++;
 	}
 	new_str = check_if_exit_status(str, i);
 	return (new_str);
@@ -142,8 +141,7 @@ void	search_env_vars(char **str)
 			free(check_str);
 			free(new_str);
 		}
-		modify_string(&str[i], temp);
-		free(temp);
+		modify_string(&str[i], &temp);
 		i++;
 		if (ft_strcmp(str[i - 1], "<<") == 0 && str[i] != NULL)
 			i++;

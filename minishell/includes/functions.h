@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 22:10:59 by mariohenriq       #+#    #+#             */
-/*   Updated: 2023/06/13 11:51:03 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/13 13:02:54 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int			count_tokens2(char *str, int i);
 int			store_values2(char *str, int i);
 void		search_env_vars(char **str);
 char		*ft_char_string(char c);
-void		modify_string(char **str, char *new_str);
+void		modify_string(char **old_str, char **new_str);
 char		*single_quotes(char *input, int *i);
 char		*double_quotes(char **env, char *input, int *i);
 char		*handle_env_variables(char **env, char *str, int *i);
@@ -40,13 +40,11 @@ int			ft_strlen_special(char *str);
 
 //--------Tokeniser---------------//
 int			is_whitespace(char c);
-int			is_string(char *str);
 void		special_chars(char *str, t_token *token);
 int			ft_strchr2(const char *s, char c);
 int			check_for_redirect_in(char *str, t_token *token);
 int			check_for_redirect_out(char *str, t_token *token);
 int			check_for_pipes(char *str, t_token *token);
-int			check_for_string(char *str, t_token *token);
 void		tokeniser(char **str);
 
 //---------Parser-----------------//
@@ -71,8 +69,6 @@ void		redirect_in(t_parsed *temp, t_file **file, t_fd **fd);
 void		redirect_out(t_parsed *temp, t_file **file, t_fd **fd);
 void		append(t_parsed *temp, t_file **file, t_fd **fd);
 void		here_doc(t_parsed *temp, t_file **file, t_fd **fd);
-void		write_process(t_parsed *temp, int pipe_fd);
-void		read_process(t_parsed *temp, int pipe_fd);
 void		execute_commands(t_parsed *temp, t_file *file, t_fd **fd);
 void		execve_or_builtin(char **args);
 char		*ft_strjoin2(char const *s1, char const *s2);
@@ -98,7 +94,6 @@ void		sort_env_variables(char **env);
 //---------Utils-----------------//
 void		update_path_directories(void);
 int			number_args_env_var(void);
-void		free_array(char **arr);
 int			handle_error(int error_code, char *custom_message);
 char		*ft_strcpy(char *dest, const char *src);
 int			ft_strclen(char *str, char c);
@@ -109,6 +104,7 @@ void		clean_fd_list(t_fd *fd);
 void		clean_all(char *str);
 void		clean_the_mess(void);
 void		free_open_pipes(int **pipe);
+void		free_array(char **arr);
 
 //---------Tests-----------------//
 void		lexer_test(void);

@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 16:09:10 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/10 19:16:58 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/13 12:56:58 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,11 @@ int	token_counter(char **str)
 }
 
 // modify string
-void	modify_string(char **str, char *new_str)
+void	modify_string(char **old_str, char **new_str)
 {
-	free(*str);
-	*str = ft_strdup(new_str);
+	free(*old_str);
+	*old_str = ft_strdup(*new_str);
+	free(*new_str);
 }
 
 // one char string

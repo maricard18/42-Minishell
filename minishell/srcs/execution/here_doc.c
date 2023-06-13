@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 21:15:05 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/12 23:51:28 by mariohenriq      ###   ########.fr       */
+/*   Updated: 2023/06/13 12:45:36 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	here_doc(t_parsed *temp, t_file **file, t_fd **fd)
 {
 	int		pipe_fd[2];
 	char	**env;
-	char 	*str;
+	char	*str;
 
 	str = NULL;
 	dup2((*fd)->out, STDOUT_FILENO);

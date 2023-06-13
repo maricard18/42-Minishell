@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   variables.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 10:26:56 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/12 22:51:29 by mariohenriq      ###   ########.fr       */
+/*   Updated: 2023/06/13 12:59:42 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,6 @@ char	**dup_env_var(char **ev)
 void	minishell_init(char **ev)
 {
 	errno = 0;
-	g_minishell.opening_prompt = 0;
-	g_minishell.in_file = STDIN_FILENO;
-	g_minishell.out_file = STDOUT_FILENO;
 	g_minishell.ev = dup_env_var(ev);
 	g_minishell.paths = ft_split(getenv("PATH"), ':');
 	g_minishell.exit_status = 0;

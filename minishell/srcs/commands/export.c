@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 17:35:27 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/11 11:49:21 by mariohenriq      ###   ########.fr       */
+/*   Updated: 2023/06/13 12:46:13 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,12 @@ void	export_print_all(void)
 		i++;
 	}
 }
+
 void	export_command(char **input)
 {
 	int	index;
 
 	if (*++input == NULL)
-	// Verifica se não há argumentos após o comando "export"
 	{
 		sort_env_variables(g_minishell.ev);
 		export_print_all();
