@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 17:35:27 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/13 16:27:36 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/13 18:27:33 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,27 @@ int	is_include(char *str)
 void	export_print_all(void)
 {
 	int	i;
+	int	a;
 
 	i = 0;
 	while (g_minishell.ev[i] != NULL)
 	{
-		printf("declare -x %s\n", g_minishell.ev[i]);
+		a = 0;
+		printf("declare -x ");
+		while (g_minishell.ev[i][a] != '=' && g_minishell.ev[i][0])
+		{
+			printf("%c", g_minishell.ev[i][a]);
+			a++;
+		}
+		printf("%c", g_minishell.ev[i][a]);
+		printf("\"");
+		a++;
+		while (g_minishell.ev[i][a])
+		{
+			printf("%c", g_minishell.ev[i][a]);
+			a++;
+		}
+		printf("\"\n");
 		i++;
 	}
 }
