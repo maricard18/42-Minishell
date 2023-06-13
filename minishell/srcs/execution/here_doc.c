@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 21:15:05 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/13 18:12:37 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/13 20:27:52 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	exec_here_doc(char **env, int pipe_fd, t_file **file, char *str)
 		str = readline("> ");
 		if (!str)
 		{
-			print_error((*file)->name, ": Not found\n", 1);
+			print_error((*file)->name, ": Not found\n", 0);
 			free(str);
 			break ;
 		}

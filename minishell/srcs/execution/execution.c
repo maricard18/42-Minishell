@@ -74,6 +74,9 @@ void	pipe_handling(t_parsed **temp, t_fd **fd)
 // check what function to execute
 void	check_command(t_parsed **temp, t_fd **fd)
 {
+	int	status;
+
+	status = get_builtin_type(temp[0]->args[0]);
 	g_minishell.pipe_flag = 0;
 	if (temp[1] != NULL)
 	{
@@ -81,16 +84,17 @@ void	check_command(t_parsed **temp, t_fd **fd)
 		pipe_handling(temp, fd);
 	}
 	else
-	{
 		execute_commands(temp[0], temp[0]->file, fd);
-	}
 	while (waitpid(0, &g_minishell.exit_status, 0) > 0)
 	{
 		continue ;
 	}
-	if (WIFEXITED(g_minishell.exit_status))
+	if (status == 0)
 	{
-		g_minishell.exit_status = WEXITSTATUS(g_minishell.exit_status);
+		if (WIFEXITED(g_minishell.exit_status))
+			g_minishell.exit_status = WEXITSTATUS(g_minishell.exit_status);
+		else
+			g_minishell.exit_status = 130;
 	}
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, &ctrl_c);

@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:01:27 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/13 12:57:11 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/13 21:06:42 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ typedef struct s_minishell_state
 	int						index;
 	int						commands;
 	int						flag;
+	int						flag2;
 	int						pipe_flag;
 	int						exit_status;
 	char					*str;

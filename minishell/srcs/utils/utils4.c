@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 12:34:57 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/13 18:00:26 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/13 20:52:28 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,6 @@ int	check_while_n(char **input, int *i, int *a)
 	}
 	else
 		return (0);
-}
-
-// signal handler inside execve
-void	sigint_handler(int signum)
-{
-	(void)signum;
-	printf("\n");
-	g_minishell.exit_status = 130;
 }
 
 // write to pipe in here doc

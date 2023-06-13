@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 10:35:27 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/13 12:45:22 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/13 21:14:00 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,14 @@ extern t_minishell_state	g_minishell;
 
 void	execute(char *full_path, char **args)
 {
-	execve(full_path, args, g_minishell.ev);
-	print_error(args[0], ": Permission denied\n", 126);
-	exit(126);
-	return ;
+	if (g_minishell.flag2 == 0)
+	{
+		execve(full_path, args, g_minishell.ev);
+		print_error(args[0], ": Permission denied\n", 126);
+		exit(126);
+	}
+	else
+		exit(1);
 }
 
 // runs trough the string until it finds a delimeter

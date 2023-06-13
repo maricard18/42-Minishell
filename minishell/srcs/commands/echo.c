@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 12:54:24 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/13 17:27:39 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/13 19:53:26 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,10 @@ void	put_char(char *input)
 void	check_n_option(char **input, int *i, int *flag)
 {
 	int	a;
-	int	k;
 
 	while (input[*i])
 	{
 		a = -1;
-		k = *i;
 		if (input[*i][++a] == '-')
 		{
 			if (check_while_n(input, i, &a) == 0)

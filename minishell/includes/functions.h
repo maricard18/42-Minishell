@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 22:10:59 by mariohenriq       #+#    #+#             */
-/*   Updated: 2023/06/13 17:20:25 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/13 20:17:39 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ void		export_print_all(void);
 void		sort_and_print(void);
 int			check_for_equal_sign(char *str, int *error);
 int			check_while_n(char **input, int *i, int *a);
+void		here_doc_handler(t_parsed *temp, t_file **file, t_fd **fd);
 
 //---------Utils-----------------//
 void		update_path_directories(void);

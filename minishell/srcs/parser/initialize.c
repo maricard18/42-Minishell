@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 19:07:47 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/13 16:27:57 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/13 21:06:57 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	initialize_shell(char *str)
 	char	**temp;
 	t_token	*token;
 
+	g_minishell.flag2 = 0;
 	add_history(str);
 	lexer(str);
 	temp = g_minishell.input;

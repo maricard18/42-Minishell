@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 18:20:40 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/13 18:01:12 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/13 21:56:49 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	execve_or_builtin(char **args)
 	int	status;
 
 	status = get_builtin_type(args[0]);
-	if (g_minishell.n_tokens2 > 0 && status != 0)
+	if (g_minishell.n_tokens2 == 1 && status != 0)
 	{
 		execute_builtin_command(args);
 		return ;
@@ -64,6 +64,7 @@ void	execve_or_builtin(char **args)
 		}
 		else
 			execute_execve(args);
+		g_minishell.flag2 = 0;
 	}
 	return ;
 }
@@ -87,7 +88,7 @@ void	execute_commands(t_parsed *temp, t_file *file, t_fd **fd)
 		else if (file->type == APPEND)
 			append(temp, &file, fd);
 		else if (file->type == HERE_DOC)
-			here_doc(temp, &file, fd);
+			here_doc_handler(temp, &file, fd);
 		file = file->next;
 		if (file == NULL && temp->next == NULL)
 			return_fds();

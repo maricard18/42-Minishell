@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 17:35:54 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/10 17:37:13 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/13 19:27:59 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,11 @@ void	pwd_command(void)
 
 	current_dir = getcwd(0, 0);
 	if (!current_dir)
-		perror("Error while getting the current directory.");
+		print_error(NULL, "error: no such file or directory.\n", 127);
 	else
+	{
+		g_minishell.exit_status = 0;
 		printf("%s\n", current_dir);
+	}
 	free(current_dir);
 }

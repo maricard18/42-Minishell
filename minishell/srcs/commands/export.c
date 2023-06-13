@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 17:35:27 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/13 18:27:33 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/13 21:35:59 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	add_env_var(char *str)
 	new_env = ft_calloc(sizeof(char *), number_args_env_var() + 2);
 	while (g_minishell.ev[++i])
 		new_env[i] = ft_strdup(g_minishell.ev[i]);
-	new_env[i] = ft_strdup(str);
+	new_env[i] = ft_strdup(str); // ! leak here
 	free_array(g_minishell.ev);
 	g_minishell.ev = new_env;
 }
@@ -99,6 +99,7 @@ void	export_command(char **input)
 	int	error;
 
 	error = 0;
+	g_minishell.exit_status = 0;
 	if (input[1] == NULL)
 	{
 		sort_and_print();

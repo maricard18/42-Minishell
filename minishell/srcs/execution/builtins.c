@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 14:32:36 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/12 14:14:42 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/13 19:23:32 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,10 @@ void	execute_builtin_command(char **arguments)
 	if (type == PWD)
 		pwd_command();
 	if (type == ECHO_)
+	{
 		echo_command(arguments);
+		g_minishell.exit_status = 0;
+	}
 	if (type == EXIT)
 		exit_command(arguments);
 	if (type == UNSET)

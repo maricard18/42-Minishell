@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 11:51:04 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/13 16:19:15 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/13 19:38:58 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	check_for_equal_sign(char *str, int *error)
 	int	i;
 
 	i = 0;
-	if (str[0] == '=')
+	if (str[0] == '=' || ft_isdigit(str[0]))
 	{
 		if (*error == 0)
 			print_error(NULL, "error: export bad syntax\n", 1);

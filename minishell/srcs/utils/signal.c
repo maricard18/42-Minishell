@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 23:36:29 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/13 18:02:37 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/13 20:55:08 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,11 @@ extern t_minishell_state	g_minishell;
 // handle ctrl^C
 void	ctrl_c(int signal)
 {
-	(void)signal;
 	rl_replace_line("", 0);
 	ft_putchar_fd('\n', STDOUT_FILENO);
 	rl_on_new_line();
 	rl_redisplay();
-	g_minishell.exit_status = 130;
+	g_minishell.exit_status = 128 + signal;
 }
 
 // handle ctrl^D
@@ -35,4 +34,11 @@ void	ctrl_d(char *str)
 		clean_the_mess();
 		exit(g_minishell.exit_status);
 	}
+}
+
+// signal handler inside execve
+void	sigint_handler(int signum)
+{
+	printf("\n");
+	g_minishell.exit_status = 128 + signum;
 }

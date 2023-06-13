@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 12:20:20 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/12 23:48:50 by mariohenriq      ###   ########.fr       */
+/*   Updated: 2023/06/13 21:11:52 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ void	append(t_parsed *temp, t_file **file, t_fd **fd)
 	file_fd = open((*file)->name, O_CREAT | O_WRONLY | O_APPEND, 0644);
 	if (file_fd == -1)
 	{
-		perror("error opening file\n");
-		exit(1);
+		print_error(NULL, "error: error opening file\n", 1);
 	}
 	if ((*file)->next == NULL || (*file)->next->type != APPEND)
 	{
@@ -50,6 +49,7 @@ void	redirect_out(t_parsed *temp, t_file **file, t_fd **fd)
 	if (file_fd == -1)
 	{
 		print_error((*file)->name, ": Not found\n", 1);
+		g_minishell.flag2 = 1;
 	}
 	if ((*file)->next == NULL || (*file)->next->type != SMALLER)
 	{
@@ -75,8 +75,7 @@ void	redirect_in(t_parsed *temp, t_file **file, t_fd **fd)
 	file_fd = open((*file)->name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (file_fd == -1)
 	{
-		perror("error opening file\n");
-		exit(1);
+		print_error(NULL, "error: error opening file\n", 1);
 	}
 	if ((*file)->next == NULL || (*file)->next->type != GREATER)
 	{
