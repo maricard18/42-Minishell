@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 11:05:17 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/12 23:39:27 by mariohenriq      ###   ########.fr       */
+/*   Updated: 2023/06/13 11:11:07 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

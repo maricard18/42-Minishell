@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 20:48:22 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/12 16:47:07 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/13 11:14:46 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,8 @@
 // exit the shell
 void	exit_the_shell(int pipe_nbr)
 {
-	if (pipe_nbr == 0)
+	if (pipe_nbr == 1)
 	{
-		printf("entrei no exit\n");
 		printf("exit\n");
 		clean_all(g_minishell.str);
 		clean_the_mess();
@@ -42,7 +41,7 @@ void	check_exit_args(char **input, int pipe_nbr)
 	if (number_args(input) > 2)
 	{
 		print_error(NULL, "exit\nexit: too many arguments\n", 1);
-		if (pipe_nbr == 0)
+		if (pipe_nbr == 1)
 		{
 			clean_all(g_minishell.str);
 			clean_the_mess();
@@ -52,7 +51,7 @@ void	check_exit_args(char **input, int pipe_nbr)
 	else
 	{
 		g_minishell.exit_status = ft_atoi(input[1]) % 256;
-		if (pipe_nbr == 0)
+		if (pipe_nbr == 1)
 		{
 			clean_all(g_minishell.str);
 			clean_the_mess();
@@ -91,7 +90,7 @@ void	exit_command(char **input)
 		else
 		{
 			print_error(NULL, "exit\nexit: numeric argument required\n", 2);
-			if (pipe_nbr == 0)
+			if (pipe_nbr == 1)
 			{
 				clean_all(g_minishell.str);
 				clean_the_mess();
