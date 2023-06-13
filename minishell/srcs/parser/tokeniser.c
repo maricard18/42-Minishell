@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 10:57:46 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/06 14:49:56 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/13 12:02:09 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,15 @@ extern t_minishell_state	g_minishell;
 // check the special characters
 void	special_chars(char *str, t_token *temp)
 {
-	check_for_pipes(str, temp);
-	check_for_redirect_in(str, temp);
-	check_for_redirect_out(str, temp);
-	check_for_and(str, temp);
-	check_for_parentheses(str, temp);
-	check_for_string(str, temp);
+	int res;
+
+	res = check_for_pipes(str, temp);
+	if (res == 0)
+		res = check_for_redirect_in(str, temp);
+	if (res == 0)
+		res = check_for_redirect_out(str, temp);
+	if (res == 0)
+		temp->type = STRING;
 }
 
 void	init_values(t_token *temp)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:01:27 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/12 23:39:48 by mariohenriq      ###   ########.fr       */
+/*   Updated: 2023/06/13 11:42:19 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,10 @@
 enum						e_tokens
 {
 	PIPE,
-	OR,
-	AND,
 	GREATER,
 	SMALLER,
 	APPEND,
 	HERE_DOC,
-	OPEN_PAR,
-	CLOSE_PAR,
 	STRING,
 };
 

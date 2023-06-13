@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   functions.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 22:10:59 by mariohenriq       #+#    #+#             */
-/*   Updated: 2023/06/12 23:59:58 by mariohenriq      ###   ########.fr       */
+/*   Updated: 2023/06/13 11:51:03 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,10 @@ int			is_whitespace(char c);
 int			is_string(char *str);
 void		special_chars(char *str, t_token *token);
 int			ft_strchr2(const char *s, char c);
-int			ft_strchr3(const char *s, char c, char d);
-int			ft_strchr4(const char *s, char c);
-void		check_for_redirect_in(char *str, t_token *token);
-void		check_for_redirect_out(char *str, t_token *token);
-void		check_for_pipes(char *str, t_token *token);
-void		check_for_string(char *str, t_token *token);
-void		check_for_(char *str, t_token *token);
-void		check_for_parentheses(char *str, t_token *token);
-void		check_for_and(char *str, t_token *token);
+int			check_for_redirect_in(char *str, t_token *token);
+int			check_for_redirect_out(char *str, t_token *token);
+int			check_for_pipes(char *str, t_token *token);
+int			check_for_string(char *str, t_token *token);
 void		tokeniser(char **str);
 
 //---------Parser-----------------//

@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 19:07:47 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/13 11:24:01 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/13 11:34:11 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	initialize_shell(char *str)
 	lexer_test();
 	if (validate_syntax(token) == 1)
 		return ;
-	//printf("       [" G "SYNTAX OK" RT "]\n");
+	printf("       [" G "SYNTAX OK" RT "]\n");
 	parse_commands(0, 1, token);
-	//parser_test();
+	parser_test();
 	execution();
 }

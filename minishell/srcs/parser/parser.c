@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 11:05:17 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/13 11:11:07 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/13 11:42:40 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void	parse_commands(int in_file, int out_file, t_token *token)
 		add_cmd_to_list(current, list);
 		while (token)
 		{
-			if (token->type >= 3 && token->type <= 6)
+			if (token->type >= 1 && token->type <= 4)
 				process_redirection(&token, &current);
 			else if (token->type == STRING)
 				add_argument(&token, &current);
