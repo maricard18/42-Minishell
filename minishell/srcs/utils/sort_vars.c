@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_vars.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 11:48:38 by mariohenriq       #+#    #+#             */
-/*   Updated: 2023/06/11 11:49:08 by mariohenriq      ###   ########.fr       */
+/*   Updated: 2023/06/13 14:15:01 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

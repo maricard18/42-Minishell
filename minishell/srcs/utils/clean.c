@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 10:45:38 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/12 23:56:08 by mariohenriq      ###   ########.fr       */
+/*   Updated: 2023/06/13 14:16:01 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

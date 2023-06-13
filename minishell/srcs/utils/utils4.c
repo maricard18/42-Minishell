@@ -6,11 +6,24 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 12:34:57 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/12 20:36:55 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/13 17:20:35 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// check if there is a n in the input
+int	check_while_n(char **input, int *i, int *a)
+{
+	if (input[*i][++(*a)] == 'n')
+	{
+		while (input[*i][*a] == 'n')
+			(*a)++;
+		return (1);
+	}
+	else
+		return (0);
+}
 
 // signal handler inside execve
 void	sigint_handler(int signum)

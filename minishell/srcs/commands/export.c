@@ -6,25 +6,22 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 17:35:27 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/13 12:46:13 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/13 16:27:36 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// check if env variable is valid
-int	check_env_var(char *str)
-{
-	char	*equal_sign_ptr;
+extern t_minishell_state	g_minishell;
 
-	equal_sign_ptr = ft_strchr(str, '=');
-	if (!equal_sign_ptr || (equal_sign_ptr == str))
-		return (0);
-	while (*str)
+// error handling for export
+int	check_env_var(char *str, int *error)
+{
+	if (ft_isdigit(*str))
 	{
-		if (is_whitespace(*str))
-			return (0);
-		str++;
+		if (*error == 0)
+			print_error(NULL, "error: export bad syntax\n", 1);
+		return (0);
 	}
 	return (1);
 }
@@ -67,6 +64,7 @@ int	is_include(char *str)
 	return (-1);
 }
 
+// print "declare -x" for all env variables
 void	export_print_all(void)
 {
 	int	i;
@@ -79,27 +77,28 @@ void	export_print_all(void)
 	}
 }
 
+// export handler
 void	export_command(char **input)
 {
-	int	index;
+	int	error;
 
-	if (*++input == NULL)
+	error = 0;
+	if (input[1] == NULL)
 	{
-		sort_env_variables(g_minishell.ev);
-		export_print_all();
+		sort_and_print();
 		return ;
 	}
-	while (*input)
+	while (*++input)
 	{
-		if (check_env_var(*input))
+		if (check_for_equal_sign(*input, &error) == 0)
+			continue ;
+		if (*input && check_env_var(*input, &error))
 		{
-			index = is_include(*input);
-			if (index != -1)
-				g_minishell.ev[index] = ft_strdup(*input);
+			if (is_include(*input) != -1)
+				g_minishell.ev[is_include(*input)] = ft_strdup(*input);
 			else
 				add_env_var(*input);
 		}
-		input++;
 	}
 	sort_env_variables(g_minishell.ev);
 	update_path_directories();

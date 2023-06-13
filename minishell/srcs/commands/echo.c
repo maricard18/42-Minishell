@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 12:54:24 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/13 10:09:17 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/13 17:27:39 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,27 +29,31 @@ void	put_char(char *input)
 }
 
 // check if -n option is present
-int	check_n_option(char *input)
+void	check_n_option(char **input, int *i, int *flag)
 {
-	int	i;
+	int	a;
+	int	k;
 
-	i = 0;
-	if (input[i] == '\0')
-		return (0);
-	if (input[i] == '-')
+	while (input[*i])
 	{
-		i++;
-		if (input[i] == 'n')
+		a = -1;
+		k = *i;
+		if (input[*i][++a] == '-')
 		{
-			while (input[i] == 'n')
-				i++;
+			if (check_while_n(input, i, &a) == 0)
+				return ;
+			if (input[*i][a] != '\0')
+				return ;
 		}
 		else
-			return (0);
+			return ;
+		(*i)++;
+		if (input[*i] && input[*i][0] != '-')
+			break ;
+		*flag = 1;
 	}
-	if (input[i] == '\0')
-		return (1);
-	return (0);
+	if (input[*i - 1][a] == '\0')
+		*flag = 1;
 }
 
 // echo handler
@@ -61,9 +65,15 @@ void	echo_command(char **input)
 	i = 1;
 	flag = 0;
 	if (input[1] != NULL)
-		flag = check_n_option(input[1]);
-	if (flag == 1)
-		i++;
+	{
+		if (input[1][0] == '\0')
+		{
+			flag = 1;
+			i++;
+		}
+		else
+			check_n_option(input, &i, &flag);
+	}
 	while (input[i])
 	{
 		g_minishell.flag = 0;

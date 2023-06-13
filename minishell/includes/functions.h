@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 22:10:59 by mariohenriq       #+#    #+#             */
-/*   Updated: 2023/06/13 13:02:54 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/13 17:20:25 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,10 @@ void		pwd_command(void);
 void		unset_command(char **input);
 void		export_command(char **input);
 void		sort_env_variables(char **env);
+void		export_print_all(void);
+void		sort_and_print(void);
+int			check_for_equal_sign(char *str, int *error);
+int			check_while_n(char **input, int *i, int *a);
 
 //---------Utils-----------------//
 void		update_path_directories(void);
@@ -98,6 +102,7 @@ int			handle_error(int error_code, char *custom_message);
 char		*ft_strcpy(char *dest, const char *src);
 int			ft_strclen(char *str, char c);
 void		print_error(char *arg, char *message, int exit_status);
+int			ft_strchr3(const char *s, char c);
 
 //---------Clean----------------//
 void		clean_fd_list(t_fd *fd);

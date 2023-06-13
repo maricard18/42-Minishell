@@ -6,11 +6,13 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 18:00:11 by mariohenriq       #+#    #+#             */
-/*   Updated: 2023/06/13 13:45:25 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/13 16:39:52 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern t_minishell_state	g_minishell;
 
 // print env variable
 char	*env_var(char *env, int i)
@@ -27,7 +29,7 @@ char	*env_var(char *env, int i)
 		k++;
 		a++;
 	}
-	str = ft_calloc(k + 1, sizeof(char));
+	str = malloc((k + 1) * sizeof(char));
 	k = 0;
 	while (env[i])
 	{

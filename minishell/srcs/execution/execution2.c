@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 18:20:40 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/13 11:12:56 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/13 16:44:17 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,36 +21,6 @@ void	return_fds(void)
 	close(g_minishell.out2);
 	dup2(g_minishell.in2, STDIN_FILENO);
 	close(g_minishell.in2);
-}
-
-// function to handle env variables inside here doc
-char	*search_expansions(char **env, char *str)
-{
-	char	*temp;
-	char	*new_str;
-	char	*char_str;
-	int		i;
-
-	temp = ft_calloc(1, sizeof(char));
-	i = -1;
-	while (str[++i])
-	{
-		if (str[i] == '$')
-		{
-			i++;
-			temp = ft_strjoin(temp, handle_env_variables(env, str, &i));
-		}
-		if (str[i] == '\0')
-			break ;
-		if (str[i] == '$')
-			continue ;
-		char_str = ft_char_string(str[i]);
-		new_str = ft_strjoin(temp, char_str);
-		temp = ft_strdup(new_str);
-		free(new_str);
-		free(char_str);
-	}
-	return (temp);
 }
 
 // function to open pipes

@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 17:35:48 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/10 20:47:52 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/13 16:33:59 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	unset_command(char **input)
 	{
 		data = ft_strjoin2(*input, "=");
 		remove_env_var(data);
+		free(data);
 		input++;
 	}
-	free(data);
 	update_path_directories();
 }

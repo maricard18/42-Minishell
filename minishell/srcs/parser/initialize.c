@@ -6,11 +6,13 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 19:07:47 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/13 12:42:11 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/13 16:27:57 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern t_minishell_state	g_minishell;
 
 // initialize shell
 void	initialize_shell(char *str)
