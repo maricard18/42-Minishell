@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 12:54:24 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/12 14:27:56 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/13 10:09:17 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	check_n_option(char *input)
 	int	i;
 
 	i = 0;
+	if (input[i] == '\0')
+		return (0);
 	if (input[i] == '-')
 	{
 		i++;
@@ -45,9 +47,7 @@ int	check_n_option(char *input)
 		else
 			return (0);
 	}
-	else if (input[i] == '\0')
-		return (1);
-	else if (ft_isalnum(input[0] == 0))
+	if (input[i] == '\0')
 		return (1);
 	return (0);
 }
