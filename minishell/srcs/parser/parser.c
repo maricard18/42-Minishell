@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 11:05:17 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/13 12:47:06 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/14 13:39:41 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,15 +109,17 @@ void	parse_commands(int in_file, int out_file, t_token *token)
 		add_cmd_to_list(current, list);
 		while (token)
 		{
-			if (token->type >= 1 && token->type <= 4)
+			if (token->type >= 1 && token->type <= 4 && token->next)
 				process_redirection(&token, &current);
 			else if (token->type == STRING)
 				add_argument(&token, &current);
-			else if (token->type == PIPE)
+			else if (token->type == PIPE && token->next)
 			{
 				current = create_next_command(&token, &current);
 				add_cmd_to_list(current, list);
 			}
+			else
+				token = token->next;
 		}
 	}
 	create_out_dup_list();

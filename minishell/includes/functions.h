@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 22:10:59 by mariohenriq       #+#    #+#             */
-/*   Updated: 2023/06/14 12:19:20 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/14 15:20:17 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int			ft_strlen_special(char *str);
 
 //--------Tokeniser---------------//
 int			is_whitespace(char c);
-void		special_chars(char *str, t_token *token);
+void		special_chars(char *str, int k, t_token *token);
 int			ft_strchr2(const char *s, char c);
 int			check_for_redirect_in(char *str, t_token *token);
 int			check_for_redirect_out(char *str, t_token *token);
@@ -106,6 +106,7 @@ int			ft_strclen(char *str, char c);
 void		print_error(char *arg, char *message, int exit_status);
 int			ft_strchr3(const char *s, char c);
 char		*get_env(char *var_name);
+int			check_for_quotes(int k, t_token *token);
 
 //---------Clean----------------//
 void		clean_fd_list(t_fd *fd);

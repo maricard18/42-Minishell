@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:01:27 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/14 12:10:59 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/14 15:17:44 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ typedef struct s_minishell_state
 	char					*str;
 	char					**ev;
 	char					**paths;
+	char					**str2;
 	char					**input;
 	t_fd					*fd;
 	t_token					*token;

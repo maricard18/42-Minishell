@@ -6,13 +6,36 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 19:07:47 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/14 11:36:56 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/14 15:27:23 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 extern t_minishell_state	g_minishell;
+
+// duplicator of arrays
+void	create_new_array(char **temp)
+{
+	int		i;
+	int		j;
+	int		k;
+	char	**new;
+
+	i = 0;
+	j = 0;
+	k = 0;
+	while (temp[i])
+		i++;
+	new = malloc((i + 1) * sizeof(char *));
+	while (temp[j])
+	{
+		new[j] = ft_strdup(temp[j]);
+		j++;
+	}
+	new[j] = NULL;
+	g_minishell.str2 = new;
+}
 
 // initialize shell
 void	initialize_shell(char *str)
@@ -27,13 +50,12 @@ void	initialize_shell(char *str)
 	temp = g_minishell.input;
 	if (check_unfinished_quotes(temp) == 1)
 		return ;
+	create_new_array(temp);
 	search_env_vars(temp);
 	tokeniser(temp);
 	token = g_minishell.token;
-	//lexer_test();
 	if (validate_syntax(token) == 1)
 		return ;
 	parse_commands(0, 1, token);
-	//parser_test();
 	execution();
 }

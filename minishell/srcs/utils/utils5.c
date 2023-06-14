@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 16:20:29 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/13 12:59:39 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/14 13:55:02 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,4 @@ int	check_if_path(char *str)
 		i++;
 	}
 	return (0);
-}
-
-// print to stdout error if error
-void	print_error(char *arg, char *message, int exit_status)
-{
-	char	*str;
-
-	str = ft_strjoin2(arg, message);
-	ft_putstr_fd(str, 2);
-	free(str);
-	g_minishell.exit_status = exit_status;
 }

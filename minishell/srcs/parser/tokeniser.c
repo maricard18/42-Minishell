@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 10:57:46 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/13 12:46:20 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/14 15:20:22 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 extern t_minishell_state	g_minishell;
 
 // check the special characters
-void	special_chars(char *str, t_token *temp)
+void	special_chars(char *str, int k, t_token *temp)
 {
-	int	res;
+	int		res;
 
-	res = check_for_pipes(str, temp);
+	res = check_for_quotes(k, temp);
+	if (res == 0)
+		res = check_for_pipes(str, temp);
 	if (res == 0)
 		res = check_for_redirect_in(str, temp);
 	if (res == 0)
@@ -50,7 +52,7 @@ void	tokeniser(char **str)
 	{
 		init_values(new);
 		new->value = ft_strdup(str[i]);
-		special_chars(str[i], new);
+		special_chars(str[i], i, new);
 		new->index = i;
 		if (temp != NULL)
 			new->prev = temp;

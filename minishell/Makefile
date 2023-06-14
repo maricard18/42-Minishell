@@ -6,7 +6,7 @@
 #    By: maricard <maricard@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 10:28:04 by maricard          #+#    #+#              #
-#    Updated: 2023/06/13 20:36:08 by maricard         ###   ########.fr        #
+#    Updated: 2023/06/14 13:57:12 by maricard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ SRC = 	./srcs/parser/lexer.c \
 		./srcs/utils/utils3.c \
 		./srcs/utils/utils4.c \
 		./srcs/utils/utils5.c \
+		./srcs/utils/utils6.c \
 		./srcs/utils/types.c \
 		./srcs/utils/erro.c \
 		./srcs/commands/cd.c \
