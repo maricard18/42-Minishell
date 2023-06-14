@@ -6,7 +6,7 @@
 #    By: maricard <maricard@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 10:28:04 by maricard          #+#    #+#              #
-#    Updated: 2023/06/14 13:57:12 by maricard         ###   ########.fr        #
+#    Updated: 2023/06/14 16:22:36 by maricard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,7 +90,7 @@ $(NAME): $(SRC-OBJ) $(LIBFT)
 	
 %.o: %.c
 	@echo "[$(CYAN)Compiling$(RESET)] $(GREEN)$<$(RESET)"
-	@$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDES) 
+	@$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDES)
 
 clean:
 	@echo "[$(RED)Cleaned$(RESET)]"
@@ -113,4 +113,4 @@ valgrind: re
 	@clear
 	@echo "[$(RED)looking for valgrind leaks$(RESET)] $(GREEN)$(RESET)"
 	@sleep 1
-	@valgrind -s --leak-check=full --show-leak-kinds=all ./minishell
+	@valgrind -s --leak-check=full --show-leak-kinds=all --log-file=output.log ./minishell

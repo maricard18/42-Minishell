@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 13:44:25 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/14 15:28:16 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/14 15:57:59 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,22 @@ int	check_for_quotes(int k, t_token *token)
 		}
 	}
 	return (0);
-}	
+}
+
+// clean g_minishell.str2
+void	clean_duplicate_array(char **str)
+{
+	int	i;
+
+	i = 0;
+	if (str)
+	{
+		while (str[i])
+		{
+			free(str[i]);
+			i++;
+		}
+		free(str);
+	}
+	g_minishell.str2 = NULL;
+}

@@ -6,29 +6,11 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 19:56:00 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/14 15:26:28 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/14 15:31:47 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// clean g_minishell.str2
-void	clean(char **str)
-{
-	int	i;
-
-	i = 0;
-	if (str)
-	{
-		while (str[i])
-		{
-			free(str[i]);
-			i++;
-		}
-		free(str);
-	}
-	str = NULL;
-}
 
 //clean list fd
 void	clean_fd_list(t_fd *fd)
@@ -74,5 +56,4 @@ void	clean_the_mess(void)
 		free(g_minishell.ev);
 	}
 	g_minishell.ev = NULL;
-	clean(g_minishell.str2);
 }

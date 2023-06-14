@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 11:48:38 by mariohenriq       #+#    #+#             */
-/*   Updated: 2023/06/13 14:15:01 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/14 16:21:43 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	swap_strings(char **a, char **b)
 // compare two strings
 int	compare_strings(const char *a, const char *b)
 {
-	return (strcmp(a, b));
+	return (ft_strcmp(a, b));
 }
 
 // sort env variables

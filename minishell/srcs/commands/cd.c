@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 17:35:35 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/14 12:37:39 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/14 15:58:09 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ void	update_pwd(void)
 }
 
 // go to home
-void	go_to_home()
+void	go_to_home(void)
 {
-	char *temp;
+	char	*temp;
 
 	temp = get_env("HOME");
 	get_current_cwd();

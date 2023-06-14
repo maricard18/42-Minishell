@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 22:10:59 by mariohenriq       #+#    #+#             */
-/*   Updated: 2023/06/14 15:20:17 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/14 15:32:05 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ void		clean_all(char *str);
 void		clean_the_mess(void);
 void		free_open_pipes(int **pipe);
 void		free_array(char **arr);
+void		clean_duplicate_array(char **str);
 
 //---------Tests-----------------//
 void		lexer_test(void);

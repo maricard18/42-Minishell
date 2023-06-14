@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 17:11:25 by mariohenriq       #+#    #+#             */
-/*   Updated: 2023/06/06 14:50:05 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/14 15:43:03 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*double_quotes(char **env, char *input, int *i)
 	(*i)++;
 	while (input[*i] != '"')
 	{
-		if (input[*i] == '$')
+		while (input[*i] == '$')
 		{
 			(*i)++;
 			var = handle_env_variables(env, input, i);

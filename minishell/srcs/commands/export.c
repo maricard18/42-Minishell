@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 17:35:27 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/14 11:31:15 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/14 15:59:06 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,6 @@ int	check_env_var(char *str, int *error)
 	return (1);
 }
 
-//Create a function to count the number of a strings in a char matrix
-int	ft_matrix_size(char **matrix)
-{
-	int	i;
-
-	i = 0;
-	while (matrix[i])
-		i++;
-	return (i);
-}
-
 // add env variable to env array
 void	add_env_var(char *str)
 {
@@ -44,11 +33,10 @@ void	add_env_var(char *str)
 	char	**new_env;
 
 	i = -1;
-	//Print the number of arguments in the array
 	new_env = ft_calloc(sizeof(char *), number_args_env_var() + 2);
 	while (g_minishell.ev[++i])
 		new_env[i] = ft_strdup(g_minishell.ev[i]);
-	new_env[i] = ft_strdup(str); // ! leak here
+	new_env[i] = ft_strdup(str);
 	free_array(g_minishell.ev);
 	g_minishell.ev = new_env;
 }
