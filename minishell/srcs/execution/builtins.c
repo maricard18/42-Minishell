@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 14:32:36 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/13 22:03:14 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/14 11:49:35 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	get_builtin_type(char *command)
 	if (!ft_strcmp(command, "pwd"))
 		return (PWD);
 	if (!ft_strcmp(command, "echo"))
-		return (ECHO_);
+		return (ECHO);
 	if (!ft_strcmp(command, "exit"))
 		return (EXIT);
 	if (!ft_strcmp(command, "unset"))
@@ -42,19 +42,16 @@ void	execute_builtin_command(char **arguments)
 	type = get_builtin_type(arguments[0]);
 	if (type == CD)
 		cd_command(arguments);
-	if (type == ENV)
+	else if (type == ENV)
 		env_command(arguments);
-	if (type == PWD)
+	else if (type == PWD)
 		pwd_command();
-	if (type == ECHO_)
-	{
+	else if (type == ECHO)
 		echo_command(arguments);
-		g_minishell.exit_status = 0;
-	}
-	if (type == EXIT)
+	else if (type == EXIT)
 		exit_command(arguments);
-	if (type == UNSET)
+	else if (type == UNSET)
 		unset_command(arguments);
-	if (type == EXPORT)
+	else if (type == EXPORT)	
 		export_command(arguments);
 }

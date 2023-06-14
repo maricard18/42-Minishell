@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 11:51:04 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/13 19:38:58 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/14 10:28:26 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,16 @@ int	check_for_equal_sign(char *str, int *error)
 		if (*error == 0)
 			print_error(NULL, "error: export bad syntax\n", 1);
 		return (0);
+	}
+	while (str[i] && str[i] != '=')
+	{
+		if (ft_isalnum(str[i]) == 0)
+		{
+			if (*error == 0)
+				print_error(NULL, "error: export bad syntax\n", 1);
+			return (0);
+		}
+		i++;
 	}
 	if (ft_strchr3(&str[i], '=') == 1)
 		return (1);

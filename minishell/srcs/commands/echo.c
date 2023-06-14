@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 12:54:24 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/13 19:53:26 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/14 11:47:55 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	put_char(char *input)
 	i = 0;
 	while (input[i])
 	{
-		g_minishell.flag = 1;
 		write(1, &input[i], 1);
 		i++;
 	}
@@ -65,21 +64,18 @@ void	echo_command(char **input)
 	if (input[1] != NULL)
 	{
 		if (input[1][0] == '\0')
-		{
-			flag = 1;
 			i++;
-		}
 		else
 			check_n_option(input, &i, &flag);
 	}
 	while (input[i])
 	{
-		g_minishell.flag = 0;
 		put_char(input[i]);
 		if (input[i + 1])
 			write(STDOUT_FILENO, " ", 1);
 		i++;
 	}
-	if (flag == 0 || g_minishell.flag == 0 || input[1] == NULL)
+	if (flag == 0 || input[1] == NULL)
 		write(STDOUT_FILENO, "\n", 1);
+	g_minishell.exit_status = 0;
 }

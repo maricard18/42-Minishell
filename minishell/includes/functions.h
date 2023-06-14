@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 22:10:59 by mariohenriq       #+#    #+#             */
-/*   Updated: 2023/06/13 20:17:39 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/14 12:19:20 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void		sort_and_print(void);
 int			check_for_equal_sign(char *str, int *error);
 int			check_while_n(char **input, int *i, int *a);
 void		here_doc_handler(t_parsed *temp, t_file **file, t_fd **fd);
+int			is_include(char *str);
 
 //---------Utils-----------------//
 void		update_path_directories(void);
@@ -104,6 +105,7 @@ char		*ft_strcpy(char *dest, const char *src);
 int			ft_strclen(char *str, char c);
 void		print_error(char *arg, char *message, int exit_status);
 int			ft_strchr3(const char *s, char c);
+char		*get_env(char *var_name);
 
 //---------Clean----------------//
 void		clean_fd_list(t_fd *fd);

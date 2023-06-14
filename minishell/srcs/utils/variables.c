@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 10:26:56 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/13 19:43:02 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/14 11:28:38 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,5 @@ void	minishell_init(char **ev)
 	g_minishell.parsed = NULL;
 	g_minishell.fd = NULL;
 	g_minishell.exit_status = 0;
+	g_minishell.error = 0;
 }
