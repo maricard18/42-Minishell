@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 12:34:57 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/13 20:52:28 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/15 17:28:21 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,27 +23,6 @@ int	check_while_n(char **input, int *i, int *a)
 	}
 	else
 		return (0);
-}
-
-// write to pipe in here doc
-void	write_here_doc(int pipe_fd, char *str)
-{
-	write(pipe_fd, str, ft_strlen(str));
-	write(pipe_fd, "\n", 1);
-}
-
-// check if the next node is a here doc
-int	check_next_node(t_file **file)
-{
-	if ((*file)->next == NULL || (*file)->next->type != HERE_DOC)
-	{
-		return (0);
-	}
-	else
-	{
-		*file = (*file)->next;
-		return (1);
-	}
 }
 
 // count the number of characters until the next character c

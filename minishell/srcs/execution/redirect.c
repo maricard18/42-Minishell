@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 12:20:20 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/13 21:11:52 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/15 17:43:26 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 extern t_minishell_state	g_minishell;
 
-// append handler
-void	append(t_parsed *temp, t_file **file, t_fd **fd)
+// append handler >>
+void	append(t_parsed *temp, t_file **file)
 {
 	int	file_fd;
 
@@ -30,7 +30,6 @@ void	append(t_parsed *temp, t_file **file, t_fd **fd)
 		if ((*file)->next != NULL)
 		{
 			*file = (*file)->next;
-			execute_commands(temp, *file, fd);
 			close(file_fd);
 			return ;
 		}
@@ -38,10 +37,12 @@ void	append(t_parsed *temp, t_file **file, t_fd **fd)
 			execve_or_builtin(temp->args);
 	}
 	close(file_fd);
+	g_minishell.flag2 = 0;
+	*file = (*file)->next;
 }
 
-// redirect_out handler
-void	redirect_out(t_parsed *temp, t_file **file, t_fd **fd)
+// redirect_out handler <
+void	redirect_out(t_parsed *temp, t_file **file)
 {
 	int	file_fd;
 
@@ -50,6 +51,8 @@ void	redirect_out(t_parsed *temp, t_file **file, t_fd **fd)
 	{
 		print_error((*file)->name, ": Not found\n", 1);
 		g_minishell.flag2 = 1;
+		*file = (*file)->next;
+		return ;
 	}
 	if ((*file)->next == NULL || (*file)->next->type != SMALLER)
 	{
@@ -57,7 +60,6 @@ void	redirect_out(t_parsed *temp, t_file **file, t_fd **fd)
 		if ((*file)->next != NULL)
 		{
 			*file = (*file)->next;
-			execute_commands(temp, *file, fd);
 			close(file_fd);
 			return ;
 		}
@@ -65,10 +67,12 @@ void	redirect_out(t_parsed *temp, t_file **file, t_fd **fd)
 			execve_or_builtin(temp->args);
 	}
 	close(file_fd);
+	g_minishell.flag2 = 0;
+	*file = (*file)->next;
 }
 
-// redirect_in handler
-void	redirect_in(t_parsed *temp, t_file **file, t_fd **fd)
+// redirect_in handler >
+void	redirect_in(t_parsed *temp, t_file **file)
 {
 	int	file_fd;
 
@@ -83,7 +87,6 @@ void	redirect_in(t_parsed *temp, t_file **file, t_fd **fd)
 		if ((*file)->next != NULL)
 		{
 			*file = (*file)->next;
-			execute_commands(temp, *file, fd);
 			close(file_fd);
 			return ;
 		}
@@ -91,4 +94,6 @@ void	redirect_in(t_parsed *temp, t_file **file, t_fd **fd)
 			execve_or_builtin(temp->args);
 	}
 	close(file_fd);
+	g_minishell.flag2 = 0;
+	*file = (*file)->next;
 }

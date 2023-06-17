@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 19:07:47 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/14 15:44:45 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/16 14:33:04 by mariohenriq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,10 @@ void	create_new_array(char **temp)
 {
 	int		i;
 	int		j;
-	int		k;
 	char	**new;
 
 	i = 0;
 	j = 0;
-	k = 0;
 	while (temp[i])
 		i++;
 	new = malloc((i + 1) * sizeof(char *));

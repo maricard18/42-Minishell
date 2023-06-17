@@ -3,69 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 21:15:05 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/13 20:27:52 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/17 12:48:44 by mariohenriq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// wheck if there is a next node
-void	check_for_next_node(t_parsed *temp, t_file **file, t_fd **fd)
+// write to pipe inside heredoc
+void	write_here_doc(int pipe_fd, char *str)
 {
-	if ((*file)->next != NULL)
-	{
-		*file = (*file)->next;
-		execute_commands(temp, *file, fd);
-		return ;
-	}
-	execve_or_builtin(temp->args);
+	write(pipe_fd, str, ft_strlen(str));
+	write(pipe_fd, "\n", 1);
 }
 
-// create a string
-char	*create_string(char *temp, char c)
-{
-	char	*char_str;
-	char	*new_str;
-
-	char_str = ft_char_string(c);
-	new_str = ft_strjoin(temp, char_str);
-	temp = ft_strdup(new_str);
-	free(new_str);
-	free(char_str);
-	return (temp);
-}
-
-// function to handle env variables inside here doc
-char	*search_expansions(char **env, char *str)
-{
-	char	*temp;
-	char	*var;
-	int		i;
-
-	temp = ft_calloc(1, sizeof(char));
-	i = -1;
-	while (str[++i])
-	{
-		if (str[i] == '$')
-		{
-			i++;
-			var = handle_env_variables(env, str, &i);
-			temp = ft_strjoin(temp, var);
-			free(var);
-		}
-		if (str[i] == '\0')
-			break ;
-		if (str[i] == '$')
-			continue ;
-		temp = create_string(temp, str[i]);
-	}
-	return (temp);
-}
-
-// here doc execution
+// heredoc execution process
 void	exec_here_doc(char **env, int pipe_fd, t_file **file, char *str)
 {
 	while (1)
@@ -73,19 +27,13 @@ void	exec_here_doc(char **env, int pipe_fd, t_file **file, char *str)
 		str = readline("> ");
 		if (!str)
 		{
-			print_error((*file)->name, ": Not found\n", 0);
+			print_error((*file)->name, ": Delimeter Not found\n", 0);
 			free(str);
 			break ;
 		}
 		if (ft_strcmp(str, (*file)->name) == 0)
 		{
-			if (check_next_node(file) == 0)
-			{
-				free(str);
-				break ;
-			}
-			else
-				continue ;
+			break ;
 		}
 		str = search_expansions(env, str);
 		if ((*file)->next == NULL || (*file)->next->type != HERE_DOC)
@@ -94,10 +42,37 @@ void	exec_here_doc(char **env, int pipe_fd, t_file **file, char *str)
 	}
 }
 
-// here doc handler
+// parent process for heredoc
+void	parent_process(int pipe[2], t_parsed *temp, t_file **file, t_fd **fd)
+{
+	close(pipe[1]);
+	igonre_signals();
+	waitpid(0, &g_minishell.exit_status, 0);
+	if (WIFEXITED(g_minishell.exit_status))
+		g_minishell.exit_status = WEXITSTATUS(g_minishell.exit_status);
+	dup2(temp->out_file, STDOUT_FILENO);
+	dup2(pipe[0], STDIN_FILENO);
+	close(pipe[0]);
+	*fd = (*fd)->next;
+	if ((*file)->next != NULL)
+	{
+		*file = (*file)->next;
+		return ;
+	}
+	else if (temp->args[0])
+	{
+		*file = (*file)->next;
+		execve_or_builtin(temp->args);
+	}
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, &ctrl_c);
+}
+
+// heredoc handler
 void	here_doc(t_parsed *temp, t_file **file, t_fd **fd)
 {
 	int		pipe_fd[2];
+	int		pid;
 	char	**env;
 	char	*str;
 
@@ -106,17 +81,16 @@ void	here_doc(t_parsed *temp, t_file **file, t_fd **fd)
 	dup2((*fd)->in, STDIN_FILENO);
 	env = g_minishell.ev;
 	pipe(pipe_fd);
-	exec_here_doc(env, pipe_fd[1], file, str);
-	close(pipe_fd[1]);
-	close((*fd)->out);
-	close((*fd)->in);
-	*fd = (*fd)->next;
-	dup2(temp->out_file, STDOUT_FILENO);
-	dup2(temp->in_file, STDIN_FILENO);
-	dup2(pipe_fd[0], STDIN_FILENO);
-	if (temp->args[0])
+	pid = fork();
+	if (pid == 0)
 	{
-		check_for_next_node(temp, file, fd);
+		close(pipe_fd[0]);
+		exec_here_doc(env, pipe_fd[1], file, str);
+		close(pipe_fd[1]);
+		exit(g_minishell.exit_status);
 	}
-	close(pipe_fd[0]);
+	else
+	{
+		parent_process(pipe_fd, temp, file, fd);
+	}
 }

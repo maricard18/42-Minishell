@@ -14,61 +14,58 @@
 
 extern t_minishell_state	g_minishell;
 
-// handler execuntion to pipes
-void	write_to_pipe(t_parsed **temp, int **pipe_fd, int i, t_fd **fd)
+// handler for execution in pipes
+void	execute_commands(t_parsed *temp, t_file *file, t_fd **fd)
 {
-	if (temp[i + 1] == NULL)
+	if (file == NULL)
 	{
-		dup2(g_minishell.out, STDOUT_FILENO);
-		temp[i]->out_file = g_minishell.out;
-		execute_commands(temp[i], temp[i]->file, fd);
-		close(g_minishell.out);
-		close(pipe_fd[i - 1][READ_END]);
+		execve_or_builtin(temp->args);
+		if (g_minishell.pipe_flag == 0)
+			return_fds();
+		else
+			dup2(temp->in_file, STDIN_FILENO);
 		return ;
 	}
-	else
+	while (file != NULL)
 	{
-		dup2(pipe_fd[i][WRITE_END], STDOUT_FILENO);
-		temp[i]->out_file = pipe_fd[i][WRITE_END];
-		execute_commands(temp[i], temp[i]->file, fd);
-		close(pipe_fd[i][WRITE_END]);
-	}
-	if (i > 0)
-		close(pipe_fd[i - 1][READ_END]);
-}
-
-// handler connection in pipes
-void	connect_pipes(t_parsed **temp, int **pipe_fd, int i)
-{
-	(void)temp;
-	if (temp[i] == NULL)
-	{
-		dup2(g_minishell.in, STDIN_FILENO);
-		close(g_minishell.in);
-		return ;
-	}
-	if (i > 0)
-	{
-		dup2(pipe_fd[i - 1][READ_END], STDIN_FILENO);
-		temp[i]->in_file = pipe_fd[i - 1][READ_END];
+		if (file->type == GREATER)
+			redirect_in(temp, &file);
+		else if (file->type == SMALLER)
+			redirect_out(temp, &file);
+		else if (file->type == APPEND)
+			append(temp, &file);
+		else if (file->type == HERE_DOC)
+			here_doc(temp, &file, fd);
+		if (file == NULL && temp->next == NULL)
+			return_fds();
 	}
 }
 
-// handler pipes
-void	pipe_handling(t_parsed **temp, t_fd **fd)
+// check if its a builtin command or not
+void	execve_or_builtin(char **args)
 {
-	int	i;
-	int	**pipe_fd;
+	int	pid;
+	int	status;
 
-	i = 0;
-	pipe_fd = open_pipes();
-	while (temp[i])
+	status = get_builtin_type(args[0]);
+	if (g_minishell.n_tokens2 == 1 && status != 0)
 	{
-		write_to_pipe(temp, pipe_fd, i, fd);
-		i++;
-		connect_pipes(temp, pipe_fd, i);
+		execute_builtin_command(args);
+		return ;
 	}
-	free_open_pipes(pipe_fd);
+	signal(SIGINT, sigint_handler);
+	pid = fork();
+	if (pid == 0)
+	{
+		if (status != 0)
+		{
+			execute_builtin_command(args);
+			exit(g_minishell.exit_status);
+		}
+		else
+			execute_execve(args);
+	}
+	return ;
 }
 
 // check what function to execute
@@ -86,9 +83,7 @@ void	check_command(t_parsed **temp, t_fd **fd)
 	else
 		execute_commands(temp[0], temp[0]->file, fd);
 	while (waitpid(0, &g_minishell.exit_status, 0) > 0)
-	{
 		continue ;
-	}
 	if (status == 0)
 	{
 		if (WIFEXITED(g_minishell.exit_status))
@@ -108,8 +103,8 @@ void	execution(void)
 
 	temp = g_minishell.parsed;
 	fd = g_minishell.fd;
-	duplicate_fds();
 	if (ft_strlen(g_minishell.str) == 0)
 		return ;
+	duplicate_fds(temp[0]);
 	check_command(temp, &fd);
 }

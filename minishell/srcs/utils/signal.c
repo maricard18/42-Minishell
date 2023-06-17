@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 23:36:29 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/14 11:32:35 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/16 18:46:00 by mariohenriq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,25 @@
 
 extern t_minishell_state	g_minishell;
 
+// signal handler for parent process
+void	igonre_signals(void)
+{
+	signal(SIGINT, SIG_IGN);
+}
+
+// here doc signal handler
+void	here_doc_sigint(int sig)
+{
+	(void)sig;
+	printf("\n");
+	g_minishell.exit_status = 130;
+	exit(g_minishell.exit_status);
+}
+
 // handle ctrl^C
 void	ctrl_c(int signal)
 {
-	rl_replace_line("", 0);
+	//rl_replace_line("", 0);
 	ft_putchar_fd('\n', STDOUT_FILENO);
 	rl_on_new_line();
 	rl_redisplay();

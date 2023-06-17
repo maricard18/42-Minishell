@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: maricard <maricard@student.42.fr>          +#+  +:+       +#+         #
+#    By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 10:28:04 by maricard          #+#    #+#              #
-#    Updated: 2023/06/14 16:22:36 by maricard         ###   ########.fr        #
+#    Updated: 2023/06/16 14:24:57 by mariohenriq      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ CFLAGS = -Wall -Werror -Wextra
 RM = rm -rf
 
 ifdef DEBUG
-	CFLAGS += -g -fsanitize=address
+	CFLAGS += -g 
 endif
 
 NAME = minishell
@@ -58,12 +58,12 @@ SRC = 	./srcs/parser/lexer.c \
 		./srcs/commands/pwd.c \
 		./srcs/commands/unset.c \
 		./srcs/execution/execution.c \
-		./srcs/execution/execution2.c \
 		./srcs/execution/execve.c \
 		./srcs/execution/builtins.c \
 		./srcs/execution/redirect.c \
 		./srcs/execution/here_doc.c \
 		./srcs/execution/here_doc2.c \
+		./srcs/execution/pipes.c \
 		./srcs/parser/initialize.c \
 		./srcs/parser/pre_syntax.c \
 		./srcs/parser/syntax.c \

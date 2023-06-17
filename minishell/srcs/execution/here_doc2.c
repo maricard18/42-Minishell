@@ -3,56 +3,67 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 20:10:44 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/13 22:00:58 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/17 12:47:16 by mariohenriq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// signal handler for parent process
-void	igonre_signals(void)
+// check if there is a next node
+void	check_for_next_node(t_parsed *temp, t_file **file)
 {
-	signal(SIGINT, SIG_IGN);
-}
-
-// here doc signal handler
-void	here_doc_sigint(int sig)
-{
-	if (sig != SIGINT)
+	if ((*file)->next != NULL)
+	{
+		*file = (*file)->next;
 		return ;
-	printf("\n");
-	g_minishell.exit_status = 130;
-	exit(g_minishell.exit_status);
+	}
+	else if (temp->args[0])
+	{
+		*file = (*file)->next;
+		execve_or_builtin(temp->args);
+	}
 }
 
-// handler for here doc
-void	here_doc_handler(t_parsed *temp, t_file **file, t_fd **fd)
+// create a string for here doc
+char	*create_string(char *temp, char c)
 {
-	int	pid;
+	char	*char_str;
+	char	*new_str;
 
-	signal(SIGINT, here_doc_sigint);
-	signal(SIGQUIT, SIG_IGN);
-	pid = fork();
-	if (pid == 0)
+	char_str = ft_char_string(c);
+	new_str = ft_strjoin(temp, char_str);
+	temp = ft_strdup(new_str);
+	free(new_str);
+	free(char_str);
+	return (temp);
+}
+
+// function to handle env variables inside here doc
+char	*search_expansions(char **env, char *str)
+{
+	char	*temp;
+	char	*var;
+	int		i;
+
+	temp = ft_calloc(1, sizeof(char));
+	i = -1;
+	while (str[++i])
 	{
-		here_doc(temp, file, fd);
-		exit(g_minishell.exit_status);
+		if (str[i] == '$')
+		{
+			i++;
+			var = handle_env_variables(env, str, &i);
+			temp = ft_strjoin(temp, var);
+			free(var);
+		}
+		if (str[i] == '\0')
+			break ;
+		if (str[i] == '$')
+			continue ;
+		temp = create_string(temp, str[i]);
 	}
-	else
-	{
-		igonre_signals();
-		waitpid(pid, &g_minishell.exit_status, 0);
-		if (WIFEXITED(g_minishell.exit_status))
-			g_minishell.exit_status = WEXITSTATUS(g_minishell.exit_status);
-	}
-	if (g_minishell.n_tokens2 > 1)
-		signal(SIGINT, sigint_handler);
-	else
-	{
-		signal(SIGINT, &ctrl_c);
-		signal(SIGQUIT, SIG_IGN);
-	}
+	return (temp);
 }
