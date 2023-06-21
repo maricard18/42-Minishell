@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 11:05:17 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/17 12:48:52 by mariohenriq      ###   ########.fr       */
+/*   Updated: 2023/06/21 12:02:28 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,29 @@ extern t_minishell_state	g_minishell;
 // create a list with n str out dups
 void	create_out_dup_list(void)
 {
-	t_fd	*fd;
-	int		i;
+	t_fd		*fd;
+	t_parsed	**temp;
+	t_file		*file;
+	int			i;
 
+	i = -1;
 	fd = (t_fd *)malloc(sizeof(t_fd));
 	g_minishell.fd = fd;
-	i = 0;
-	while (i < g_minishell.n_tokens2)
+	temp = g_minishell.parsed;
+	while (temp[++i])
 	{
-		fd->out = dup(STDOUT_FILENO);
-		fd->in = dup(STDIN_FILENO);
-		if (i + 1 < g_minishell.n_tokens2)
-			fd->next = (t_fd *)malloc(sizeof(t_fd));
-		else
-			fd->next = NULL;
-		fd = fd->next;
-		i++;
+		file = temp[i]->file;
+		while (file)
+		{
+			fd->out = dup(STDOUT_FILENO);
+			fd->in = dup(STDIN_FILENO);
+			if (file->next || temp[i + 1])
+				fd->next = (t_fd *)malloc(sizeof(t_fd));
+			else
+				fd->next = NULL;
+			fd = fd->next;
+			file = file->next;
+		}
 	}
 }
 
@@ -80,8 +87,8 @@ void	add_argument(t_token **token, t_parsed **current)
 	i = 0;
 	if (!((*current)->cmd))
 	{
-		(*current)->cmd = ft_calloc(ft_strlen((*token)->value) + 2,
-									sizeof(char));
+		(*current)->cmd = ft_calloc(ft_strlen((*token)->value) + 2, \
+							sizeof(char));
 		ft_strcpy((*current)->cmd, (*token)->value);
 	}
 	while ((*current)->args[i])
@@ -122,6 +129,6 @@ void	parse_commands(int in_file, int out_file, t_token *token)
 				token = token->next;
 		}
 	}
-	create_out_dup_list();
 	g_minishell.parsed = list;
+	create_out_dup_list();
 }
