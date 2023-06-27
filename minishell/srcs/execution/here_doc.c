@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 21:15:05 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/21 12:00:39 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/27 17:23:43 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ void	parent_process(int pipe[2], t_parsed *temp, t_file **file, t_fd **fd)
 {
 	close(pipe[1]);
 	igonre_signals();
-	waitpid(0, &g_minishell.exit_status, 0);
+	while (waitpid(0, &g_minishell.exit_status, 0) > 0)
+		continue ;
 	if (WIFEXITED(g_minishell.exit_status))
 		g_minishell.exit_status = WEXITSTATUS(g_minishell.exit_status);
 	dup2(temp->out_file, STDOUT_FILENO);
@@ -59,10 +60,11 @@ void	parent_process(int pipe[2], t_parsed *temp, t_file **file, t_fd **fd)
 		*file = (*file)->next;
 		return ;
 	}
-	else if (temp->args[0])
+	else
 	{
 		*file = (*file)->next;
-		execve_or_builtin(temp->args);
+		if (temp->args[0])
+			execve_or_builtin(temp->args);
 	}
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, &ctrl_c);
@@ -81,6 +83,7 @@ void	here_doc(t_parsed *temp, t_file **file, t_fd **fd)
 	dup2((*fd)->in, STDIN_FILENO);
 	env = g_minishell.ev;
 	pipe(pipe_fd);
+	signal(SIGINT, &here_doc_sigint);
 	pid = fork();
 	if (pid == 0)
 	{
@@ -90,7 +93,5 @@ void	here_doc(t_parsed *temp, t_file **file, t_fd **fd)
 		exit(g_minishell.exit_status);
 	}
 	else
-	{
 		parent_process(pipe_fd, temp, file, fd);
-	}
 }
