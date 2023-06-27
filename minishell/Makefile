@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+         #
+#    By: maricard <maricard@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 10:28:04 by maricard          #+#    #+#              #
-#    Updated: 2023/06/16 14:24:57 by mariohenriq      ###   ########.fr        #
+#    Updated: 2023/06/27 18:55:00 by maricard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ CFLAGS = -Wall -Werror -Wextra
 RM = rm -rf
 
 ifdef DEBUG
-	CFLAGS += -g 
+	CFLAGS += -g -fsanitize=address
 endif
 
 NAME = minishell

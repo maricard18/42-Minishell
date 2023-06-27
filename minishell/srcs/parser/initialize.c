@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mariohenriques <mariohenriques@student.    +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 19:07:47 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/16 14:33:04 by mariohenriq      ###   ########.fr       */
+/*   Updated: 2023/06/27 18:39:28 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 19:56:00 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/14 15:31:47 by maricard         ###   ########.fr       */
+/*   Updated: 2023/06/27 19:05:28 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,24 @@
 //clean list fd
 void	clean_fd_list(t_fd *fd)
 {
-	t_fd	*tmp;
-	int		i;
+	t_parsed	**temp;
+	t_file		*file;
+	t_fd		*tmp;
+	int			i;
 
-	i = 0;
-	while (i < g_minishell.n_tokens2)
+	i = -1;
+	g_minishell.fd = fd;
+	temp = g_minishell.parsed;
+	while (temp[++i])
 	{
-		tmp = fd->next;
-		free(fd);
-		fd = tmp;
-		i++;
+		file = temp[i]->file;
+		while (file)
+		{
+			tmp = fd->next;
+			free(fd);
+			fd = tmp;
+			file = file->next;
+		}
 	}
 	g_minishell.fd = NULL;
 }
