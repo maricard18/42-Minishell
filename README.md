@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://github.com/maricard18/42-Minishell/blob/main/minishell/extras/logo.png" alt="Minishell">
+     <img src="https://github.com/maricard18/42-Minishell/blob/main/minishell/extras/minishell_animation.gif" />
 </p>
 
 
@@ -26,17 +26,7 @@ $ cd minishell
 # Run make command
 $ make
 ```
-
-## Credits
-
-This README uses the following packages
-
-- [Flaming Text](https://www10.flamingtext.com)
-
-
-### Special thanks - [42 Porto](https://www.42porto.com/en)
-
 ---
-
 > GitHub [@maricard18](https://github.com/maricard18) &nbsp;&middot;&nbsp;
-> Linkedin [Mario Henriques](https://www.linkedin.com/in/mario18)
+> Linkedin [Mario Henriques](https://www.linkedin.com/in/mario18) &nbsp;&middot;&nbsp;
+> [42 Porto](https://www.42porto.com/en)
