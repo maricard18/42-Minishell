@@ -1,5 +1,5 @@
 <p align="center">
-     <img src= />
+     <img src="https://github.com/maricard18/42-Minishell/blob/main/minishell/extras/minishell.gif"/>
 </p>
 
 
