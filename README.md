@@ -10,7 +10,7 @@ I learned a lot about processes and file descriptors. <br>
 Project management and communication were the main pillars of this project. <br>
 And yes, this is my own little bash. <br>
 This project is in rank 3 of 42 common core and had passed with the score of 101.<br>
-[-> Subject here](https://github.com/maricard18/42-Minishell/blob/main/minishell/extras/en.subject.pdf)
+[Subject here](https://github.com/maricard18/42-Minishell/blob/main/minishell/extras/en.subject.pdf)
 
 ## How To Use
 
@@ -25,6 +25,11 @@ $ cd minishell
 
 # Run make command
 $ make
+
+# Run the executeble
+$ ./minishell
+
+# And enjoy this beauty
 ```
 ---
 > GitHub [@maricard18](https://github.com/maricard18) &nbsp;&middot;&nbsp;
