@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.porto.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 21:15:05 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/27 17:30:27 by maricard         ###   ########.fr       */
+/*   Updated: 2023/07/13 14:40:02 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ void	here_doc(t_parsed *temp, t_file **file, t_fd **fd)
 		close(pipe_fd[0]);
 		exec_here_doc(env, pipe_fd[1], file, str);
 		close(pipe_fd[1]);
+		clean_all(g_minishell.str);
+		clean_the_mess();
 		exit(g_minishell.exit_status);
 	}
 	else

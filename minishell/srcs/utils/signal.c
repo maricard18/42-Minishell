@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.porto.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 23:36:29 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/27 16:46:49 by maricard         ###   ########.fr       */
+/*   Updated: 2023/07/13 14:40:22 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	here_doc_sigint(int sig)
 	(void)sig;
 	printf("\n");
 	g_minishell.exit_status = 130;
+	clean_all(g_minishell.str);
+	clean_the_mess();
 	exit(g_minishell.exit_status);
 }
 

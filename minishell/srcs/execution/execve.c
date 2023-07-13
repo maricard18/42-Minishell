@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.porto.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 10:35:27 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/13 21:14:00 by maricard         ###   ########.fr       */
+/*   Updated: 2023/07/13 19:46:05 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,17 @@ void	execute(char *full_path, char **args)
 	if (g_minishell.flag2 == 0)
 	{
 		execve(full_path, args, g_minishell.ev);
+		clean_all(g_minishell.str);
+		clean_the_mess();
 		print_error(args[0], ": Permission denied\n", 126);
 		exit(126);
 	}
 	else
+	{
+		clean_all(g_minishell.str);
+		clean_the_mess();
 		exit(1);
+	}
 }
 
 // runs trough the string until it finds a delimeter
@@ -80,6 +86,8 @@ char	*search_path(char *arg, char *path)
 		}
 	}
 	free(command);
+	clean_all(g_minishell.str);
+	clean_the_mess();
 	print_error(arg, ": command not found\n", 127);
 	return (NULL);
 }
