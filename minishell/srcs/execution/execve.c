@@ -6,7 +6,7 @@
 /*   By: maricard <maricard@student.porto.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 10:35:27 by maricard          #+#    #+#             */
-/*   Updated: 2023/07/13 19:46:05 by maricard         ###   ########.fr       */
+/*   Updated: 2023/07/14 14:19:34 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,9 @@ char	*search_path(char *arg, char *path)
 		}
 	}
 	free(command);
+	print_error(arg, ": command not found\n", 127);
 	clean_all(g_minishell.str);
 	clean_the_mess();
-	print_error(arg, ": command not found\n", 127);
 	return (NULL);
 }
 
