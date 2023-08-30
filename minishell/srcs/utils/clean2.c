@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maricard <maricard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maricard <maricard@student.porto.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 19:56:00 by maricard          #+#    #+#             */
-/*   Updated: 2023/06/28 18:34:00 by maricard         ###   ########.fr       */
+/*   Updated: 2023/08/30 09:55:27 by maricard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,8 @@ void	clean_fd_list(t_fd *fd)
 	t_file		*file;
 	t_fd		*tmp;
 	int			i;
-	int			flag;
 
 	i = -1;
-	flag = 1;
 	g_minishell.fd = fd;
 	temp = g_minishell.parsed;
 	while (temp[++i])
@@ -30,7 +28,6 @@ void	clean_fd_list(t_fd *fd)
 		file = temp[i]->file;
 		while (file)
 		{
-			flag = 0;
 			tmp = fd->next;
 			free(fd);
 			fd = tmp;
